@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div
       className="bg-white 
   
-  bod"
+"
     >
       {children}
     </div>
