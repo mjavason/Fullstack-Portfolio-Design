@@ -1,16 +1,20 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 
-const WorkPage = () => {
-    const router = useRouter();
-    const { workId } = router.query;
+interface ProjectDetailProps {
+  params: Promise<{
+    workId: string;
+  }>;
+}
 
-    return (
-        <div>
-            <h1>Work Page</h1>
-            <p>Work ID: {workId}</p>
-        </div>
-    );
+const WorkPage = async ({ params }: ProjectDetailProps) => {
+  const { workId } = await params;
+
+  return (
+    <div>
+      <h1>Work Page</h1>
+      <p>Work ID: {workId}</p>
+    </div>
+  );
 };
 
 export default WorkPage;
