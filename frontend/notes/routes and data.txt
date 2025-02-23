@@ -1,0 +1,5 @@
+home - recent posts(2), featured works/projects(3), social media profiles
+blog - all posts(pagination), social media profiles
+work - all works/projects(pagination), social media profiles
+blog details - post(heading and text)[Will need Text editor]
+work/project details - work(headings and images), social mesia profiles
