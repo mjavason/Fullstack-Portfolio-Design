@@ -1,7 +1,5 @@
 'use server';
-// import { API_BASE_URL } from '@/config/constants';
 import { PostType } from '@/config/types/post';
-// import axios from 'axios';
 
 export const fetchPosts = async () => {
   const posts: PostType[] = [
@@ -22,7 +20,7 @@ export const fetchPosts = async () => {
   ];
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
     return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);

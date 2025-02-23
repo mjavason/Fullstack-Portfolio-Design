@@ -2,12 +2,9 @@ import { Skeleton } from '@heroui/react';
 
 function RecentPostsSkeleton() {
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
-      {[1, 2, 3].map((index) => (
-        <div
-          key={index}
-          className='flex flex-col p-5'
-        >
+    <div className='grid grid-cols-1 lg:grid-cols-2 items-stretch gap-5'>
+      {[1, 2].map((index) => (
+        <div key={index} className='flex flex-col p-5'>
           {/* Title Skeleton */}
           <Skeleton className='h-8 w-3/4 my-5' />
 
