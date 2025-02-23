@@ -1,4 +1,5 @@
 import { fetchProjects } from '@/actions/work/read';
+import { Image } from '@heroui/react';
 
 async function FeaturedWorks() {
   const works = await fetchProjects();
@@ -6,9 +7,15 @@ async function FeaturedWorks() {
     return (
       <div
         key={index}
-        className="flex flex-col md:flex-row gap-5 md:gap-0 md:hover:shadow-md border-b-2 pb-3"
+        className="flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3"
       >
-        <img className="object-contain w-full md:w-fit" src={work.image} alt={work.alt} />
+        <Image
+          className="object-contain w-[100%] md:w-fit h-[100%]"
+          src={work.image}
+          alt={work.alt}
+          isZoomed
+          removeWrapper
+        />
         <div className="flex flex-col gap-5 md:gap-0 justify-between cursor-pointer bg-white px-0 md:px-5">
           <h3 className="text-3xl font-bold">{work.title}</h3>
           <div className="my-3 text-lg flex items-center gap-5">
