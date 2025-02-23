@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import RecentPostsSectionHeader from './header';
 import RecentPosts from './posts';
+import PostSkeleton from './suspense/posts';
 
 function RecentPostsSection() {
   return (
@@ -8,7 +10,9 @@ function RecentPostsSection() {
       <RecentPostsSectionHeader></RecentPostsSectionHeader>
 
       {/* recent posts */}
-      <RecentPosts></RecentPosts>
+      <Suspense fallback={<PostSkeleton />}>
+        <RecentPosts></RecentPosts>
+      </Suspense>
     </section>
   );
 }
