@@ -2,5 +2,5 @@
 import React, { ReactNode } from 'react';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <div className='font-[Heebo] bg-white'>{children}</div>;
+  return <div className='bg-white'>{children}</div>;
 }

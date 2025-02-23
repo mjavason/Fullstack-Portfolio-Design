@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Heebo } from 'next/font/google';
 import './globals.css';
+import NavHeader from '@/components/navigation';
 
 const heebo = Heebo({
   variable: '--font-heebo',
@@ -25,7 +26,10 @@ export default function RootLayout({
           href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
         />
       </head>
-      <body className={`${heebo.className}`}>{children}</body>
+      <body className={`${heebo.className}`}>
+        <NavHeader></NavHeader>
+        {children}
+      </body>
     </html>
   );
 }

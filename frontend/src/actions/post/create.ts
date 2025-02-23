@@ -2,7 +2,7 @@
 import { API_BASE_URL } from '@/config/constants';
 import axios from 'axios';
 
-export const createPost = async (postData: any) => {
+export const createPost = async (postData: object) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/posts`, postData);
     return response.data;

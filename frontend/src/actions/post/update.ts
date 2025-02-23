@@ -2,7 +2,7 @@
 import { API_BASE_URL } from '@/config/constants';
 import axios from 'axios';
 
-export const updatePost = async (postId: string, updatedData: any) => {
+export const updatePost = async (postId: string, updatedData: object) => {
   try {
     const response = await axios.put(
       `${API_BASE_URL}/api/posts/${postId}`,
