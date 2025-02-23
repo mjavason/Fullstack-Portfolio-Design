@@ -9,15 +9,6 @@
     "lint": "next lint",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "next lint --fix",
-      "prettier --write"
-    ],
-    "**/*.{json,md,css,scss}": [
-      "prettier --write"
-    ]
-  },
   "dependencies": {
     "@heroui/react": "^2.7.2",
     "axios": "^1.7.9",
