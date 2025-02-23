@@ -1,5 +1,4 @@
 import { fetchProjects } from '@/actions/work/read';
-import { Image } from '@heroui/react';
 
 async function FeaturedWorks() {
   const works = await fetchProjects();
