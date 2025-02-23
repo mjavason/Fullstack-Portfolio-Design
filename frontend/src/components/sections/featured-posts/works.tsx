@@ -1,11 +1,12 @@
 import { fetchProjects } from '@/actions/work/read';
+import { Image } from '@heroui/react';
 
 async function FeaturedWorks() {
   const works = await fetchProjects();
   const renderedWorks = works.map((work, index) => {
     return (
-      <div className='flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3'>
-        <img
+      <div key={index} className='flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3'>
+        <Image
           className='object-contain w-full md:w-fit'
           src={work.image}
           alt={work.alt}

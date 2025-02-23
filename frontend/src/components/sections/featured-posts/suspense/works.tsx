@@ -4,7 +4,7 @@ function WorkSkeleton() {
   return (
     <div className='grid items-stretch gap-9'>
       {[1, 2, 3].map((index) => (
-        <div className='flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3'>
+        <div key={index} className='flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3'>
           {/* Image Skeleton */}
           <Skeleton className='rounded-sm w-[100%] md:w-[30%] h-[30vh] md:h-[100%]' />
 

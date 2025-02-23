@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Heebo } from 'next/font/google';
 import './globals.css';
-import NavHeader from '@/components/navigation';
+import NavSection from '@/components/navigation';
+import FooterSection from '@/components/footer';
 
 const heebo = Heebo({
   variable: '--font-heebo',
@@ -27,8 +28,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${heebo.className}`}>
-        <NavHeader></NavHeader>
+        <NavSection></NavSection>
         {children}
+        <FooterSection></FooterSection>
       </body>
     </html>
   );

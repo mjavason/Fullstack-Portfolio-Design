@@ -2,7 +2,7 @@ import DesktopList from './desktop-list';
 import Toggle from './toggle';
 import MobileList from './mobile-list';
 
-function NavHeader() {
+function NavSection() {
   return (
     <header className='flex justify-end align-middle px-10 py-5 min-h-[10vh]'>
       {/* desktop */}
@@ -17,4 +17,4 @@ function NavHeader() {
   );
 }
 
-export default NavHeader;
+export default NavSection;
