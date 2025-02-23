@@ -3,3 +3,8 @@ blog - all posts(pagination), social media profiles
 work - all works/projects(pagination), social media profiles
 blog details - post(heading and text)[Will need Text editor]
 work/project details - work(headings and images), social mesia profiles
+
+admin dashboard - posts table(clicks, site stats, average session, create, delete, update), projects table(clicks, delete, update)
+admin update post - text editor and preview
+admin update works - text-editor and preview
+admin update social media links - twitter, facebook, instagram, linkedin
