@@ -1,23 +1,23 @@
 import paths from '@/app/paths';
-import { Link } from '@heroui/react';
+import Link from 'next/link';
 
 function MobileList() {
   return (
     <>
       <input type="checkbox" id="nav-toggle" className="hidden peer" />
       <ul className="fixed top-0 left-0 h-screen w-1/3 bg-gray-600 shadow-lg transform -translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-center items-start p-5 space-y-4 font-bold sm:hidden z-50">
-        <li className=" hover:bg-gray-500 px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
-          <Link className="text-white" href={paths.work}>
+        <li className="px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
+          <Link className="text-white hover:text-button-primary" href={paths.work}>
             Work
           </Link>
         </li>
-        <li className="hover:bg-gray-500 px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
-          <Link className="text-white" href={paths.blog}>
+        <li className="px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
+          <Link className="text-white hover:text-button-primary" href={paths.blog}>
             Blog
           </Link>
         </li>
-        <li className="hover:bg-gray-500 px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
-          <Link className="text-white" href={paths.home}>
+        <li className="px-4 py-2 rounded transition-colors duration-300 cursor-pointer">
+          <Link className="text-white hover:text-button-primary" href={paths.home}>
             Contact
           </Link>
         </li>
