@@ -1,7 +1,7 @@
 import { fetchProjects } from '@/actions/work/read';
 import FullDetails from '@/components/details-page/full-details';
 import FullDetailsHeader from '@/components/details-page/header';
-import React, { Suspense } from 'react';
+import React from 'react';
 
 interface ProjectDetailProps {
   params: Promise<{
@@ -12,7 +12,7 @@ interface ProjectDetailProps {
 const WorkPage = async ({ params }: ProjectDetailProps) => {
   const { workId } = await params;
   const works = await fetchProjects();
-  const work = works[0];
+  const work = works[parseInt(workId)];
 
   return (
     <section className="px-5 md:px-36 py-10 text-[#21243D] min-h-[90vh] flex flex-col justify-start gap-10">

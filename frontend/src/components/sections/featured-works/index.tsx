@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import FeaturedWorksHeader from './header';
 import FeaturedWorks from './works';
 import WorkSkeleton from './suspense/works';
-import Link from 'next/link';
 
 function FeaturedWorksSection() {
   return (

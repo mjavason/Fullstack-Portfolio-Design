@@ -1,4 +1,7 @@
+import FullDetails from '@/components/details-page/full-details';
+import FullDetailsHeader from '@/components/details-page/header';
 import React from 'react';
+import { fetchPosts } from '@/actions/post/read';
 
 interface BlogDetailProps {
   params: Promise<{
@@ -8,12 +11,24 @@ interface BlogDetailProps {
 
 const BlogPostPage = async ({ params }: BlogDetailProps) => {
   const { postId } = await params;
+  const posts = await fetchPosts();
+  const post = posts[parseInt(postId)];
 
   return (
-    <div>
-      <h1>Blog Post {postId}</h1>
-      <p>This is the content of the blog post.</p>
-    </div>
+    <section className="px-5 md:px-36 py-10 text-[#21243D] min-h-[90vh] flex flex-col justify-start gap-10">
+      {/* detail header */}
+      <FullDetailsHeader
+        title={post.title}
+        date={post.date}
+        category={post.category.join(', ')}
+        description={post.description}
+        image={''}
+        isPost={true}
+      ></FullDetailsHeader>
+
+      {/* full detail */}
+      <FullDetails content={post.description}></FullDetails>
+    </section>
   );
 };
 

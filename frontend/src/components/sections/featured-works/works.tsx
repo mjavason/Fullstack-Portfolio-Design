@@ -7,11 +7,8 @@ async function FeaturedWorks() {
   const works = await fetchProjects();
   const renderedWorks = works.map((work, index) => {
     return (
-      <Link href={paths.workDetails(index.toString())}>
-        <div
-          key={index}
-          className="flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3"
-        >
+      <Link key={index} href={paths.workDetails(index.toString())}>
+        <div className="flex flex-col md:flex-row gap-5 md:gap-0 hover:shadow-md border-b-2 pb-3">
           <Image
             className="object-contain w-[100%] md:w-fit h-[100%]"
             src={work.image}
