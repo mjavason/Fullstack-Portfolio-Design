@@ -33,7 +33,7 @@ export const fetchProjects = async () => {
   ];
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return works;
   } catch (error) {
     console.error('Error fetching work data:', error);

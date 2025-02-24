@@ -20,7 +20,7 @@ export const fetchPosts = async () => {
   ];
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
