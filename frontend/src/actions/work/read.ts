@@ -9,7 +9,7 @@ export const fetchProjects = async () => {
       category: 'Dashboard',
       description:
         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: 'images/featured/30.png',
+      image: '/images/featured/30.png',
       alt: 'dashboard design',
     },
     {
@@ -18,7 +18,7 @@ export const fetchProjects = async () => {
       category: 'Illustration',
       description:
         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: 'images/featured/32.png',
+      image: '/images/featured/32.png',
       alt: 'dashboard design',
     },
     {
@@ -27,7 +27,7 @@ export const fetchProjects = async () => {
       category: 'Typography',
       description:
         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: 'images/featured/34.png',
+      image: '/images/featured/34.png',
       alt: 'dashboard design',
     },
   ];
