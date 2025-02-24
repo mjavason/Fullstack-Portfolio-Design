@@ -1,4 +1,4 @@
-import FeaturedWorksSection from '@/components/sections/featured-posts';
+import FeaturedWorksSection from '@/components/sections/featured-works';
 import HeroSection from '@/components/sections/hero';
 import RecentPostsSection from '@/components/sections/recent-posts';
 

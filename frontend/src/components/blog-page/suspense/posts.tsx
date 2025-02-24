@@ -3,7 +3,7 @@ import { Skeleton } from '@heroui/react';
 function BlogPostsSkeleton() {
   return (
     <div className="grid grid-cols-1 items-stretch gap-5">
-      {[1, 2].map((index) => (
+      {[1].map((index) => (
         <div key={index} className="flex flex-col">
           {/* Title Skeleton */}
           <Skeleton className="h-8 w-3/4 my-5" />

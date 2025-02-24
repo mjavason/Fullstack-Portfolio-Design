@@ -1,6 +1,6 @@
-import BlogPageHeader from '@/components/blog/header';
-import BlogPagePosts from '@/components/blog/posts';
-import BlogPostsSkeleton from '@/components/blog/suspense/posts';
+import BlogPageHeader from '@/components/blog-page/header';
+import BlogPagePosts from '@/components/blog-page/posts';
+import BlogPostsSkeleton from '@/components/blog-page/suspense/posts';
 import React, { Suspense } from 'react';
 
 const BlogPage = () => {
