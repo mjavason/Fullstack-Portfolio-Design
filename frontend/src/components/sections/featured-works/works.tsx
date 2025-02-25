@@ -24,7 +24,7 @@ async function FeaturedWorks() {
               <span className="rounded-full px-3 p-0 bg-[#21243D] font-semibold text-white">
                 {work.year}
               </span>
-              <span className="text-xl text-[#8695A4] font-semibold">{work.category}</span>
+              <span className="text-xl text-[#8695A4]">{work.category}</span>
             </div>
             <p className="text-lg">{work.description}</p>
           </div>

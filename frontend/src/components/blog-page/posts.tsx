@@ -13,7 +13,7 @@ async function BlogPagePosts() {
           <div className="my-3 text-lg">
             <span>{post.date}</span>
             <span className="mx-5">|</span>
-            <span>{post.category.join(', ')}</span>
+            <span className="text-[#8695A4]">{post.category.join(', ')}</span>
           </div>
           <p className="flex-1 text-lg">{post.description}</p>
         </div>
