@@ -29,7 +29,15 @@ function FullDetailsHeader({
       )}
       <p className="text-lg">{description}</p>
       {!isPost && (
-        <Image removeWrapper className="border-4 object-contain w-[100%]" src={image} alt={title} />
+        <div className="overflow-hidden rounded-lg">
+          <Image
+            removeWrapper
+            isZoomed
+            className="object-contain w-[100%] rounded-lg"
+            src={image}
+            alt={title}
+          />
+        </div>
       )}
     </div>
   );
