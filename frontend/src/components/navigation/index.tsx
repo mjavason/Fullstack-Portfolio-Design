@@ -4,7 +4,7 @@ import MobileList from './mobile-list';
 
 function NavSection() {
   return (
-    <header className='flex justify-end align-middle px-10 py-5 min-h-[10vh]'>
+    <header className="flex justify-end items-center px-5 py-5 min-h-[10vh]">
       {/* desktop */}
       <DesktopList></DesktopList>
 

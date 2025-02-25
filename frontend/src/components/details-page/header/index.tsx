@@ -20,7 +20,7 @@ function FullDetailsHeader({
   isPost,
 }: FullDetailsHeaderProps) {
   return (
-    <div className="flex flex-col justify-start my-10 text-[#21243D] gap-5">
+    <div className="flex flex-col justify-start my-10 text-[#21243D] gap-3">
       <h1 className="text-4xl font-bold w-full md:w-[50%]">{title}</h1>
       {isPost ? (
         <PostTitleMetaData date={date} category={category} />

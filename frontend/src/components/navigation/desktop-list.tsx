@@ -1,5 +1,5 @@
 import paths from '@/app/paths';
-import { Link } from '@heroui/react';
+import Link from 'next/link';
 
 function DesktopList() {
   return (
