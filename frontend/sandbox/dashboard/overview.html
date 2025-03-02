@@ -24,15 +24,53 @@
     </div>
     <div class="grid grid-rows-2 w-full flex-1 px-5 gap-5">
       <div class="grid grid-cols-2 gap-5 overflow-hidden">
-        <div class="grid grid-cols-2 gap-5 items-end">
-          <div class="flex flex-col gap-3 items-center justify-center border-8 p-3">
-            <div class="flex justify-between w-full">
-              <h4 class="font-semibold text-black">Visitors</h4>
+        <div class="grid grid-cols-2 gap-5 items-stretch">
+          <div class="flex flex-col gap-3 items-center justify-start border-8 p-3">
+            <div class="flex justify-between w-full mb-3">
+              <h4 class="font-semibold text-lg text-[#3E4B58]">Visitors</h4>
               <i class="fas fa-ellipsis-h cursor-pointer"></i>
             </div>
-            <canvas class="h-full" id="myChart"></canvas>
+            <canvas class="h-full" id="visitors"></canvas>
           </div>
-          <div class="aspect-square w-full border-8"></div>
+          <div class="flex flex-col gap-3 items-center justify-start border-8 p-3">
+            <div class="flex justify-between w-full mb-3">
+              <h4 class="font-semibold text-lg text-[#3E4B58]">Top Locations</h4>
+              <i class="fas fa-ellipsis-h cursor-pointer"></i>
+            </div>
+
+            <div class="w-full">
+              <div class="flex w-full justify-between">
+                <h5 class="text-sm font-medium text-[#3E4B58] mb-2">Enugu</h5>
+                <h5>74%</h5>
+              </div>
+              <!-- Progress Bar Container -->
+              <div class="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full w-[74%] bg-[#4CA2FE]"></div>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div class="flex w-full justify-between">
+                <h5 class="text-sm font-medium text-[#3E4B58] mb-2">Abuja</h5>
+                <h5>51%</h5>
+              </div>
+              <!-- Progress Bar Container -->
+              <div class="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full w-[53%] bg-[#4CA2FE]"></div>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div class="flex w-full justify-between">
+                <h5 class="text-sm font-medium text-[#3E4B58] mb-2">Lagos</h5>
+                <h5>42%</h5>
+              </div>
+              <!-- Progress Bar Container -->
+              <div class="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full w-[42%] bg-[#4CA2FE]"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="grid grid-cols-3 gap-1">
           <div class="col-span-2 w-full border-8"></div>
@@ -48,66 +86,7 @@
     </div>
   </section>
 
-  <script>
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.4,
-        pointRadius: 5, // 🔥 Hides all points by default
-        pointHoverRadius: 10, // 🔥 Shows only on hover
-      }],
-    };
-    const options = {
-      hover: {
-        animationDuration: 0 // 🔥 Removes hover delay
-      },
-      animation: {
-        duration: 200 // 🔥 Speeds up chart animations (default is 1000ms)
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false // Removes vertical grid lines
-          },
-          ticks: {
-            display: false
-          },
-          border: {
-            display: false
-          }
-        },
-        y: {
-          grid: {
-            display: false // Removes horizontal grid lines
-          },
-          ticks: {
-            display: false
-          },
-          border: {
-            display: false
-          }
-        }
-      },
-      plugins: {
-        legend: {
-          display: false // 🔥 Hides the legend
-        }
-      }
-    }
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',  // Can be 'line', 'pie', 'radar', etc.
-      data: data,
-      options: options
-    });
-
-  </script>
+  <script src="scripts/visitors.js"></script>
 </body>
 
 </html>
