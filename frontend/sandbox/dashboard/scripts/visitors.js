@@ -18,7 +18,7 @@ const options = {
     animationDuration: 0, // 🔥 Removes hover delay
   },
   animation: {
-    duration: 200, // 🔥 Speeds up chart animations (default is 1000ms)
+    // duration: 200, // 🔥 Speeds up chart animations (default is 1000ms)
   },
   scales: {
     x: {
