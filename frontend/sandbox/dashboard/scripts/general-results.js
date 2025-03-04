@@ -1,6 +1,4 @@
 const labelsGeneralResults = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const darkBlue = "rgb(76, 162, 254)";
-const lightBlue = "rgb(173, 216, 230)";
 
 const dataValues = [65, 49, 39, 51, 20, 55, 40, 16, 51, 60, 70, 50];
 
@@ -8,7 +6,7 @@ const dataGeneralResults = {
   labels: labelsGeneralResults,
   datasets: [
     {
-      label: "My First Dataset",
+      label: "Dataset",
       data: dataValues,
       backgroundColor: dataValues.map((value) => (value > 50 ? darkBlue : lightBlue)),
       borderColor: "rgb(76, 162, 254)",

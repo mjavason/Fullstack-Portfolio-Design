@@ -6,10 +6,10 @@ const dataVisitors = {
       label: "My First Dataset",
       data: [65, 59, 80, 81, 56, 55, 40],
       fill: false,
-      borderColor: "rgb(76, 162, 254)",
+      borderColor: darkBlue,
       tension: 0.4,
-      pointRadius: 5, // 🔥 Hides all points by default
-      pointHoverRadius: 10, // 🔥 Shows only on hover
+      pointRadius: 5,
+      pointHoverRadius: 10,
     },
   ],
 };
