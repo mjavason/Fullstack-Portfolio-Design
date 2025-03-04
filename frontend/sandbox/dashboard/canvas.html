@@ -13,7 +13,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="font-[Heebo] bg-[#FAFCFE] min-h-screen border-8 border-red-500 flex items-center justify-center">
+<body
+  class="min-w-[480px] font-[Heebo] bg-[#FAFCFE] min-h-screen border-8 border-red-500 flex items-center justify-center">
   <div class="flex items-center justify-center h-[40vh] border-8">
     <canvas class="h-full" id="myChart"></canvas>
   </div>
@@ -34,11 +35,11 @@
     };
     const options = {
       hover: {
-      animationDuration: 0 // 🔥 Removes hover delay
-    },
-    animation: {
-      duration: 200 // 🔥 Speeds up chart animations (default is 1000ms)
-    },
+        animationDuration: 0 // 🔥 Removes hover delay
+      },
+      animation: {
+        duration: 200 // 🔥 Speeds up chart animations (default is 1000ms)
+      },
       scales: {
         x: {
           grid: {
@@ -47,7 +48,7 @@
           ticks: {
             display: false
           },
-          border:{
+          border: {
             display: false
           }
         },
@@ -58,7 +59,7 @@
           ticks: {
             display: false
           },
-          border:{
+          border: {
             display: false
           }
         }

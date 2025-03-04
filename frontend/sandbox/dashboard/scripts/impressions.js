@@ -15,6 +15,9 @@ new Chart(ctxImpressions, {
     ],
   },
   options: {
+    animation: {
+      duration: 3000,
+    },
     rotation: 0, // Starts at top
     circumference: 360, // Full circle
     plugins: {
