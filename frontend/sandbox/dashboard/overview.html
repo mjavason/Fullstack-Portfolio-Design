@@ -14,7 +14,7 @@
 </head>
 
 <body class="font-[Heebo] bg-[#FAFCFE]">
-  <section class="bg-white text-[#C8CACB] flex flex-col min-h-[90vh] items-center px-10">
+  <section class="bg-white text-[#C8CACB] flex flex-col min-h-[90vh] items-center md:px-10">
     <div class="flex justify-between w-full items-center p-5">
       <div>
         <h1 class="text-[#3C4959] text-2xl">Hello Vallendito</h1>
@@ -72,11 +72,29 @@
             </div>
           </div>
         </div>
+
+
+        <!-- inner second column -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-1">
-          <div class="col-span-2 w-full border-8"></div>
+          <div class="col-span-2 w-full border-8">
+            <div class="flex justify-between w-full mb-3 p-3">
+              <h4 class="font-semibold text-lg text-[#3E4B58]">General Results</h4>
+            </div>
+            <canvas class="h-full" id="general-results"></canvas>
+          </div>
           <div class="w-full border-8"></div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+      <!-- second row -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
         <div class="h-full w-full border-8"></div>
         <div class="h-full w-full border-8"></div>
@@ -87,6 +105,7 @@
   </section>
 
   <script src="scripts/visitors.js"></script>
+  <script src="scripts/general-results.js"></script>
 </body>
 
 </html>

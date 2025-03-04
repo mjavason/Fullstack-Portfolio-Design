@@ -1,6 +1,6 @@
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-const data = {
-  labels: labels,
+const labelsVisitors = ["January", "February", "March", "April", "May", "June", "July"];
+const dataVisitors = {
+  labels: labelsVisitors,
   datasets: [
     {
       label: "My First Dataset",
@@ -13,12 +13,12 @@ const data = {
     },
   ],
 };
-const options = {
+const optionsVisitors = {
   hover: {
     animationDuration: 0, // 🔥 Removes hover delay
   },
   animation: {
-    // duration: 200, // 🔥 Speeds up chart animations (default is 1000ms)
+    duration: 3000, // 🔥 Speeds up chart animations (default is 1000ms)
   },
   scales: {
     x: {
@@ -51,9 +51,9 @@ const options = {
   },
 };
 
-const ctx = document.getElementById("visitors").getContext("2d");
-new Chart(ctx, {
+const ctxVisitors = document.getElementById("visitors").getContext("2d");
+new Chart(ctxVisitors, {
   type: "line", // Can be 'line', 'pie', 'radar', etc.
-  data: data,
-  options: options,
+  data: dataVisitors,
+  options: optionsVisitors,
 });
