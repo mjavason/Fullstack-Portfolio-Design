@@ -31,7 +31,7 @@ function DashboardOverviewSection() {
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Projects</h2>
-          <button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create Project</button>
+          <button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</button>
         </div>
         <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
@@ -95,7 +95,7 @@ function DashboardOverviewSection() {
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
-          <button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create Post</button>
+          <button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</button>
         </div>
         <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
