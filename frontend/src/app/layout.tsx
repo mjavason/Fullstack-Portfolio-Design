@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Heebo } from 'next/font/google';
 import './globals.css';
 // import NavSection from '@/components/navigation';
-import FooterSection from '@/components/footer';
+// import FooterSection from '@/components/footer';
 import AdminNavBar from '@/components/admin/navigation';
 
 const heebo = Heebo({

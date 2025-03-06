@@ -36,7 +36,7 @@ export const options: ChartOptions<'bar'> = {
       align: 'start',
       fullSize: true,
       labels: {
-        generateLabels: function (chart) {
+        generateLabels: function (this) {
           return [
             {
               text: 'Up',

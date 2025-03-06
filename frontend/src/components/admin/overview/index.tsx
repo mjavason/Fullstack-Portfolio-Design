@@ -47,7 +47,7 @@ function DashboardOverviewSection() {
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
             <h5 className="text-gray-400 text-sm">16 March 2019</h5>
             <p className="text-black text-sm my-3">
-              Let me start off by saying, you can do this! It will be hard work, but it is'nt
+              Let me start off by saying, you can do this! It will be hard work, but it isn&#39;t
               impossible
             </p>
             <span className="text-[#4CA2FE]">10+ Responses</span>
@@ -102,7 +102,7 @@ function DashboardOverviewSection() {
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
             <h5 className="text-gray-400 text-sm">16 March 2019</h5>
             <p className="text-black text-sm my-3">
-              Let me start off by saying, you can do this! It will be hard work, but it is'nt
+              Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
               impossible
             </p>
             <span className="text-[#4CA2FE]">10+ Responses</span>
@@ -129,7 +129,7 @@ function DashboardOverviewSection() {
             <h3 className="text-black text-lg mt-3">Design Thinking Process</h3>
             <h5 className="text-gray-400 text-sm">04 December 2019</h5>
             <p className="text-black flex-1 text-sm my-3">
-              Let me start off by saying, you can do this! It will be hard work, but it is'nt
+              Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
               impossible
             </p>
             <span className="text-[#4CA2FE]">30+ Responses</span>

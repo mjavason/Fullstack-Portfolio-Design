@@ -14,7 +14,7 @@ export const options: ChartOptions<'doughnut'> = {
       align: 'start',
       fullSize: true,
       labels: {
-        generateLabels: function (chart) {
+        generateLabels: function (this) {
           return [
             {
               text: 'Male',
