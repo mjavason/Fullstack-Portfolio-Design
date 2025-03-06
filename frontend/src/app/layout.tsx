@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Heebo } from 'next/font/google';
 import './globals.css';
-import NavSection from '@/components/navigation';
+// import NavSection from '@/components/navigation';
 import FooterSection from '@/components/footer';
+import AdminNavBar from '@/components/admin/navigation';
 
 const heebo = Heebo({
   variable: '--font-heebo',
@@ -20,17 +21,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
         <link
-          rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
       <body className={`${heebo.className}`}>
-        <NavSection></NavSection>
+        {/* <NavSection></NavSection> */}
+        <AdminNavBar></AdminNavBar>
         {children}
-        <FooterSection></FooterSection>
+        {/* <FooterSection></FooterSection> */}
       </body>
     </html>
   );
