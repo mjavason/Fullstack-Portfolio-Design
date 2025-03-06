@@ -1,68 +1,20 @@
 import { Image } from '@heroui/react';
+import WelcomeMessage from './welcome-message';
+import VisitorChart from './charts/visitors';
+import DashboardTopLocations from './charts/top-locations';
 
 function DashboardOverviewSection() {
   return (
     <section className="bg-white text-[#C8CACB] flex flex-col gap-10 items-center md:px-10">
-      {/* <!-- first row --> */}
-      <div className="flex justify-between w-full items-center p-5">
-        <div>
-          <h1 className="text-[#3C4959] text-2xl">Hello Vallendito</h1>
-          <p className="text-lg">Your recap articles at this time</p>
-        </div>
-        {/* <!-- <button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create Article</button> --> */}
-      </div>
+      {/* welcome message */}
+      <WelcomeMessage></WelcomeMessage>
 
       {/* <!-- second row --> */}
       <div className="grid w-full px-5 gap-3">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="grid grid-cols-2 gap-3">
-            <div className="flex flex-col gap-3 items-center justify-between shadow-md p-3 rounded-md">
-              <div className="flex justify-between w-full mb-3">
-                <h4 className="font-semibold text-lg text-[#3E4B58]">Visitors</h4>
-                <i className="fas fa-ellipsis-h cursor-pointer"></i>
-              </div>
-              <canvas className="h-full" id="visitors"></canvas>
-            </div>
-            <div className="flex flex-col gap-3 items-center justify-between shadow-md p-3 rounded-md">
-              <div className="flex justify-between w-full mb-3">
-                <h4 className="font-semibold text-lg text-[#3E4B58]">Top Locations</h4>
-                <i className="fas fa-ellipsis-h cursor-pointer"></i>
-              </div>
-
-              <div className="w-full flex flex-col gap-3">
-                <div className="w-full">
-                  <div className="flex w-full justify-between">
-                    <h5 className="text-sm font-medium text-[#3E4B58] mb-2">Enugu</h5>
-                    <h5>74%</h5>
-                  </div>
-                  <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div id="progress-bar" className="h-full w-[74%] bg-[#4CA2FE]"></div>
-                  </div>
-                </div>
-
-                <div className="w-full">
-                  <div className="flex w-full justify-between">
-                    <h5 className="text-sm font-medium text-[#3E4B58] mb-2">Abuja</h5>
-                    <h5>51%</h5>
-                  </div>
-                  {/* <!-- Progress Bar Container --> */}
-                  <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div id="progress-bar" className="h-full w-[53%] bg-[#4CA2FE]"></div>
-                  </div>
-                </div>
-
-                <div className="w-full">
-                  <div className="flex w-full justify-between">
-                    <h5 className="text-sm font-medium text-[#3E4B58] mb-2">Lagos</h5>
-                    <h5>42%</h5>
-                  </div>
-                  {/* <!-- Progress Bar Container --> */}
-                  <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div id="progress-bar" className="h-full w-[42%] bg-[#4CA2FE]"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <VisitorChart></VisitorChart>
+            <DashboardTopLocations></DashboardTopLocations>
           </div>
 
           {/* <!-- inner second column --> */}
