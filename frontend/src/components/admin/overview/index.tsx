@@ -2,6 +2,7 @@ import { Image } from '@heroui/react';
 import WelcomeMessage from './welcome-message';
 import VisitorChart from './charts/visitors';
 import DashboardTopLocations from './charts/top-locations';
+import GeneralResultsChart from './charts/general-results';
 
 function DashboardOverviewSection() {
   return (
@@ -19,12 +20,8 @@ function DashboardOverviewSection() {
 
           {/* <!-- inner second column --> */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-            <div className="flex flex-col justify-between col-span-2 w-full shadow-md  rounded-md">
-              <div className="flex justify-between w-full mb-3 p-3">
-                <h4 className="font-semibold text-lg text-[#3E4B58]">General Results</h4>
-              </div>
-              <canvas className="h-full" id="general-results"></canvas>
-            </div>
+            <GeneralResultsChart></GeneralResultsChart>
+
             <div className="w-full shadow-md col-span-2 md:col-span-1 flex flex-col justify-between rounded-md">
               <div className="flex justify-center w-full mb-3 p-3">
                 <h4 className="font-semibold text-lg text-[#3E4B58]">Impressions</h4>
