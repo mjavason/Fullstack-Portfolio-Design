@@ -28,7 +28,7 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
-      <body className={`${heebo.className}`}>
+      <body className={`${heebo.className} min-w-[480px]`}>
         {/* <NavSection></NavSection> */}
         <AdminNavBar></AdminNavBar>
         {children}
