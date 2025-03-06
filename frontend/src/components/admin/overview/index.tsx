@@ -3,6 +3,7 @@ import WelcomeMessage from './welcome-message';
 import VisitorChart from './charts/visitors';
 import DashboardTopLocations from './charts/top-locations';
 import GeneralResultsChart from './charts/general-results';
+import ImpressionsChart from './charts/impressions';
 
 function DashboardOverviewSection() {
   return (
@@ -21,13 +22,7 @@ function DashboardOverviewSection() {
           {/* <!-- inner second column --> */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
             <GeneralResultsChart></GeneralResultsChart>
-
-            <div className="w-full shadow-md col-span-2 md:col-span-1 flex flex-col justify-between rounded-md">
-              <div className="flex justify-center w-full mb-3 p-3">
-                <h4 className="font-semibold text-lg text-[#3E4B58]">Impressions</h4>
-              </div>
-              <canvas className="h-full" id="impressions"></canvas>
-            </div>
+            <ImpressionsChart></ImpressionsChart>
           </div>
         </div>
       </div>
