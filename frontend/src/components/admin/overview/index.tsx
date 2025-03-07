@@ -1,18 +1,24 @@
-// import { Button, Image } from '@heroui/react';
-// import WelcomeMessage from './welcome-message';
+import { Button, Image } from '@heroui/react';
+import WelcomeMessage from './welcome-message';
 import VisitorChart from './charts/visitors';
 import DashboardTopLocations from './charts/top-locations';
 import GeneralResultsChart from './charts/general-results';
 import ImpressionsChart from './charts/impressions';
-import FeaturedWorks from '@/components/sections/featured-works/works';
-import RecentPosts from '@/components/sections/recent-posts/posts';
 
-// TODO: Update happens when you click on a post or project. As the user types, updates are saved automatically. There should be a button to preview the work. The preview is simply redirecting them to client side as usual. A delete button should be there as well. Maybe a publish/unpublish button as well. Don't forget the TinyMCE text editor. There should also be a settings page to update the picture and social media links that show on the client side. Also don't forget to implement search.
+// TODO: Update happens when you click on a post or project.
+//  As the user types, updates are saved automatically.
+//  There should be a button to preview the work.
+//  The preview is simply redirecting them to client side as usual.
+//  A delete button should be there as well.
+//  Maybe a publish/unpublish button as well.
+//  Don't forget the TinyMCE text editor.
+//  There should also be a settings page to update the picture and social media links that show on the client side.
+//  Also don't forget to implement search.
 
 function DashboardOverviewSection() {
   return (
     <section className="bg-white flex flex-col gap-10 items-center md:px-10">
-      {/* <WelcomeMessage></WelcomeMessage> */}
+      <WelcomeMessage></WelcomeMessage>
 
       {/* <!-- second row --> */}
       <div className="grid w-full px-5 gap-3">
@@ -34,9 +40,9 @@ function DashboardOverviewSection() {
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Projects</h2>
-          {/* <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button> */}
+          <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button>
         </div>
-        {/* <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <div className="overflow-hidden">
               <Image
@@ -91,17 +97,16 @@ function DashboardOverviewSection() {
             </p>
             <span className="text-[#4CA2FE]">27+ Responses</span>
           </div>
-        </div> */}
-        <FeaturedWorks></FeaturedWorks>
+        </div>
       </div>
 
       {/* <!-- fourth row --> */}
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
-          {/* <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button> */}
+          <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button>
         </div>
-        {/* <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
             <h5 className="text-gray-400 text-sm">16 March 2019</h5>
@@ -138,8 +143,7 @@ function DashboardOverviewSection() {
             </p>
             <span className="text-[#4CA2FE]">30+ Responses</span>
           </div>
-        </div> */}
-        <RecentPosts></RecentPosts>
+        </div>
       </div>
     </section>
   );
