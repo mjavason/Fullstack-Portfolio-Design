@@ -1,11 +1,17 @@
-'use client'; // Ensures the component runs only on the client side
+'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
 
 function MobileList() {
-  const pathname = usePathname(); // Get the current route
+  const pathname = usePathname();
+  const [currentPath, setCurrentPath] = useState(pathname);
+
+  useEffect(() => {
+    setCurrentPath(pathname);
+  }, [pathname]);
 
   return (
     <>
@@ -24,7 +30,7 @@ function MobileList() {
               <Link
                 href={item.path}
                 className={`text-white ${
-                  pathname === item.path
+                  currentPath === item.path
                     ? 'text-button-primary font-semibold'
                     : 'hover:text-button-primary'
                 }`}
