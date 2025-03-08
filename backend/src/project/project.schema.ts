@@ -27,6 +27,9 @@ export class Project implements IProject {
 
   @Prop({ required: true })
   body: string;
+
+  @Prop({ default: false })
+  published: boolean;
 }
 
 export const projectSchema = SchemaFactory.createForClass(Project);

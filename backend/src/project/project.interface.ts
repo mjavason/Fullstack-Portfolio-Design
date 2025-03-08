@@ -6,7 +6,7 @@ export interface IProject {
   coverImage: string;
   summary: string;
   body: string;
-  
+  published: boolean;
 }
 
 export interface IProjectDocument extends IProject, Document {}

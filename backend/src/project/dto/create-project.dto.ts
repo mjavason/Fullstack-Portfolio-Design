@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 export class CreateProjectDto {
@@ -33,4 +33,11 @@ export class CreateProjectDto {
   })
   @IsString()
   body: string;
+
+  @ApiPropertyOptional({
+    description: 'Publication status of the project',
+    type: Boolean,
+    example: true,
+  })
+  published: boolean;
 }

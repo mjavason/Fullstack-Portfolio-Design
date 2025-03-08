@@ -12,6 +12,13 @@ export class FilterProjectDto {
   @IsOptional()
   @IsString()
   title: string;
+
+  @ApiPropertyOptional({
+    description: 'Publication status of the project',
+    type: Boolean,
+    example: true,
+  })
+  published: boolean;
 }
 
 export class FilterProjectWithOrDto {
