@@ -5,7 +5,7 @@ import WorkSkeleton from './suspense/works';
 
 function FeaturedWorksSection() {
   return (
-    <section className="px-5 md:px-36 py-10 text-[#21243D] min-h-[90vh] flex flex-col justify-start gap-5">
+    <section className="px-5 md:px-36 py-10 text-[#21243D] min-h-[90vh] md:min-h-0 flex flex-col justify-start gap-5">
       {/* header */}
       <FeaturedWorksHeader></FeaturedWorksHeader>
 

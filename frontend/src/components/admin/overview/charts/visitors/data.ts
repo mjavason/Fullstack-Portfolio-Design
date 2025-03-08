@@ -1,4 +1,4 @@
-import { darkBlue } from '@/config/constants/constants';
+import { darkBlue } from '@/config/constants';
 import { ChartData, ChartDataset } from 'chart.js';
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];

@@ -1,4 +1,4 @@
-import { darkBlue, lightBlue } from '@/config/constants/constants';
+import { darkBlue, lightBlue } from '@/config/constants';
 import { ChartData, ChartDataset } from 'chart.js';
 
 const gaugeValue = 75; // Adjust this value dynamically if needed
