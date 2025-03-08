@@ -1,10 +1,11 @@
 // import { JwtPayload, jwtDecode } from 'jwt-decode';
-import { NextRequest, NextResponse } from 'next/server';
-import { CookieType } from './config/enums/CookieType';
-import { authPaths, noAuthPaths } from './config/constants/urls';
+import { NextRequest /* NextResponse */ } from 'next/server';
+// import { CookieType } from './config/enums/CookieType';
+// import { authPaths, noAuthPaths } from './config/constants/urls';
 
 export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  console.log(request);
+  // const pathname = request.nextUrl.pathname;
 
   // if (pathname.includes('/verify-email')) {
   //   return extractTokenAndRedirect(request, '/verify-email', CookieType.ConfirmEmail);

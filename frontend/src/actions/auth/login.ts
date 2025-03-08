@@ -1,10 +1,10 @@
 'use server';
-import { API_BASE_URL } from '@/config/constants/constants';
+import { BASE_URL } from '@/config/constants';
 import axios from 'axios';
 
 export const login = async (username: string, password: string) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+    const response = await axios.post(`${BASE_URL}/api/auth/login`, {
       username,
       password,
     });
