@@ -19,7 +19,7 @@ function AdminPostsSection() {
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
           <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button>
         </div>
-        <div className="grid grid-cols-2 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
             <h5 className="text-gray-400 text-sm">16 March 2019</h5>
