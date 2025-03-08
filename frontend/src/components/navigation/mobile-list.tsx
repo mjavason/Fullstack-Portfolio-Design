@@ -34,9 +34,9 @@ function MobileList() {
       >
         <ul className="h-full w-1/3 bg-gray-600 shadow-lg flex flex-col justify-center items-start p-5 space-y-4">
           {[
+            { name: 'Home', path: paths.home },
             { name: 'Work', path: paths.work },
             { name: 'Blog', path: paths.blog },
-            { name: 'Contact', path: paths.home },
           ].map((item) => (
             <li
               key={item.path}
