@@ -24,6 +24,9 @@ export class Post implements IPost {
 
   @Prop({ required: true })
   body: string;
+
+  @Prop({ default: false })
+  published: boolean;
 }
 
 export const postSchema = SchemaFactory.createForClass(Post);

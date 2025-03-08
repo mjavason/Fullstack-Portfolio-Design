@@ -13,6 +13,13 @@ export class FilterPostDto {
   @IsArray()
   @IsString({ each: true })
   categories: string[];
+
+  @ApiPropertyOptional({
+    description: 'Publication status of the post',
+    type: Boolean,
+    example: true,
+  })
+  published: boolean;
 }
 
 export class FilterPostWithOrDto {

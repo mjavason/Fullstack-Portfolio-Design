@@ -5,6 +5,7 @@ export interface IPost {
   categories: string[];
   summary: string;
   body: string;
+  published: boolean;
 }
 
 export interface IPostDocument extends IPost, Document {}

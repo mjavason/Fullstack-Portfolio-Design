@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsArray, IsString } from 'class-validator';
 
 export class CreatePostDto {
@@ -21,4 +21,11 @@ export class CreatePostDto {
   @ApiProperty({ description: 'Content of the post', example: 'This is the body of the post.' })
   @IsString()
   body: string;
+
+  @ApiPropertyOptional({
+    description: 'Publication status of the post',
+    type: Boolean,
+    example: true,
+  })
+  published: boolean;
 }
