@@ -1,4 +1,4 @@
-import { JwtPayload, jwtDecode } from 'jwt-decode';
+// import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { NextRequest, NextResponse } from 'next/server';
 import { CookieType } from './config/enums/CookieType';
 import { authPaths, noAuthPaths } from './config/constants/urls';
@@ -38,23 +38,23 @@ export async function middleware(request: NextRequest) {
   // }
 }
 
-const extractTokenAndRedirect = (request: NextRequest, redirectUrl: string, name: CookieType) => {
-  const email = request.nextUrl.searchParams.get('email');
-  const token = request.nextUrl.searchParams.get('token');
-  if (email && token) {
-    //remove token and email from url
-    const response = NextResponse.redirect(new URL(redirectUrl, request.url));
-    response.cookies.set(name, JSON.stringify({ email, token }), {});
-    return response;
-  }
-};
+// const extractTokenAndRedirect = (request: NextRequest, redirectUrl: string, name: CookieType) => {
+//   const email = request.nextUrl.searchParams.get('email');
+//   const token = request.nextUrl.searchParams.get('token');
+//   if (email && token) {
+//     //remove token and email from url
+//     const response = NextResponse.redirect(new URL(redirectUrl, request.url));
+//     response.cookies.set(name, JSON.stringify({ email, token }), {});
+//     return response;
+//   }
+// };
 
-const isExpiredToken = (decodedToken: JwtPayload) => {
-  const ONE_SECOND_IN_MILLISECOND = 1000;
-  const currentTime = new Date().getTime();
-  const tokenExpiryTime = (decodedToken?.exp ?? 0) * ONE_SECOND_IN_MILLISECOND;
-  return currentTime > tokenExpiryTime;
-};
+// const isExpiredToken = (decodedToken: JwtPayload) => {
+//   const ONE_SECOND_IN_MILLISECOND = 1000;
+//   const currentTime = new Date().getTime();
+//   const tokenExpiryTime = (decodedToken?.exp ?? 0) * ONE_SECOND_IN_MILLISECOND;
+//   return currentTime > tokenExpiryTime;
+// };
 
 export const config = {
   matcher: [

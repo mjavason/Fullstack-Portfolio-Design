@@ -1,4 +1,4 @@
-interface BusinessSignupResponse {}
+// interface BusinessSignupResponse {}
 
 interface BusinessSignupDTO {
   email: string;

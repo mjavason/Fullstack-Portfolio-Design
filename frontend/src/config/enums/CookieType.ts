@@ -10,7 +10,7 @@ export enum CookieType {
   Token = 'token',
   CollectInfo = 'collection-information',
   ClientDetails = 'client-details',
-  MerchantId = 'client-details',
+  MerchantId = 'client-details-',
   CollectionAccounts = 'collection-accounts',
   Splits = 'splits',
   AccountBan = 'account-ban',
