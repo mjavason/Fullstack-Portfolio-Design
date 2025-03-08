@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
-      <body className={`${heebo.className} min-w-[480px]`}>
+      <body className={`${heebo.className} min-w-[240px]`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
