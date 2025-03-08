@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import NavSection from '@/components/navigation';
 import FooterSection from '@/components/footer';
 import AdminNavBar from '@/components/admin/navigation';
+import AdminFooterSection from './admin/footer';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,7 +14,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <>
       {isAdmin ? <AdminNavBar /> : <NavSection />}
       {children}
-      {isAdmin ? <></> : <FooterSection />}
+      {isAdmin ? <AdminFooterSection /> : <FooterSection />}
     </>
   );
 }

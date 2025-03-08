@@ -6,15 +6,21 @@ function AdminNavBar() {
     <nav className="bg-white text-[#C8CACB] flex justify-between items-center shadow-md px-10">
       <div className="flex items-center justify-between">
         <ul className="flex gap-10">
-          <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
-            <Link href={paths.adminDashboard}>Overview</Link>
-          </li>
-          <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
-            Posts
-          </li>
-          <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
-            Projects
-          </li>
+          <Link href={paths.adminDashboard}>
+            <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
+              Overview
+            </li>
+          </Link>
+          <Link href={paths.adminPosts}>
+            <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
+              Posts
+            </li>
+          </Link>
+          <Link href={paths.adminWorks}>
+            <li className="py-5 cursor-pointer hover:text-[#469DFF] border-b-8 border-transparent hover:border-[#469DFF]">
+              Projects
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="hidden md:flex gap-5">

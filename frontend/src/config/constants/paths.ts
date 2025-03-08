@@ -18,6 +18,8 @@ const paths = {
   blogDetails: (postId: string) => `/blog/${postId}`,
   workDetails: (workId: string) => `/work/${workId}`,
   adminDashboard: '/admin', // Needs revalidation
+  adminPosts: '/admin/posts',
+  adminWorks: '/admin/works',
   adminUpdatePost: (postId: string) => `/admin/posts/${postId}/edit`,
   adminUpdateWork: (workId: string) => `/admin/works/${workId}/edit`,
   adminUpdateSocialMediaLinks: '/admin/social-media-links', // Needs revalidation
