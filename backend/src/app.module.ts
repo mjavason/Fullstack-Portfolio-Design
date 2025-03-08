@@ -22,6 +22,7 @@ import {
   databaseConfig,
   mailConfig,
 } from './common/configs/constants';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import {
     BucketModule,
     ReviewModule,
     ContactModule,
+    PostModule,
     // ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
