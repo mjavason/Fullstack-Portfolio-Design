@@ -13,6 +13,7 @@ function DesktopList() {
         { name: 'Home', path: paths.home },
         { name: 'Works', path: paths.work },
         { name: 'Blog', path: paths.blog },
+        { name: 'Admin', path: paths.adminDashboard },
       ].map((item) => (
         <li key={item.path} className="transition-colors duration-300 cursor-pointer">
           <Link

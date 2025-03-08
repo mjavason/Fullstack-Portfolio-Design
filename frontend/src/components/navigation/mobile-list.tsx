@@ -37,6 +37,7 @@ function MobileList() {
             { name: 'Home', path: paths.home },
             { name: 'Work', path: paths.work },
             { name: 'Blog', path: paths.blog },
+            { name: 'Admin', path: paths.adminDashboard },
           ].map((item) => (
             <li
               key={item.path}
