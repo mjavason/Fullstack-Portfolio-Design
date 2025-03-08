@@ -23,6 +23,7 @@ import {
   mailConfig,
 } from './common/configs/constants';
 import { PostModule } from './post/post.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { PostModule } from './post/post.module';
     ReviewModule,
     ContactModule,
     PostModule,
+    ProjectModule,
     // ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
