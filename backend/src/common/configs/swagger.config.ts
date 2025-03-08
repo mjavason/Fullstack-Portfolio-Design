@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Startup')
+    .setTitle('Fullstack-portfolio')
     .setDescription('Nest.js app')
     .setVersion('1.0')
     .addBearerAuth()

@@ -8,13 +8,13 @@ export const appConfig = registerAs('app', () => ({
   apiPrefix: 'api/v1',
   envName: process.env.NODE_ENV || 'development',
   baseURL: process.env.BASE_URL || 'http://localhost:5000',
-  name: process.env.APP_NAME || 'Startup',
+  name: process.env.APP_NAME || 'Fullstack Portfolio',
   // frontendUrl: process.env.FRONTEND_URL,
   // emailUser: process.env.EMAIL_SENDER,
 }));
 
 export const databaseConfig = registerAs('db', () => ({
-  name: process.env.MONGO_DB_NAME || 'startup',
+  name: process.env.MONGO_DB_NAME || 'fullstack-portfolio',
   url: process.env.MONGO_DB_URL + MONGO_DB_NAME || 'mongodb://localhost:27017/' + MONGO_DB_NAME,
 }));
 
@@ -25,31 +25,31 @@ export const cloudinaryConfig = registerAs('cloudinary', () => ({
 }));
 
 export const mailConfig = registerAs('mail', () => ({
-  address: process.env.MAIL_ADDRESS || 'admin@startup.com',
+  address: process.env.MAIL_ADDRESS || 'admin@fullstack-portfolio.com',
   password: process.env.MAIL_PASSWORD || 'xxx',
 }));
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-export const MAIL_ADDRESS = process.env.MAIL_ADDRESS || 'admin@startup.com';
+export const MAIL_ADDRESS = process.env.MAIL_ADDRESS || 'admin@fullstack-portfolio.com';
 export const MAIL_PASSWORD = process.env.MAIL_PASSWORD || 'xxx';
 
 export const CLOUDINARY_API_NAME = process.env.CLOUDINARY_API_NAME || 'cloudinary';
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || '12345';
 export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || 'xxxx';
 
-export const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'startup';
+export const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'fullstack-portfolio';
 export const MONGO_DB_URL =
   process.env.MONGO_DB_URL + MONGO_DB_NAME || 'mongodb://localhost:27017/' + MONGO_DB_NAME;
 
 export const PORT = process.env.PORT || 5000;
 
-export const APP_NAME = process.env.APP_NAME || 'Startup';
+export const APP_NAME = process.env.APP_NAME || 'Fullstack-portfolio';
 export const JWT_SECRET = process.env.JWT_SECRET || 'xxx';
 export const API_PREFIX = 'api/v1';
 export const NODE_ENV = process.env.NODE_ENV || 'development';
 export const BASE_URL = process.env.BASE_URL || `http://locahost:${PORT}`;
-export const FRONTEND_URL = process.env.FRONTEND_URL || 'https://startup.com';
+export const FRONTEND_URL = process.env.FRONTEND_URL || 'https://fullstack-portfolio.com';
 
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || 'xxxx';
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || 'xxxx';
@@ -71,7 +71,7 @@ export const DISCOUNT_CAP = 2500;
 export const DEFAULT_COORDINATES = { longitude: 7.49, latitude: 6.389 };
 export const DEFAULT_ADDRESS = 'Gariki enugu';
 export const CONTACT_PHONE = '08148223122';
-export const CONTACT_EMAIL = 'startup@gmail.com';
+export const CONTACT_EMAIL = 'fullstack-portfolio@gmail.com';
 
 export const CACHE_EXPIRY = 1000 * 1 * 60 * 60 * 12; //12 hours (milliseconds)
 
