@@ -1,5 +1,5 @@
 'use server';
-import { API_BASE_URL } from '@/config/constants';
+import { API_BASE_URL } from '@/config/constants/constants';
 import axios from 'axios';
 
 export const deleteWork = async (workId: string): Promise<void> => {

@@ -1,5 +1,5 @@
 import { fetchPosts } from '@/actions/post/read';
-import paths from '@/app/paths';
+import paths from '@/config/constants/paths';
 import { PostType } from '@/config/types/post';
 import Link from 'next/link';
 

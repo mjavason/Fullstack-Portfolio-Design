@@ -1,5 +1,5 @@
 import { fetchProjects } from '@/actions/work/read';
-import paths from '@/app/paths';
+import paths from '@/config/constants/paths';
 import { Image } from '@heroui/react';
 import Link from 'next/link';
 

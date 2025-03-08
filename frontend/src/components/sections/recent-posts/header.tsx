@@ -1,4 +1,4 @@
-import paths from '@/app/paths';
+import paths from '@/config/constants/paths';
 import Link from 'next/link';
 
 function RecentPostsSectionHeader() {
