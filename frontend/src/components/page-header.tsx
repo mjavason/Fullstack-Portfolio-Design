@@ -4,7 +4,7 @@ interface PageHeaderProps {
 
 function PageHeader({ pageTitle }: PageHeaderProps) {
   return (
-    <div className="flex justify-between my-5 text-[#21243D]">
+    <div className="flex justify-between my-5 text-primary">
       <span className="text-5xl font-bold">{pageTitle}</span>
     </div>
   );

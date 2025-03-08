@@ -1,4 +1,4 @@
-import { darkBlue, lightBlue } from '@/config/constants';
+import { accentPrimary, accentSecondary } from '@/config/constants';
 import { ChartOptions } from 'chart.js';
 
 export const options: ChartOptions<'bar'> = {
@@ -40,13 +40,13 @@ export const options: ChartOptions<'bar'> = {
           return [
             {
               text: 'Up',
-              fillStyle: darkBlue,
-              strokeStyle: darkBlue,
+              fillStyle: accentPrimary,
+              strokeStyle: accentPrimary,
             },
             {
               text: 'Down',
-              fillStyle: lightBlue,
-              strokeStyle: lightBlue,
+              fillStyle: accentSecondary,
+              strokeStyle: accentSecondary,
             },
           ];
         },

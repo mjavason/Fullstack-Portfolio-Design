@@ -20,8 +20,8 @@ function DesktopList() {
             href={item.path}
             className={`text-2xl ${
               pathname === item.path
-                ? 'text-button-primary font-semibold'
-                : 'hover:text-button-primary'
+                ? 'text-accent-primary font-semibold'
+                : 'hover:text-accent-primary'
             }`}
           >
             {item.name}

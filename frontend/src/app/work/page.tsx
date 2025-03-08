@@ -5,7 +5,7 @@ import React, { Suspense } from 'react';
 
 const WorkPage = () => {
   return (
-    <section className="px-5 md:px-36 text-[#21243D] min-h-[90vh] flex flex-col justify-start gap-5">
+    <section className="px-5 md:px-36 text-primary min-h-[90vh] flex flex-col justify-start gap-5">
       {/* header */}
       <PageHeader pageTitle="Work"></PageHeader>
 

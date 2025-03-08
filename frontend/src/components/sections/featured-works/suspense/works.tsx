@@ -14,7 +14,7 @@ function WorksSkeleton() {
 
             <div className="my-3 text-lg flex items-center gap-5">
               {/* Year Skeleton */}
-              <Skeleton className="rounded-full px-3 p-2 bg-[#21243D] w-12 h-6" />
+              <Skeleton className="rounded-full px-3 p-2 bg-primary w-12 h-6" />
               {/* Category Skeleton */}
               <Skeleton className="w-24 h-6" />
             </div>

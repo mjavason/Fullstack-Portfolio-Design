@@ -47,8 +47,8 @@ function MobileList() {
                 href={item.path}
                 className={`text-white ${
                   currentPath === item.path
-                    ? 'text-button-primary font-semibold'
-                    : 'hover:text-button-primary'
+                    ? 'text-accent-primary font-semibold'
+                    : 'hover:text-accent-primary'
                 }`}
                 onClick={() => setMenuOpen(false)} // Close menu on click
               >

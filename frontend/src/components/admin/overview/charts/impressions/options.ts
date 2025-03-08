@@ -1,4 +1,4 @@
-import { darkBlue, lightBlue } from '@/config/constants';
+import { accentPrimary, accentSecondary } from '@/config/constants';
 import { ChartOptions } from 'chart.js';
 
 export const options: ChartOptions<'doughnut'> = {
@@ -18,13 +18,13 @@ export const options: ChartOptions<'doughnut'> = {
           return [
             {
               text: 'Male',
-              fillStyle: darkBlue,
-              strokeStyle: darkBlue,
+              fillStyle: accentPrimary,
+              strokeStyle: accentPrimary,
             },
             {
               text: 'Female',
-              fillStyle: lightBlue,
-              strokeStyle: lightBlue,
+              fillStyle: accentSecondary,
+              strokeStyle: accentSecondary,
             },
           ];
         },

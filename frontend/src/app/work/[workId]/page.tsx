@@ -15,7 +15,7 @@ const WorkPage = async ({ params }: ProjectDetailProps) => {
   const work = works[parseInt(workId)];
 
   return (
-    <section className="px-5 md:px-36 text-[#21243D] min-h-[90vh] flex flex-col justify-start gap-10">
+    <section className="px-5 md:px-36 text-primary min-h-[90vh] flex flex-col justify-start gap-10">
       {/* detail header */}
       <FullDetailsHeader
         title={work.title}

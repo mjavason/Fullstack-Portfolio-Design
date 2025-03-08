@@ -1,4 +1,4 @@
-import { darkBlue, lightBlue } from '@/config/constants';
+import { accentPrimary, accentSecondary } from '@/config/constants';
 import { ChartData, ChartDataset } from 'chart.js';
 
 const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -8,8 +8,7 @@ const datasets: ChartDataset<'bar'>[] = [
   {
     label: 'Dataset',
     data: dataValues,
-    backgroundColor: dataValues.map((value) => (value > 50 ? darkBlue : lightBlue)),
-    borderColor: 'rgb(76, 162, 254)',
+    backgroundColor: dataValues.map((value) => (value > 50 ? accentPrimary : accentSecondary)),
     borderWidth: 1,
     barThickness: 10, // Makes bars slimmer
     categoryPercentage: 0.6, // Adjusts bar width

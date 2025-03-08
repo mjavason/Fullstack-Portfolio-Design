@@ -17,7 +17,7 @@ function AdminProjectsSection() {
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Projects</h2>
-          <Button className="rounded-sm text-white bg-[#469DFF] px-5 py-2">Create</Button>
+          <Button className="rounded-sm text-white bg-accent-primary px-5 py-2">Create</Button>
         </div>
         <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
@@ -36,7 +36,7 @@ function AdminProjectsSection() {
               Let me start off by saying, you can do this! It will be hard work, but it isn&#39;t
               impossible
             </p>
-            <span className="text-[#4CA2FE]">10+ Responses</span>
+            <span className="text-accent-primary">10+ Responses</span>
           </div>
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <div className="overflow-hidden">
@@ -54,7 +54,7 @@ function AdminProjectsSection() {
               Industrial designs require little furniture and more floor space. This design genre
               wants people to be able
             </p>
-            <span className="text-[#4CA2FE]">12+ Responses</span>
+            <span className="text-accent-primary">12+ Responses</span>
           </div>
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <div className="overflow-hidden">
@@ -72,7 +72,7 @@ function AdminProjectsSection() {
               This involves a methodical integration of pedagogical and technological elements to
               enrich all learning
             </p>
-            <span className="text-[#4CA2FE]">27+ Responses</span>
+            <span className="text-accent-primary">27+ Responses</span>
           </div>
         </div>
       </div>

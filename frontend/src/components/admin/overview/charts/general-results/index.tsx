@@ -19,7 +19,7 @@ function GeneralResultsChart() {
   return (
     <div className="flex flex-col justify-between col-span-2 w-full shadow-md  rounded-md">
       <div className="flex justify-between w-full mb-3 p-3">
-        <h4 className="font-semibold text-lg text-[#3E4B58]">General Results</h4>
+        <h4 className="font-semibold text-lg text-primary">General Results</h4>
       </div>
       <Bar data={data} options={options}></Bar>
     </div>

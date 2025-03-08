@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { heroui } from '@heroui/react';
+import { accentPrimary, accentSecondary } from './src/config/constants';
 
 export default {
   content: [
@@ -16,8 +17,9 @@ export default {
       colors: {
         primary: '#21243D', // Dark Blue Text
         secondary: '#8695A4', // Muted Text
-        button: {
-          primary: '#FF6464', // Red Button
+        accent: {
+          primary: accentPrimary,
+          secondary: accentSecondary,
         },
         background: {
           primary: '#FFFFFF', // White

@@ -21,10 +21,10 @@ async function FeaturedWorks() {
           <div className="flex flex-col gap-5 lg:gap-0 justify-between cursor-pointer bg-white px-0 lg:px-5">
             <h3 className="text-3xl font-bold">{work.title}</h3>
             <div className="my-1 text-lg flex items-center gap-5">
-              <span className="rounded-full px-3 p-0 bg-[#21243D] font-semibold text-white">
+              <span className="rounded-full px-3 p-0 bg-primary font-semibold text-white">
                 {work.year}
               </span>
-              <span className="text-xl text-[#8695A4]">{work.category}</span>
+              <span className="text-xl text-secondary">{work.category}</span>
             </div>
             <p className="text-lg">{work.description}</p>
           </div>
