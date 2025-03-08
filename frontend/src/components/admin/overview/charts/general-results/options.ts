@@ -1,4 +1,4 @@
-import { darkBlue, lightBlue } from '@/config/constants/constants';
+import { darkBlue, lightBlue } from '@/config/constants';
 import { ChartOptions } from 'chart.js';
 
 export const options: ChartOptions<'bar'> = {
