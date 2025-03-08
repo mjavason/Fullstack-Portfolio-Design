@@ -4,7 +4,7 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { FilterReviewWithPaginationDto } from './dto/filter-review.dto';
 import { IUserDocument } from 'src/user/user.interface';
 import { ReviewService } from './review.service';
-import { UniqueIdDTO } from 'src/common/dtos/unique_id.dto';
+import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import {
   ApiBadRequestResponse,

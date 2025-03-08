@@ -44,6 +44,34 @@ export class GenericService<T extends Document> {
     return await this.model.findOne(filter).setOptions({ autopopulate: false });
   }
 
+  async findWithMultipleOrFields(filter: FilterQuery<T>) {
+    const { pagination_page, pagination_size, ...orFilters } = filter;
+    const page = pagination_page ?? 1;
+    const size = pagination_size ?? 10;
+
+    // Convert filters into an array of OR conditions
+    const orConditions = Object.entries(orFilters).map(([key, value]) => ({
+      [key]: Array.isArray(value) ? { $in: value } : value,
+    }));
+
+    const query = orConditions.length ? { $or: orConditions } : {};
+
+    return await this.model.paginate(query as FilterQuery<T>, { limit: size, page });
+  }
+
+  async findWithMultipleOrFieldsNoPagination(filter: FilterQuery<T>) {
+    const { pagination_page, pagination_size, ...orFilters } = filter;
+
+    // Convert filters into an array of OR conditions
+    const orConditions = Object.entries(orFilters).map(([key, value]) => ({
+      [key]: Array.isArray(value) ? { $in: value } : value,
+    }));
+
+    const query = orConditions.length ? { $or: orConditions } : {};
+
+    return await this.model.find(query as FilterQuery<T>).sort({ createdAt: 'desc' });
+  }
+
   async getMonthlyGrowth(filter: FilterQuery<T>) {
     const now = new Date();
     const prevMonth = getUTCMonthStartAndEnd(now.getFullYear(), now.getMonth() - 1);
@@ -124,7 +152,7 @@ export class GenericService<T extends Document> {
     });
 
     if (!result) {
-      throw new BadRequestException('Unable to update entity, it doesnt exist?');
+      throw new BadRequestException("Unable to update entity, it does'nt exist?");
     }
 
     return result;
@@ -133,7 +161,7 @@ export class GenericService<T extends Document> {
   async remove(id: string) {
     const result = await this.model.findByIdAndDelete(id);
     if (!result) {
-      throw new BadRequestException('Unable to delete entity, it doesnt exist?');
+      throw new BadRequestException("Unable to delete entity, it does'nt exist?");
     }
 
     return result;

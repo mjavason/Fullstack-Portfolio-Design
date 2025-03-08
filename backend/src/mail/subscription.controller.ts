@@ -5,7 +5,7 @@ import { FilterMailSubscriptionWithPaginationDto } from './dto/filter-subscripti
 import { MailService } from './mail.service';
 import { MailSubscriptionService } from './subscription.service';
 import { SendMailParamsDTO } from './mail.dto';
-import { UniqueIdDTO } from 'src/common/dtos/unique_id.dto';
+import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,

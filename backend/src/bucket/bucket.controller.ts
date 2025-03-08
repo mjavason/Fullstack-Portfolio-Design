@@ -2,7 +2,7 @@ import { AnyFilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth, CurrentUser } from 'src/common/decorators/auth.decorator';
 import { BucketService } from './bucket.service';
-import { FileUploadDTO, MultiFileUploadDTO } from 'src/common/dtos/file.dto';
+import { FileUploadDTO, MultiFileUploadDTO } from 'src/common/dto/file.dto';
 import { IUserDocument } from 'src/user/user.interface';
 import { MulterFile } from 'src/common/interfaces/multer.interface';
 import { upload } from 'src/common/configs/multer.config';

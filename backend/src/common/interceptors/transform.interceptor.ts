@@ -1,7 +1,7 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SuccessResponseDTO } from '../dtos/response.dto';
+import { SuccessResponseDTO } from '../dto/response.dto';
 import { MESSAGES } from '../configs/constants';
 
 @Injectable()

@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { Cache } from '@nestjs/cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Response } from 'express';
-import { SetCacheDto } from './common/dtos/cache.dto';
+import { SetCacheDto } from './common/dto/cache.dto';
 import {
   Body,
   Controller,
