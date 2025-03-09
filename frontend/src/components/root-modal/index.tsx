@@ -1,13 +1,13 @@
 import { Button } from '@heroui/react';
 import { FC, ReactNode, useRef } from 'react';
 
-interface ModalProps {
+interface RootModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const RootModal: FC<RootModalProps> = ({ isOpen, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -23,10 +23,13 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
-      <div ref={modalRef} className="bg-white rounded-lg p-6 w-[90%] max-w-md shadow-lg relative">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-lg p-6 w-full md:w-[90%] min-h-[90vh] shadow-lg relative"
+      >
         <Button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          onPress={onClose}
+          className="absolute top-2 right-2 bg-transparent text-xl text-primary hover:border-accent-primary hover:border-8"
         >
           ✖
         </Button>
@@ -36,4 +39,4 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default Modal;
+export default RootModal;

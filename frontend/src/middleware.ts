@@ -4,7 +4,9 @@ import { NextRequest /* NextResponse */ } from 'next/server';
 // import { authPaths, noAuthPaths } from './config/constants/urls';
 
 export async function middleware(request: NextRequest) {
-  console.log(request);
+  if (request) {
+  }
+
   // const pathname = request.nextUrl.pathname;
 
   // if (pathname.includes('/verify-email')) {

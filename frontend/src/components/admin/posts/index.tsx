@@ -2,7 +2,8 @@
 
 import { Button } from '@heroui/button';
 import { useState } from 'react';
-import Modal from './modal';
+import RootModal from '../../root-modal';
+import PostForm from './create-post-form';
 
 // TODO: Update happens when you click on a post or project.
 //  As the user types, updates are saved automatically.
@@ -30,10 +31,9 @@ function AdminPostsSection() {
             Create
           </Button>
         </div>
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <h2 className="text-xl font-bold">Modal Title</h2>
-          <p className="mt-2">This is a simple modal.</p>
-        </Modal>
+        <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <PostForm setIsModalOpen={setIsModalOpen}></PostForm>
+        </RootModal>
         <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
