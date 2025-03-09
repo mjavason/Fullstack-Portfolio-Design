@@ -28,7 +28,7 @@ export class PostController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new post' })
-  @Auth()
+  // @Auth()
   async create(@Body() createPostDto: CreatePostDto) {
     return await this.postService.create(createPostDto);
   }
@@ -53,14 +53,14 @@ export class PostController {
 
   @Patch('/:id')
   @ApiOperation({ summary: 'Update an existing post' })
-  @Auth()
+  // @Auth()
   async update(@Param() uniqueIdDTO: UniqueIdDTO, @Body() updatePostDto: UpdatePostDto) {
     return await this.postService.update(uniqueIdDTO.id, updatePostDto);
   }
 
   @Delete('/:id')
   @ApiOperation({ summary: 'Delete a post' })
-  @Auth()
+  // @Auth()
   async remove(@Param() uniqueIdDTO: UniqueIdDTO) {
     return await this.postService.remove(uniqueIdDTO.id);
   }

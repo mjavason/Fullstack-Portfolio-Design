@@ -24,17 +24,22 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
     resolver: zodResolver(postSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    data.categories = data.categories.split(',').map((cat: string) => cat.trim()); // Convert categories to array
-    await createPost(data)
+  const onSubmit = async (data: PostFormData) => {
+    await createPost({
+      title: data.title,
+      summary: data.summary,
+      categories: data.categories.split(',').map((cat: string) => cat.trim()),
+      body: data.body,
+      published: data.published ? true : false,
+    })
       .unwrap()
       .then((res) => {
         toast.success(res.message);
-        console.log('Form Submitted:', data);
+        // console.log('Form Submitted:', data);
         setIsModalOpen(false);
       })
-      .catch((err: any) => {
-        console.log(err);
+      .catch((err: { message: string }) => {
+        // console.log(err);
         toast.error(err.message);
       });
   };
