@@ -1,4 +1,5 @@
-import { Button } from '@heroui/react';
+import paths from '@/config/constants/paths';
+import Link from 'next/link';
 
 // TODO: Update happens when you click on a post or project.
 //  As the user types, updates are saved automatically.
@@ -17,7 +18,12 @@ function AdminPostsSection() {
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
-          <Button className="rounded-sm text-white bg-accent-primary px-5 py-2">Create</Button>
+          <Link
+            href={paths.adminCreatePost}
+            className="rounded-sm text-white bg-accent-primary px-5 py-2"
+          >
+            Create
+          </Link>
         </div>
         <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
@@ -27,7 +33,7 @@ function AdminPostsSection() {
               Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
               impossible
             </p>
-            <span className="text-accent-primary">10+ Responses</span>
+            <span className="text-accent-primary">10+ Clicks</span>
           </div>
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Modern Industrial Design</h3>
@@ -36,7 +42,7 @@ function AdminPostsSection() {
               Industrial designs require little furniture and more floor space. This design genre
               wants people to be able
             </p>
-            <span className="text-accent-primary">12+ Responses</span>
+            <span className="text-accent-primary">12+ Clicks</span>
           </div>
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Learning Design Process</h3>
@@ -45,7 +51,7 @@ function AdminPostsSection() {
               This involves a methodical integration of pedagogical and technological elements to
               enrich all learning
             </p>
-            <span className="text-accent-primary">27+ Responses</span>
+            <span className="text-accent-primary">27+ Clicks</span>
           </div>
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Design Thinking Process</h3>
@@ -54,7 +60,7 @@ function AdminPostsSection() {
               Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
               impossible
             </p>
-            <span className="text-accent-primary">30+ Responses</span>
+            <span className="text-accent-primary">30+ Clicks</span>
           </div>
         </div>
       </div>
