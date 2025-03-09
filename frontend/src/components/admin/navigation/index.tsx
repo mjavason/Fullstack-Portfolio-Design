@@ -44,13 +44,13 @@ function AdminNavBar() {
         ].map((item, index) => (
           <div key={index} className="flex items-center gap-2">
             <i
-              className={`${item.icon} cursor-pointer ${item.color} hover:text-accent-secondary transition-colors`}
+              className={`${item.icon} cursor-pointer ${item.color} hover:text-accent-primary transition-colors`}
             />
             {index < 2 && <span className="text-gray-400">|</span>}
           </div>
         ))}
         <span className="text-gray-400">|</span>
-        <div className="flex items-center gap-3 cursor-pointer hover:text-accent-secondary transition-colors">
+        <div className="flex items-center gap-3 cursor-pointer hover:text-accent-primary transition-colors">
           <i className="far fa-user-circle text-xl"></i>
           <p className="flex items-center gap-1">
             Vallendito <i className="fas fa-chevron-down"></i>
