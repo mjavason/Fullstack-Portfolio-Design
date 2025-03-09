@@ -1,5 +1,8 @@
-import paths from '@/config/constants/paths';
-import Link from 'next/link';
+'use client';
+
+import { Button } from '@heroui/button';
+import { useState } from 'react';
+import Modal from './modal';
 
 // TODO: Update happens when you click on a post or project.
 //  As the user types, updates are saved automatically.
@@ -12,19 +15,25 @@ import Link from 'next/link';
 //  Also don't forget to implement search.
 
 function AdminPostsSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="bg-white flex flex-col gap-10 items-center md:px-10 min-h-[70vh]">
       {/* <!-- fourth row --> */}
       <div className="mt-10 px-5">
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
-          <Link
-            href={paths.adminCreatePost}
+          <Button
+            onClick={() => setIsModalOpen(true)}
             className="rounded-sm text-white bg-accent-primary px-5 py-2"
           >
             Create
-          </Link>
+          </Button>
         </div>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2 className="text-xl font-bold">Modal Title</h2>
+          <p className="mt-2">This is a simple modal.</p>
+        </Modal>
         <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           <div className="flex flex-col justify-between w-full p-3 shadow-md">
             <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
