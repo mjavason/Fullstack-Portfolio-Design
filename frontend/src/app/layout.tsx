@@ -1,7 +1,10 @@
-import type { Metadata } from 'next';
-import { Heebo } from 'next/font/google';
-import './globals.css';
 import LayoutWrapper from '@/components/layout-wrapper';
+import { Heebo } from 'next/font/google';
+import { StoreProvider } from '@/redux';
+import { ToastContainer } from 'react-toastify';
+import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import type { Metadata } from 'next';
 
 const heebo = Heebo({
   variable: '--font-heebo',
@@ -23,7 +26,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className={`${heebo.className} min-w-[240px]`}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <ToastContainer position="top-right" theme="light" />
+        <StoreProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </StoreProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.example.com';
+export const BASE_URL = process.env.BASE_API_URL ?? 'http://localhost:5000/api/v1';
 export const lightBlue = '#A5D0FF';
 export const darkBlue = '#4CA2FE';
 export const accentPrimary = '#FF6464';
