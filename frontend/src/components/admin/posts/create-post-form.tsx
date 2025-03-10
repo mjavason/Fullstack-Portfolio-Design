@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm /* useFieldArray*/ } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
 import { PostFormData, postSchema } from './schema';
