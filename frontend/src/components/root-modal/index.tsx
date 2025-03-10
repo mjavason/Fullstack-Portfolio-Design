@@ -20,12 +20,12 @@ const RootModal: FC<RootModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center overflow-auto justify-center bg-black bg-opacity-50 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-lg p-6 w-full md:w-[90%] min-h-[90vh] shadow-lg relative"
+        className="bg-white rounded-lg p-6 w-full md:w-[90%] h-[90vh] overflow-auto shadow-lg relative"
       >
         <Button
           onPress={onClose}

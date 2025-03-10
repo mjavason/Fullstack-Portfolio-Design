@@ -27,15 +27,17 @@ export default function DynamicForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       {fields.map((field, index) => (
         <div key={field.id}>
-          <input {...register(`test.${index}.firstName`)} placeholder="First Name" />
-          <button type="button" onClick={() => remove(index)}>
-            Remove
+          <div>
+            <input {...register(`test.${index}.firstName`)} placeholder="First Name" />
+            <button type="button" onClick={() => remove(index)}>
+              Remove
+            </button>
+          </div>
+          <button type="button" onClick={() => append({ firstName: '' })}>
+            Add Field
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => append({ firstName: '' })}>
-        Add Field
-      </button>
       <div>
         <input {...register('another')} placeholder="hello hello" type="text" />
       </div>

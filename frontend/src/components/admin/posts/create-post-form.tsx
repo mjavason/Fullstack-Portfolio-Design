@@ -1,12 +1,13 @@
 'use client';
 
 import { FC } from 'react';
-import { useForm /* useFieldArray*/ } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
 import { PostFormData, postSchema } from './schema';
 import { useCreatePostMutation } from '@/redux/api/posts';
 import { toast } from 'react-toastify';
+import { extractFieldValues } from '@/utils/extract-field-values';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
@@ -17,17 +18,23 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   const [createPost, { isLoading }] = useCreatePostMutation();
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<PostFormData>({
+    defaultValues: { categories: [{ category: '' }] },
     resolver: zodResolver(postSchema),
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'categories', // Matches the field name pattern
   });
 
   const onSubmit = async (data: PostFormData) => {
     await createPost({
       title: data.title,
       summary: data.summary,
-      categories: data.categories.split(',').map((cat: string) => cat.trim()),
+      categories: extractFieldValues(data.categories, 'category'),
       body: data.body,
       published: data.published ? true : false,
     })
@@ -46,7 +53,7 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   return (
     <>
       <h2 className="text-xl font-bold">Create Post</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 mt-4 space-y-3">
         <Input
           label="Title"
           variant={'bordered'}
@@ -56,14 +63,32 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           errorMessage={errors?.title?.message}
         />
 
-        <Input
-          label="Categories"
-          variant={'bordered'}
-          {...register('categories')}
-          defaultValue={testing}
-          isInvalid={errors.categories ? true : false}
-          errorMessage={errors?.categories?.message}
-        />
+        <div>
+          <div className="flex flex-col gap-2 justify-start">
+            {fields.map((field, index) => (
+              <div key={field.id}>
+                <Input
+                  label="Categories"
+                  variant={'bordered'}
+                  {...register(`categories.${index}.category`)}
+                  defaultValue={testing}
+                  isInvalid={errors?.categories?.[index]?.category ? true : false}
+                  errorMessage={errors?.categories?.[index]?.category?.message}
+                  endContent={
+                    <div className="h-full flex align-middle">
+                      <button type="button" onClick={() => remove(index)}>
+                        ✖
+                      </button>
+                    </div>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+          <Button className="mt-3" type="button" onClick={() => append({ category: '' })}>
+            Add
+          </Button>
+        </div>
 
         <Textarea
           label="Summary"
