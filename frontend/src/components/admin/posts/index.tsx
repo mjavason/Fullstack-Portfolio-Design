@@ -25,7 +25,7 @@ function AdminPostsSection() {
         <div className="flex justify-between align-middle w-full items-center py-5">
           <h2 className="text-5xl font-bold h-fit text-black">Posts</h2>
           <Button
-            onClick={() => setIsModalOpen(true)}
+            onPress={() => setIsModalOpen(true)}
             className="rounded-sm text-white bg-accent-primary px-5 py-2"
           >
             Create
