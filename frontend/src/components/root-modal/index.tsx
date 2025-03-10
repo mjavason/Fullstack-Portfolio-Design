@@ -20,7 +20,7 @@ const RootModal: FC<RootModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      className="fixed inset-0 flex items-center overflow-auto justify-center bg-black bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
       <div
@@ -29,7 +29,7 @@ const RootModal: FC<RootModalProps> = ({ isOpen, onClose, children }) => {
       >
         <Button
           onPress={onClose}
-          className="absolute top-2 right-2 bg-transparent text-xl text-primary hover:border-accent-primary hover:border-8"
+          className="absolute top-2 right-2 bg-transparent text-xl text-primary"
         >
           ✖
         </Button>

@@ -13,8 +13,7 @@ interface ModalProps {
 }
 
 const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
-  const testing =
-    'testing, testing, testing, testing, testing, testing, testing, testing, testing, testing, ';
+  const testing = '';
   const [createPost, { isLoading }] = useCreatePostMutation();
   const {
     register,
@@ -48,28 +47,50 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
     <>
       <h2 className="text-xl font-bold">Create Post</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-3">
-        <Input {...register('title')} value={testing} placeholder="Title" />
-        {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+        <Input
+          label="Title"
+          variant={'bordered'}
+          {...register('title')}
+          defaultValue={testing}
+          isInvalid={errors.title ? true : false}
+          errorMessage={errors?.title?.message}
+        />
 
         <Input
+          label="Categories"
+          variant={'bordered'}
           {...register('categories')}
-          value={testing}
-          placeholder="Categories (comma-separated)"
+          defaultValue={testing}
+          isInvalid={errors.categories ? true : false}
+          errorMessage={errors?.categories?.message}
         />
-        {errors.categories && <p className="text-red-500">{errors.categories.message}</p>}
 
-        <Textarea {...register('summary')} value={testing} placeholder="Summary" />
-        {errors.summary && <p className="text-red-500">{errors.summary.message}</p>}
+        <Textarea
+          label="Summary"
+          variant={'bordered'}
+          size="sm"
+          {...register('summary')}
+          defaultValue={testing}
+          isInvalid={errors.summary ? true : false}
+          errorMessage={errors?.summary?.message}
+        />
 
-        <Textarea {...register('body')} value={testing} placeholder="Body" />
-        {errors.body && <p className="text-red-500">{errors.body.message}</p>}
+        <Textarea
+          label="Body"
+          variant={'bordered'}
+          size="lg"
+          {...register('body')}
+          defaultValue={testing}
+          isInvalid={errors.body ? true : false}
+          errorMessage={errors?.body?.message}
+        />
 
-        <div className="flex items-center space-x-2">
-          <input type="checkbox" {...register('published')} />
-          <label>Publish</label>
+        <div className="flex justify-end space-x-2">
+          <input id="published" type="checkbox" {...register('published')} />
+          <label htmlFor="published">Publish</label>
         </div>
 
-        <Button isLoading={isLoading} type="submit" className="w-full bg-blue-500 text-white">
+        <Button isLoading={isLoading} type="submit" className="w-full bg-accent-primary text-white">
           Submit
         </Button>
       </form>
