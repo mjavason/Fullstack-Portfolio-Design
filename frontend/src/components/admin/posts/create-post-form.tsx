@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
@@ -8,6 +8,7 @@ import { PostFormData, postSchema } from './schema';
 import { useCreatePostMutation } from '@/redux/api/posts';
 import { toast } from 'react-toastify';
 import { extractFieldValues } from '@/utils/extract-field-values';
+import QuillEditor from '@/components/custom-editor';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
@@ -15,11 +16,13 @@ interface ModalProps {
 
 const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   const testing = '';
+  const [body, setBody] = useState(testing);
   const [createPost, { isLoading }] = useCreatePostMutation();
   const {
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<PostFormData>({
     defaultValues: { categories: [{ category: '' }] },
@@ -29,6 +32,11 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
     control,
     name: 'categories', // Matches the field name pattern
   });
+
+  // Sync state variable with the form field
+  useEffect(() => {
+    setValue('body', body);
+  }, [body, setValue]);
 
   const onSubmit = async (data: PostFormData) => {
     await createPost({
@@ -100,15 +108,12 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           errorMessage={errors?.summary?.message}
         />
 
-        <Textarea
-          label="Body"
-          variant={'bordered'}
-          size="lg"
-          {...register('body')}
-          defaultValue={testing}
-          isInvalid={errors.body ? true : false}
-          errorMessage={errors?.body?.message}
-        />
+        <div>
+          <QuillEditor setValue={setBody}></QuillEditor>
+          {/* Hidden Input - Syncs with Quill Editor */}
+          <input type="text" {...register('body')} value={body} hidden readOnly />
+          {errors.body && <div className="text-red-500 text-sm mt-1">{errors.body.message}</div>}
+        </div>
 
         <div className="flex justify-end space-x-2">
           <input id="published" type="checkbox" {...register('published')} />

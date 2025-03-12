@@ -3,16 +3,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'quill/dist/quill.snow.css';
 
-const QuillEditor: React.FC = () => {
+interface QuillEditorProps {
+  setValue: (content: string) => void;
+}
+
+const QuillEditor: React.FC<QuillEditorProps> = ({ setValue }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [QuillInstance, setQuillInstance] = useState<any>(null);
 
   useEffect(() => {
     const loadQuill = async () => {
       const { default: Quill } = await import('quill');
-      const ImageResize = (await require('quill-image-resize')).default;
-
-      Quill.register('modules/imageResize', ImageResize);
       setQuillInstance(() => Quill);
     };
 
@@ -26,56 +27,24 @@ const QuillEditor: React.FC = () => {
         modules: {
           toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            // [{ font: [] }],
             [{ list: 'ordered' }, { list: 'bullet' }],
-            // [{ script: 'sub' }, { script: 'super' }],
-            // [{ indent: '-1' }, { indent: '+1' }],
-            // [{ direction: 'rtl' }],
             [{ size: ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline', 'strike'],
             [{ color: [] }, { background: [] }],
             [{ align: [] }],
             ['link', 'image', 'video'],
-            // ['clean'],
-            // ['code-block'],
           ],
-          imageResize: {
-            displayStyles: {
-              backgroundColor: 'black',
-              border: 'none',
-              color: 'white',
-            },
-            modules: ['Resize', 'DisplaySize', 'Toolbar'],
-          },
         },
       });
 
-      // Image Upload Handler
-      quill.getModule('toolbar').addHandler('image', () => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.click();
-
-        input.onchange = () => {
-          const file = input.files?.[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              const base64Image = e.target?.result;
-              const range = quill.getSelection();
-              if (range) {
-                quill.insertEmbed(range.index, 'image', base64Image);
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        };
+      // Sync changes to parent component
+      quill.on('text-change', () => {
+        setValue(quill.root.innerHTML);
       });
     }
-  }, [QuillInstance]);
+  }, [QuillInstance, setValue]);
 
-  return <div ref={editorRef} />;
+  return <div ref={editorRef} className="border rounded-md p-2 min-h-[200px]" />;
 };
 
 export default QuillEditor;
