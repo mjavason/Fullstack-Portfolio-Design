@@ -7,7 +7,7 @@ function FooterSection() {
         <i className="cursor-pointer fab fa-twitter"></i>
         <i className="cursor-pointer fab fa-linkedin"></i>
       </div>
-      <p className="text-sm md:text-lg text-center w-[90vw] md:w-[100%]">
+      <p className="text-sm text-center w-[90vw] md:w-[100%]">
         Copyright ©2025 All rights reserved
       </p>
     </footer>

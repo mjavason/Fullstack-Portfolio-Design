@@ -1,41 +1,81 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import EditorJS, { OutputData } from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import List from '@editorjs/list';
-import Paragraph from '@editorjs/paragraph';
+import React, { useEffect, useRef, useState } from 'react';
+import 'quill/dist/quill.snow.css';
 
-interface EditorProps {
-  onChange: (data: OutputData) => void;
-  initialData?: OutputData;
-}
-
-export default function Editor({ onChange, initialData }: EditorProps) {
-  const editorRef = useRef<EditorJS | null>(null);
+const QuillEditor: React.FC = () => {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const [QuillInstance, setQuillInstance] = useState<any>(null);
 
   useEffect(() => {
-    if (!editorRef.current) {
-      editorRef.current = new EditorJS({
-        holder: 'editor',
-        tools: {
-          paragraph: Paragraph,
-          header: Header,
-          list: List,
-        },
-        data: initialData || { blocks: [] },
-        onChange: async () => {
-          const data = await editorRef.current?.save();
-          if (data) onChange(data);
-        },
-      });
-    }
+    const loadQuill = async () => {
+      const { default: Quill } = await import('quill');
+      const ImageResize = (await require('quill-image-resize')).default;
 
-    return () => {
-      editorRef.current?.destroy();
-      editorRef.current = null;
+      Quill.register('modules/imageResize', ImageResize);
+      setQuillInstance(() => Quill);
     };
+
+    loadQuill();
   }, []);
 
-  return <div id="editor" className="p-4 border rounded-md"></div>;
-}
+  useEffect(() => {
+    if (QuillInstance && editorRef.current) {
+      const quill = new QuillInstance(editorRef.current, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ font: [] }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ script: 'sub' }, { script: 'super' }],
+            [{ indent: '-1' }, { indent: '+1' }],
+            [{ direction: 'rtl' }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ color: [] }, { background: [] }],
+            [{ align: [] }],
+            ['link', 'image', 'video'],
+            ['clean'],
+            ['code-block'],
+          ],
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white',
+            },
+            modules: ['Resize', 'DisplaySize', 'Toolbar'],
+          },
+        },
+      });
+
+      // Image Upload Handler
+      quill.getModule('toolbar').addHandler('image', () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = () => {
+          const file = input.files?.[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const base64Image = e.target?.result;
+              const range = quill.getSelection();
+              if (range) {
+                quill.insertEmbed(range.index, 'image', base64Image);
+              }
+            };
+            reader.readAsDataURL(file);
+          }
+        };
+      });
+    }
+  }, [QuillInstance]);
+
+  return <div ref={editorRef} />;
+};
+
+export default QuillEditor;
