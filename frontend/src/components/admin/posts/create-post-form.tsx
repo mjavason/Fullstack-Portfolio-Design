@@ -93,7 +93,7 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
               </div>
             ))}
           </div>
-          <Button className="mt-3" type="button" onClick={() => append({ category: '' })}>
+          <Button className="mt-3" type="button" onPress={() => append({ category: '' })}>
             Add
           </Button>
         </div>

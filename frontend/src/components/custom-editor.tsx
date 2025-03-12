@@ -44,7 +44,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ setValue }) => {
     }
   }, [QuillInstance, setValue]);
 
-  return <div ref={editorRef} className="border rounded-md p-2 min-h-[200px]" />;
+  return <div ref={editorRef} className="border rounded-sm p-2 min-h-[200px]" />;
 };
 
 export default QuillEditor;

@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import QuillEditor from '@/components/custom-editor';
+// import QuillEditor from '@/components/custom-editor';
+import QuillEditor from './quill';
 
 const EditorPage: React.FC = () => {
   function setValue(content: string) {
