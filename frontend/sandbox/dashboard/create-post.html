@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tailwind CSS in HTML</title>
+  <script src="../core/tailwind-3.4.16.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Include stylesheet -->
+
+  <!-- Create the editor container -->
+  <div id="editor">
+    <p>Hello World!</p>
+    <p>Some initial <strong>bold</strong> text</p>
+    <p><br /></p>
+  </div>
+
+  <!-- Include the Quill library -->
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+  <!-- Initialize Quill editor -->
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: {
+          container: [
+            ['bold', 'italic'],
+            ['image'] // Add the image upload button
+          ],
+          handlers: {
+            image: function () {
+              let input = document.createElement('input');
+              input.setAttribute('type', 'file');
+              input.setAttribute('accept', 'image/*');
+              input.click();
+
+              input.onchange = () => {
+              let file = input.files[0];
+              if (file) {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                let base64Image = e.target.result;
+
+                // Insert image into Quill editor
+                let range = quill.getSelection();
+                quill.insertEmbed(range.index, 'image', base64Image);
+                };
+                reader.readAsDataURL(file);
+              }
+              };
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
