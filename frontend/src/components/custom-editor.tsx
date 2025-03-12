@@ -26,18 +26,18 @@ const QuillEditor: React.FC = () => {
         modules: {
           toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            [{ font: [] }],
+            // [{ font: [] }],
             [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ script: 'sub' }, { script: 'super' }],
-            [{ indent: '-1' }, { indent: '+1' }],
-            [{ direction: 'rtl' }],
+            // [{ script: 'sub' }, { script: 'super' }],
+            // [{ indent: '-1' }, { indent: '+1' }],
+            // [{ direction: 'rtl' }],
             [{ size: ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline', 'strike'],
             [{ color: [] }, { background: [] }],
             [{ align: [] }],
             ['link', 'image', 'video'],
-            ['clean'],
-            ['code-block'],
+            // ['clean'],
+            // ['code-block'],
           ],
           imageResize: {
             displayStyles: {
