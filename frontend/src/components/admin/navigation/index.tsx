@@ -1,13 +1,25 @@
-'use client'; // Ensure this runs only on the client side
+'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation'; // Use usePathname instead of useRouter
+import { usePathname, useRouter } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
+import { deleteCookie, getCookies } from 'cookies-next';
 
 function AdminNavBar() {
+  const router = useRouter();
   const pathname = usePathname(); // Works in client-side components
   const [activePath, setActivePath] = useState('');
+
+  const logout = async () => {
+    const allCookies = getCookies();
+    if (allCookies) {
+      Object.keys(allCookies).forEach((key) => {
+        deleteCookie(key);
+      });
+    }
+    router.replace(paths.adminLogin);
+  };
 
   useEffect(() => {
     if (pathname) setActivePath(pathname);
@@ -36,7 +48,14 @@ function AdminNavBar() {
           ))}
         </ul>
       </div>
-      <div className="hidden md:flex gap-5 items-center">
+
+      <div
+        className="flex items-center gap-3 cursor-pointer hover:text-accent-primary transition-colors"
+        onClick={logout}
+      >
+        <p className="flex items-center gap-1">Logout</p>
+      </div>
+      {/* <div className="hidden md:flex gap-5 items-center">
         {[
           { icon: 'fas fa-search', color: 'text-primary' },
           { icon: 'far fa-comments', color: 'text-primary' },
@@ -52,11 +71,11 @@ function AdminNavBar() {
         <span className="text-gray-400">|</span>
         <div className="flex items-center gap-3 cursor-pointer hover:text-accent-primary transition-colors">
           <i className="far fa-user-circle text-xl"></i>
-          <p className="flex items-center gap-1">
+          <p className="flex items-center gap-1" onClick={logout}>
             Vallendito <i className="fas fa-chevron-down"></i>
           </p>
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 }

@@ -51,10 +51,7 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
           const file = input.files?.[0];
           if (!file) return;
 
-          const token =
-            (await getCookieValue(CookieType.Token)) ??
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2QyYTI2MjJmZDM5OWJjMzc4OGMxOWMiLCJpYXQiOjE3NDE4NTc2NzIsImV4cCI6MTc0MTkwMDg3Mn0.8c0KRzCDSa6iyIr04WPZsuu6lN_V310A5GdneSAc7-4';
-
+          const token = (await getCookieValue(CookieType.Token)) ?? '';
           const imageUrl = await uploadImage(file, token);
           if (!imageUrl.success) return toast.error(imageUrl.error);
 
