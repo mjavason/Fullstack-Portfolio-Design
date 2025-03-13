@@ -43,7 +43,7 @@ function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-[65vh] items-center justify-center bg-background-secondary p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background-secondary p-4">
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
         className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 shadow-lg"
