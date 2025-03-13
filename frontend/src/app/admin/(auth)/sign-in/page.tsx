@@ -10,6 +10,7 @@ import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cooki
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Button } from '@heroui/react';
+import paths from '@/config/constants/paths';
 
 function SignInPage() {
   const router = useRouter();
@@ -33,11 +34,12 @@ function SignInPage() {
         if (res.data && res.data.accessToken) {
           const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
           setCookieValue(CookieType.Token, res.data.accessToken);
-          router.replace(currentUrl ?? '/admin');
+          router.replace(currentUrl ?? paths.adminDashboard);
           removeCookieValue(CookieType.CurrentUrl);
         }
       })
       .catch((err: any) => {
+        console.log(err);
         toast.error(err.message);
       });
   };

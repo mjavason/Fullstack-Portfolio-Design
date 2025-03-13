@@ -28,7 +28,7 @@ export class ProjectController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new project' })
-  // @Auth()
+  @Auth()
   async create(@Body() createProjectDto: CreateProjectDto) {
     return await this.projectService.create(createProjectDto);
   }
@@ -53,14 +53,14 @@ export class ProjectController {
 
   @Patch('/:id')
   @ApiOperation({ summary: 'Update an existing project' })
-  // @Auth()
+  @Auth()
   async update(@Param() uniqueIdDTO: UniqueIdDTO, @Body() updateProjectDto: UpdateProjectDto) {
     return await this.projectService.update(uniqueIdDTO.id, updateProjectDto);
   }
 
   @Delete('/:id')
   @ApiOperation({ summary: 'Delete a project' })
-  // @Auth()
+  @Auth()
   async remove(@Param() uniqueIdDTO: UniqueIdDTO) {
     return await this.projectService.remove(uniqueIdDTO.id);
   }

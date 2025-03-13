@@ -1,3 +1,4 @@
+import paths from '@/config/constants/paths';
 import { CookieType } from '@/config/enums';
 import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cookies';
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
@@ -22,9 +23,6 @@ const AUTH_ERRORS = {
   LOCKED: 'locked',
   BANNED: 'banned',
 } as const;
-
-// Redirect URL for authentication failures
-const REDIRECT_URL = '/admin/sign-in';
 
 /**
  * Checks if an authentication error has occurred and returns an appropriate message.
@@ -52,11 +50,11 @@ const handleAuthenticationFailure = (error: AxiosError<ErrorResponse>) => {
   if (lockedOut) {
     removeCookieValue(CookieType.Token);
     setCookieValue(CookieType.ExpiryMessage, lockedOut.message);
-    window.location.href = REDIRECT_URL;
-  } else if (!currentUrl.includes(REDIRECT_URL)) {
+    window.location.href = paths.adminLogin;
+  } else if (!currentUrl.includes(paths.adminLogin)) {
     setCookieValue(CookieType.CurrentUrl, currentUrl, 120);
     setCookieValue(CookieType.ExpiryMessage, 'Token Expired Please Login');
-    window.location.href = REDIRECT_URL;
+    // window.location.href = paths.adminLogin;
   }
 };
 
@@ -65,7 +63,7 @@ const handleAuthenticationFailure = (error: AxiosError<ErrorResponse>) => {
  */
 axios.interceptors.request.use(
   async (config) => {
-    const token = getCookieValue(CookieType.Token);
+    const token = await getCookieValue(CookieType.Token);
     config.headers = {
       ...config.headers,
       Authorization: token ? `Bearer ${token}` : '',

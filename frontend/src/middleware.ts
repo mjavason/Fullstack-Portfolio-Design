@@ -2,6 +2,7 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { NextRequest, NextResponse } from 'next/server';
 import { CookieType } from './config/enums/CookieType';
 import { authPaths, noAuthPaths } from './config/constants/urls';
+import paths from './config/constants/paths';
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -20,7 +21,7 @@ export async function middleware(request: NextRequest) {
       const decoded = jwtDecode(user.value) as JwtPayload;
       if (isExpiredToken(decoded)) {
         console.log('token is expired');
-        const response = NextResponse.redirect(new URL('/admin/sign-in', request.url));
+        const response = NextResponse.redirect(new URL(paths.adminLogin, request.url));
         response.cookies.set(CookieType.CurrentUrl, pathname, {
           maxAge: 120,
         });
@@ -29,7 +30,7 @@ export async function middleware(request: NextRequest) {
         return response;
       }
     } else {
-      return NextResponse.redirect(new URL('/admin/sign-in', request.url));
+      return NextResponse.redirect(new URL(paths.adminLogin, request.url));
     }
   }
 
@@ -37,7 +38,7 @@ export async function middleware(request: NextRequest) {
   else if (noAuthPaths.includes(pathname)) {
     const user = request.cookies.get(CookieType.Token);
     if (user) {
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.redirect(new URL(paths.home, request.url));
     }
   }
 }
