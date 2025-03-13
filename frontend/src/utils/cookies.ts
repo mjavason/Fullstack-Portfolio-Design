@@ -30,6 +30,6 @@ export const setCookieValue = (name: string, value: string, maxAge: number = 360
  * Removes a cookie by its name.
  * @param name - The name of the cookie to remove.
  */
-export const removeCookie = (name: string): void => {
+export const removeCookieValue = (name: string): void => {
   deleteCookie(name);
 };

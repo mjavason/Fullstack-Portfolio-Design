@@ -1,5 +1,5 @@
 import { CookieType } from '@/config/enums';
-import { getCookieValue, removeCookie, setCookieValue } from '@/utils/cookies';
+import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cookies';
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import axios, {
   AxiosError,
@@ -9,7 +9,7 @@ import axios, {
   Method,
 } from 'axios';
 
-// Types
+// Define the structure of the error response
 interface ErrorResponse {
   message: string;
   status: number;
@@ -17,16 +17,20 @@ interface ErrorResponse {
   errors: string[];
 }
 
-// Constants
+// Authentication-related error types
 const AUTH_ERRORS = {
   LOCKED: 'locked',
   BANNED: 'banned',
 } as const;
 
-const REDIRECT_URL = '/sign-in';
-const TOKEN_COOKIE = 'token';
+// Redirect URL for authentication failures
+const REDIRECT_URL = '/admin/sign-in';
 
-// Helper functions
+/**
+ * Checks if an authentication error has occurred and returns an appropriate message.
+ * @param {string} errorMessage - The error message received from the server.
+ * @returns {Object | null} - Returns an object with the error type and message if matched, otherwise null.
+ */
 const handleAuthError = (errorMessage: string = '') => {
   if (errorMessage.includes(AUTH_ERRORS.LOCKED)) {
     return { type: 'LOCKED', message: 'User account locked, contact support' };
@@ -37,25 +41,31 @@ const handleAuthError = (errorMessage: string = '') => {
   return null;
 };
 
+/**
+ * Handles authentication failures by redirecting the user and clearing authentication cookies.
+ * @param {AxiosError<ErrorResponse>} error - The Axios error object containing the response details.
+ */
 const handleAuthenticationFailure = (error: AxiosError<ErrorResponse>) => {
   const lockedOut = handleAuthError(error.response?.data?.message);
   const currentUrl = window.location.href;
 
   if (lockedOut) {
-    removeCookie(CookieType.Token);
+    removeCookieValue(CookieType.Token);
     setCookieValue(CookieType.ExpiryMessage, lockedOut.message);
     window.location.href = REDIRECT_URL;
   } else if (!currentUrl.includes(REDIRECT_URL)) {
     setCookieValue(CookieType.CurrentUrl, currentUrl, 120);
     setCookieValue(CookieType.ExpiryMessage, 'Token Expired Please Login');
-    // window.location.href = REDIRECT_URL; TODO: Remove later
+    window.location.href = REDIRECT_URL;
   }
 };
 
-// Request interceptor
+/**
+ * Axios request interceptor to automatically add authentication headers to outgoing requests.
+ */
 axios.interceptors.request.use(
   async (config) => {
-    const token = getCookieValue(TOKEN_COOKIE);
+    const token = getCookieValue(CookieType.Token);
     config.headers = {
       ...config.headers,
       Authorization: token ? `Bearer ${token}` : '',
@@ -65,11 +75,13 @@ axios.interceptors.request.use(
   (error: AxiosError) => Promise.reject(error),
 );
 
-// Response interceptor
+/**
+ * Axios response interceptor to handle authentication errors globally.
+ */
 axios.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError<ErrorResponse>) => {
-    // Skip interceptor for server-side rendering and non-auth errors
+    // Skip processing if on server-side or if the error is not related to authentication
     if (
       typeof window === 'undefined' ||
       !error.response ||
@@ -83,7 +95,13 @@ axios.interceptors.response.use(
   },
 );
 
-// RTK Query base query function
+/**
+ * RTK Query base query function for making API requests using Axios.
+ * @param {Object} options - Configuration options for the base query function.
+ * @param {string} options.baseUrl - The base URL for API requests.
+ * @param {Object} [options.baseHeaders] - Default headers for API requests.
+ * @returns {BaseQueryFn} - Returns an RTK Query compatible base query function.
+ */
 export const axiosBaseQuery =
   ({
     baseUrl = '',

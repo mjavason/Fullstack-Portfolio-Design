@@ -13,12 +13,28 @@ interface EmailVerificationDTO {
 interface UserSignInDTO {
   email: string;
   password: string;
-  userRole: 'MERCHANT' | 'ADMIN';
 }
 
-interface SignInResponse extends BusinessSignupDTO {
-  token: string;
-  email: string;
+interface SignInResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    fullName: string;
+    isPhoneNumberVerified: boolean;
+    isEmailVerified: boolean;
+    email: string;
+    userType: 'user' | 'admin';
+    role: 'customer' | 'businessOwner';
+    status: string;
+    avatarURL: string;
+    address: string | null;
+    mapLongitude: number | null;
+    mapLatitude: number | null;
+    signInWithGoogle: boolean;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+  };
 }
 
 interface ResetPasswordResponse extends EmailVerificationDTO {

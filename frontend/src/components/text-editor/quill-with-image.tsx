@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { uploadImage } from '@/utils/upload-image';
 import 'quill/dist/quill.snow.css';
 import { getCookieValue } from '@/utils/cookies';
-import { TOKEN_COOKIE } from '@/config/constants/cookie';
+import { CookieType } from '@/config/enums';
 
 interface QuillEditorProps {
   setValue: (content: string) => void;
@@ -52,7 +52,7 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
           if (!file) return;
 
           const token =
-            (await getCookieValue(TOKEN_COOKIE)) ??
+            (await getCookieValue(CookieType.Token)) ??
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2QyYTI2MjJmZDM5OWJjMzc4OGMxOWMiLCJpYXQiOjE3NDE4NTc2NzIsImV4cCI6MTc0MTkwMDg3Mn0.8c0KRzCDSa6iyIr04WPZsuu6lN_V310A5GdneSAc7-4';
 
           const imageUrl = await uploadImage(file, token);

@@ -34,7 +34,7 @@ export const authApi = baseApi.injectEndpoints({
 
     userSignIn: builder.mutation<ISuccessResponse<SignInResponse>, UserSignInDTO>({
       query: (data) => ({
-        url: '/auth/sign-in',
+        url: '/auth/login',
         method: 'POST',
         data: data,
       }),
