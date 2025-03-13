@@ -8,7 +8,7 @@ import { PostFormData, postSchema } from './schema';
 import { useCreatePostMutation } from '@/redux/api/posts';
 import { toast } from 'react-toastify';
 import { extractFieldValues } from '@/utils/extract-field-values';
-import QuillEditor from '@/components/custom-editor';
+import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
@@ -109,7 +109,7 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
         />
 
         <div>
-          <QuillEditor setValue={setBody}></QuillEditor>
+          <QuillEditorWithImage setValue={setBody}></QuillEditorWithImage>
           {/* Hidden Input - Syncs with Quill Editor */}
           <input type="text" {...register('body')} value={body} hidden readOnly />
           {errors.body && <div className="text-red-500 text-sm mt-1">{errors.body.message}</div>}
