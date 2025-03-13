@@ -54,7 +54,7 @@ const handleAuthenticationFailure = (error: AxiosError<ErrorResponse>) => {
   } else if (!currentUrl.includes(paths.adminLogin)) {
     setCookieValue(CookieType.CurrentUrl, currentUrl, 120);
     setCookieValue(CookieType.ExpiryMessage, 'Token Expired Please Login');
-    // window.location.href = paths.adminLogin;
+    window.location.href = paths.adminLogin;
   }
 };
 
