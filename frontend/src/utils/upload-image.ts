@@ -14,7 +14,7 @@ export const uploadImage = async (file: File, token: string): Promise<UploadImag
     const response = await fetch(`${BASE_URL}/bucket/upload`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer h${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: formData,
     });
