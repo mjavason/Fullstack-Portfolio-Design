@@ -6,7 +6,7 @@ import signInSchema from './schema';
 import { useForm } from 'react-hook-form';
 import { useUserSignInMutation } from '@/redux/api/auth';
 import { CookieType } from '@/config/enums';
-import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cookies';
+import { setCookieValue } from '@/utils/cookies';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Button } from '@heroui/react';
@@ -30,12 +30,13 @@ function SignInPage() {
       ...data,
     })
       .unwrap()
-      .then(async (res) => {
+      .then((res) => {
         if (res.data && res.data.accessToken) {
-          const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
+          // const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
           setCookieValue(CookieType.Token, res.data.accessToken);
-          router.replace(currentUrl ?? paths.adminDashboard);
-          removeCookieValue(CookieType.CurrentUrl);
+          // removeCookieValue(CookieType.CurrentUrl);
+          // router.replace(currentUrl ?? paths.adminDashboard);
+          router.push(paths.adminDashboard);
         }
       })
       .catch((err: any) => {
