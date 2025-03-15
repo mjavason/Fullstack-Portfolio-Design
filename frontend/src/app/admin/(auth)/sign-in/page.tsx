@@ -1,12 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import signInSchema from './schema';
 import { useForm } from 'react-hook-form';
 import { useUserSignInMutation } from '@/redux/api/auth';
 import { CookieType } from '@/config/enums';
-import { setCookieValue } from '@/utils/cookies';
+import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cookies';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Button } from '@heroui/react';
@@ -17,6 +17,19 @@ function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const toggleShow = () => setShowPassword(!showPassword);
   const [userSignIn, { isLoading }] = useUserSignInMutation();
+
+  useEffect(() => {
+    async function checkExpiryMessage() {
+      const expiryMessage = await getCookieValue(CookieType.ExpiryMessage);
+
+      if (expiryMessage) {
+        toast.error(expiryMessage);
+        removeCookieValue(CookieType.ExpiryMessage);
+      }
+    }
+
+    checkExpiryMessage();
+  }, []);
 
   const {
     register,
@@ -30,13 +43,12 @@ function SignInPage() {
       ...data,
     })
       .unwrap()
-      .then((res) => {
+      .then(async (res) => {
         if (res.data && res.data.accessToken) {
-          // const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
+          const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
           setCookieValue(CookieType.Token, res.data.accessToken);
-          // removeCookieValue(CookieType.CurrentUrl);
-          // router.replace(currentUrl ?? paths.adminDashboard);
-          router.push(paths.adminDashboard);
+          removeCookieValue(CookieType.CurrentUrl);
+          router.replace(currentUrl ?? paths.adminDashboard);
         }
       })
       .catch((err: any) => {

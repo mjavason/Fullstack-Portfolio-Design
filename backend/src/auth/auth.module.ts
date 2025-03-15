@@ -24,7 +24,7 @@ import { Token, tokenSchema } from './entities/token.schema';
       useFactory: (config: ConfigService) => ({
         secret: config.get('app.jwtSecret'),
         signOptions: {
-          expiresIn: '12h',
+          expiresIn: '1h',
         },
       }),
     }),
