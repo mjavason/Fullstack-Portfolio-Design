@@ -48,7 +48,7 @@ function SignInPage() {
             .then((currentUrl) => {
               setCookieValue(CookieType.Token, res.data.accessToken);
               removeCookieValue(CookieType.CurrentUrl);
-              window.location.href = paths.adminDashboard;
+              window.location.href = currentUrl ?? paths.adminDashboard;
             });
         }
       })
