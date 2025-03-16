@@ -48,6 +48,7 @@ function SignInPage() {
           const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
           setCookieValue(CookieType.Token, res.data.accessToken);
           removeCookieValue(CookieType.CurrentUrl);
+          router.refresh();
           router.replace(currentUrl ?? paths.adminDashboard);
         }
       })
