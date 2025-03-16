@@ -43,13 +43,15 @@ function SignInPage() {
       ...data,
     })
       .unwrap()
-      .then(async (res) => {
+      .then((res) => {
         if (res.data && res.data.accessToken) {
-          const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
-          setCookieValue(CookieType.Token, res.data.accessToken);
-          removeCookieValue(CookieType.CurrentUrl);
-          router.refresh();
-          router.replace(currentUrl ?? paths.adminDashboard);
+          getCookieValue(CookieType.CurrentUrl)
+            .then((currentUrl) => currentUrl ?? null)
+            .then((currentUrl) => {
+              setCookieValue(CookieType.Token, res.data.accessToken);
+              removeCookieValue(CookieType.CurrentUrl);
+              router.replace(currentUrl ?? paths.adminDashboard);
+            });
         }
       })
       .catch((err: any) => {
