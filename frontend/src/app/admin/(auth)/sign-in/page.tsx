@@ -12,7 +12,6 @@ import { Button } from '@heroui/react';
 import paths from '@/config/constants/paths';
 
 function SignInPage() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const toggleShow = () => setShowPassword(!showPassword);
   const [userSignIn, { isLoading }] = useUserSignInMutation();
