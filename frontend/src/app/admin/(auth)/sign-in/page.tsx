@@ -50,7 +50,9 @@ function SignInPage() {
             .then((currentUrl) => {
               setCookieValue(CookieType.Token, res.data.accessToken);
               removeCookieValue(CookieType.CurrentUrl);
-              router.replace(currentUrl ?? paths.adminDashboard);
+              // router.refresh();
+              // router.replace(currentUrl ?? paths.adminDashboard);
+              window.location.href = paths.adminDashboard;
             });
         }
       })
