@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@heroui/button';
 import { useState } from 'react';
 import RootModal from '../../root-modal';
 import PostForm from './create-post-form';

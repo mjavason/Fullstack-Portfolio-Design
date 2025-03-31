@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
-import { Button } from '@heroui/react';
 
 interface MobileAdminNavbarProps {
   logout: () => void;
