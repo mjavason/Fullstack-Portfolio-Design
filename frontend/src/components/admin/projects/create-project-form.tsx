@@ -11,6 +11,7 @@ import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
 import { uploadImage } from '@/utils/upload-image';
 import { getCookieValue } from '@/utils/cookies';
 import { CookieType } from '@/config/enums';
+import { Image } from '@heroui/react';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
@@ -118,7 +119,7 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
                 rel="noopener noreferrer"
                 className="underline ml-1"
               >
-                <img
+                <Image
                   src={fileUrl}
                   alt="Uploaded file preview"
                   className="mt-2 max-w-[96px] h-auto rounded-lg"
