@@ -2,10 +2,11 @@ import PageHeader from '@/components/page-header';
 import BlogPagePosts from '@/components/blog-page/posts';
 import BlogPostsSkeleton from '@/components/blog-page/suspense/posts';
 import React, { Suspense } from 'react';
+import ContainerSection from '@/components/container';
 
 const BlogPage = () => {
   return (
-    <section className="px-5 md:px-36 text-primary min-h-[90vh] flex flex-col justify-start gap-5">
+    <ContainerSection>
       {/* header */}
       <PageHeader pageTitle="Blog"></PageHeader>
 
@@ -13,7 +14,7 @@ const BlogPage = () => {
       <Suspense fallback={<BlogPostsSkeleton />}>
         <BlogPagePosts></BlogPagePosts>
       </Suspense>
-    </section>
+    </ContainerSection>
   );
 };
 

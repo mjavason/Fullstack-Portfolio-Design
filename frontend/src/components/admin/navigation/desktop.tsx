@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
-import { Button } from '@heroui/react';
 
 interface AdminNavbarProps {
   logout: () => void;
@@ -34,13 +33,9 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
               {item.name}
             </Link>
           ) : (
-            <Button
-              key={index}
-              onPress={item.action}
-              className="w-full text-lg bg-accent-primary text-white"
-            >
+            <button key={index} onClick={item.action} className="text-2xl">
               {item.name}
-            </Button>
+            </button>
           )}
         </li>
       ))}

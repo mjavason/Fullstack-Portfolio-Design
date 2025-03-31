@@ -62,13 +62,13 @@ function MobileList({ logout }: MobileAdminNavbarProps) {
                   {item.name}
                 </Link>
               ) : (
-                <Button
+                <button
                   key={index}
-                  onPress={item.action}
-                  className="w-full text-lg bg-accent-primary text-white"
+                  onClick={item.action}
+                  className="w-full text-lg text-accent-primary"
                 >
                   {item.name}
-                </Button>
+                </button>
               )}
             </li>
           ))}
