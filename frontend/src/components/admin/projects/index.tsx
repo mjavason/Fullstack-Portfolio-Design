@@ -4,7 +4,7 @@ import ContainerSection from '@/components/container';
 import { Image } from '@heroui/react';
 import PageHeaderAdmin from '../page-header-admin';
 import { useState } from 'react';
-import PostForm from '../posts/create-post-form';
+import ProjectForm from '../projects/create-project-form';
 import RootModal from '@/components/root-modal';
 
 // TODO: Update happens when you click on a post or project.
@@ -25,7 +25,7 @@ function AdminProjectsSection() {
       {/* <!-- third row --> */}
       <PageHeaderAdmin pageTitle="Projects" setIsModalOpen={setIsModalOpen}></PageHeaderAdmin>
       <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <PostForm setIsModalOpen={setIsModalOpen}></PostForm>
+        <ProjectForm setIsModalOpen={setIsModalOpen}></ProjectForm>
       </RootModal>
       <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
         <div className="flex flex-col justify-between w-full p-3 shadow-md">

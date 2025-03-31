@@ -15,8 +15,7 @@ interface ModalProps {
 }
 
 const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
-  const testing = '';
-  const [body, setBody] = useState(testing);
+  const [body, setBody] = useState('');
   const [createPost, { isLoading }] = useCreatePostMutation();
   const {
     register,
@@ -66,7 +65,6 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           label="Title"
           variant={'bordered'}
           {...register('title')}
-          defaultValue={testing}
           isInvalid={errors.title ? true : false}
           errorMessage={errors?.title?.message}
         />
@@ -79,7 +77,6 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
                   label="Categories"
                   variant={'bordered'}
                   {...register(`categories.${index}.category`)}
-                  defaultValue={testing}
                   isInvalid={errors?.categories?.[index]?.category ? true : false}
                   errorMessage={errors?.categories?.[index]?.category?.message}
                   endContent={
@@ -103,7 +100,6 @@ const PostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           variant={'bordered'}
           size="sm"
           {...register('summary')}
-          defaultValue={testing}
           isInvalid={errors.summary ? true : false}
           errorMessage={errors?.summary?.message}
         />

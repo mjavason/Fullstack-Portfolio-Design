@@ -14,6 +14,7 @@ interface QuillEditorProps {
 const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [QuillInstance, setQuillInstance] = useState<any>(null);
+  const [isUploading, setIsUploading] = useState(false); // Track upload state
 
   useEffect(() => {
     const loadQuill = async () => {
@@ -48,15 +49,28 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
         input.click();
 
         input.onchange = async () => {
+          const range = quill.getSelection();
+          const index = range ? range.index : 0;
+
           const file = input.files?.[0];
           if (!file) return;
 
+          setIsUploading(true); // Disable editor
+          quill.enable(false); // Prevent interaction
+
           const token = (await getCookieValue(CookieType.Token)) ?? '';
           const imageUrl = await uploadImage(file, token);
-          if (!imageUrl.success) return toast.error(imageUrl.error);
 
-          const range = quill.getSelection();
-          quill.insertEmbed(range.index, 'image', imageUrl.url);
+          if (!imageUrl.success) {
+            setIsUploading(false);
+            quill.enable(true); // Re-enable editor
+            return toast.error(imageUrl.error);
+          }
+
+          quill.insertEmbed(index, 'image', imageUrl.url);
+
+          setIsUploading(false);
+          quill.enable(true); // Re-enable editor
         };
       });
 
@@ -67,7 +81,19 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
     }
   }, [QuillInstance, setValue]);
 
-  return <div ref={editorRef} className="border rounded-sm p-2 min-h-[200px]" />;
+  return (
+    <div className="relative">
+      <div
+        ref={editorRef}
+        className="border rounded-sm p-2 min-h-[200px] opacity-100 transition-opacity"
+      />
+      {isUploading && (
+        <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+          <p className="text-gray-700">Uploading...</p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default QuillEditorWithImage;
