@@ -3,7 +3,6 @@ import Toggle from './toggle';
 import MobileList from './mobile';
 import paths from '@/config/constants/paths';
 import { getCookies, deleteCookie } from 'cookies-next';
-import router from 'next/router';
 
 function NavSection() {
   const logout = async () => {
@@ -13,7 +12,7 @@ function NavSection() {
         deleteCookie(key);
       });
     }
-    router.replace(paths.adminLogin);
+    window.location.href = paths.home;
   };
 
   return (
