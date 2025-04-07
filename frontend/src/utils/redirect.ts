@@ -53,10 +53,10 @@ export const isProtectedPath = (pathname: string) => {
 export const handleAuthRedirect = (request: NextRequest, pathname: string) => {
   const user = request.cookies.get(CookieType.Token);
 
-  if (!user || user.value === 'null') return redirectToLoginOrHome(request);
+  if (!user || user.value === 'null') return redirectToLogin(request);
 
   const decoded = jwtDecode(user.value) as JwtPayload;
-  if (isExpiredToken(decoded)) return redirectToLoginOrHome(request, pathname);
+  if (isExpiredToken(decoded)) return redirectToLogin(request, pathname);
 };
 
 /**
@@ -65,7 +65,7 @@ export const handleAuthRedirect = (request: NextRequest, pathname: string) => {
  * @param currentPath - The current URL path, optional.
  * @returns A NextResponse object that redirects to the login page.
  */
-export const redirectToLoginOrHome = (request: NextRequest, currentPath?: string) => {
+export const redirectToLogin = (request: NextRequest, currentPath?: string) => {
   // If a current path is provided (i.e., the user was trying to access a protected path, but their token got expired), store it in cookies
   if (currentPath) {
     const response = NextResponse.redirect(new URL(paths.adminLogin, request.url));
@@ -75,7 +75,7 @@ export const redirectToLoginOrHome = (request: NextRequest, currentPath?: string
     return response;
   }
 
-  return NextResponse.redirect(new URL(paths.home, request.url));
+  return NextResponse.redirect(new URL(paths.adminLogin, request.url));
 };
 
 /**
