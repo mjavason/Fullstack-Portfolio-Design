@@ -10,10 +10,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const isAdmin = pathname.startsWith(paths.adminDashboard);
 
   return (
-    <>
+    <div className="min-w-[240px] max-w-[1280px] mx-auto">
       {isAdmin ? <></> : <NavSection />}
       {children}
       {isAdmin ? <></> : <FooterSection />}
-    </>
+    </div>
   );
 }
