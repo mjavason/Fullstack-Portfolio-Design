@@ -7,22 +7,11 @@ import { useState } from 'react';
 import ProjectForm from '../projects/create-project-form';
 import RootModal from '@/components/root-modal';
 
-// TODO: Update happens when you click on a post or project.
-//  As the user types, updates are saved automatically.
-//  There should be a button to preview the work.
-//  The preview is simply redirecting them to client side as usual.
-//  A delete button should be there as well.
-//  Maybe a publish/unpublish button as well.
-//  Don't forget the TinyMCE text editor.
-//  There should also be a settings page to update the picture and social media links that show on the client side.
-//  Also don't forget to implement search.
-
 function AdminProjectsSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <ContainerSection>
-      {/* <!-- third row --> */}
       <PageHeaderAdmin pageTitle="Projects" setIsModalOpen={setIsModalOpen}></PageHeaderAdmin>
       <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ProjectForm setIsModalOpen={setIsModalOpen}></ProjectForm>

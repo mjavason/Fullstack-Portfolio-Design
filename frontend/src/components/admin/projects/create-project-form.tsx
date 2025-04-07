@@ -104,6 +104,7 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
 
         <div>
           <Input
+            label="Cover Image"
             id="coverImage"
             type="file"
             accept="image/*"

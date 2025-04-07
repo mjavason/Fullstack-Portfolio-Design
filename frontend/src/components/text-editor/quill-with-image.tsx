@@ -33,7 +33,7 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
           toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
             [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ size: ['small', false, 'large', 'huge'] }],
+            // [{ size: ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline', 'strike'],
             [{ color: [] }, { background: [] }],
             [{ align: [] }],
