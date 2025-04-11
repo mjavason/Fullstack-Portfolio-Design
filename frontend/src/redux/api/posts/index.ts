@@ -9,7 +9,15 @@ export const postApi = baseApi.injectEndpoints({
         data: data,
       }),
     }),
+
+    fetchPosts: builder.query<ISuccessResponse<IPost[]>, IPostsQuery>({
+      query: (params) => ({
+        url: '/posts',
+        method: 'GET',
+        params: params,
+      }),
+    }),
   }),
 });
 
-export const { useCreatePostMutation } = postApi;
+export const { useCreatePostMutation, useFetchPostsQuery } = postApi;
