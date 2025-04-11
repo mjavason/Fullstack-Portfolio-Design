@@ -5,6 +5,8 @@ import RootModal from '../../root-modal';
 import PostForm from './create-post-form';
 import PageHeaderAdmin from '../page-header-admin';
 import ContainerSection from '@/components/container';
+import { useFetchPostsQuery } from '@/redux/api/posts';
+import { truncate } from '@/utils/string';
 
 // TODO: Update happens when you click on a post or project.
 //  As the user types, updates are saved automatically.
@@ -18,6 +20,7 @@ import ContainerSection from '@/components/container';
 
 function AdminPostsSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: posts, isLoading } = useFetchPostsQuery({});
 
   return (
     <ContainerSection>
@@ -25,43 +28,25 @@ function AdminPostsSection() {
       <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <PostForm setIsModalOpen={setIsModalOpen}></PostForm>
       </RootModal>
+      {isLoading && (
+        <div className="flex justify-center items-center h-full w-full">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-primary"></div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-        <div className="flex flex-col justify-between w-full p-3 shadow-md">
-          <h3 className="text-black text-lg mt-3">Guide to Pro Photography</h3>
-          <h5 className="text-gray-400 text-sm">16 March 2019</h5>
-          <p className="text-black text-sm my-3">
-            Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
-            impossible
-          </p>
-          <span className="text-accent-primary">10+ Clicks</span>
-        </div>
-        <div className="flex flex-col justify-between w-full p-3 shadow-md">
-          <h3 className="text-black text-lg mt-3">Modern Industrial Design</h3>
-          <h5 className="text-gray-400 text-sm">24 February 2025</h5>
-          <p className="text-black text-sm my-3">
-            Industrial designs require little furniture and more floor space. This design genre
-            wants people to be able
-          </p>
-          <span className="text-accent-primary">12+ Clicks</span>
-        </div>
-        <div className="flex flex-col justify-between w-full p-3 shadow-md">
-          <h3 className="text-black text-lg mt-3">Learning Design Process</h3>
-          <h5 className="text-gray-400 text-sm">06 April 2025</h5>
-          <p className="text-black text-sm my-3">
-            This involves a methodical integration of pedagogical and technological elements to
-            enrich all learning
-          </p>
-          <span className="text-accent-primary">27+ Clicks</span>
-        </div>
-        <div className="flex flex-col justify-between w-full p-3 shadow-md">
-          <h3 className="text-black text-lg mt-3">Design Thinking Process</h3>
-          <h5 className="text-gray-400 text-sm">04 December 2019</h5>
-          <p className="text-black flex-1 text-sm my-3">
-            Let me start off by saying, you can do this! It will be hard work, but it is&#39;nt
-            impossible
-          </p>
-          <span className="text-accent-primary">30+ Clicks</span>
-        </div>
+        {posts?.data?.map((post) => (
+          <div key={post.id} className="flex flex-col justify-between w-full p-3 shadow-md">
+            <h3 className="text-black text-lg mt-3">{truncate(post.title, 20)}</h3>
+            <h5 className="text-gray-400 text-sm">
+              {new Date(post.createdAt).toLocaleDateString()}
+            </h5>
+            <p className="text-black text-sm my-3">{truncate(post.summary, 20)}</p>
+            <span className="text-accent-primary">
+              {Math.floor(Math.random() * 50) + 1}+ Clicks
+            </span>
+          </div>
+        ))}
       </div>
     </ContainerSection>
   );
