@@ -1,4 +1,5 @@
 import { baseApi } from '@/redux/baseApi';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 export const postApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,6 +9,7 @@ export const postApi = baseApi.injectEndpoints({
         method: 'POST',
         data: data,
       }),
+      invalidatesTags: [{ type: tagTypes.POSTS }],
     }),
 
     fetchPosts: builder.query<ISuccessResponse<IPost[]>, IPostsQuery>({
@@ -16,6 +18,7 @@ export const postApi = baseApi.injectEndpoints({
         method: 'GET',
         params: params,
       }),
+      providesTags: [{ type: tagTypes.POSTS }],
     }),
   }),
 });

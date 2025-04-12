@@ -53,7 +53,6 @@ function SignInPage() {
         }
       })
       .catch((err: any) => {
-        console.log(err);
         toast.error(err.message);
       });
   };

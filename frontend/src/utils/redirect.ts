@@ -84,7 +84,6 @@ export const redirectToLogin = (request: NextRequest, currentPath?: string) => {
  * @returns A NextResponse object that redirects to the admin dashboard if the user is logged in.
  */
 export const redirectIfLoggedIn = (request: NextRequest) => {
-  console.log('Checking if user is logged in...');
   const user = request.cookies.get(CookieType.Token);
 
   if (user) {
