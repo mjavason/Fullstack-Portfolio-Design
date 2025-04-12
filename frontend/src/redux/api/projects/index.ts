@@ -1,4 +1,5 @@
 import { baseApi } from '@/redux/baseApi';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 export const projectApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,8 +9,18 @@ export const projectApi = baseApi.injectEndpoints({
         method: 'POST',
         data: data,
       }),
+      invalidatesTags: [{ type: tagTypes.PROJECTS }],
+    }),
+
+    fetchProjects: builder.query<ISuccessResponse<IProject[]>, IProjectQuery>({
+      query: (params) => ({
+        url: '/project',
+        method: 'GET',
+        params: params,
+      }),
+      providesTags: [{ type: tagTypes.PROJECTS }],
     }),
   }),
 });
 
-export const { useCreateProjectMutation } = projectApi;
+export const { useCreateProjectMutation, useFetchProjectsQuery } = projectApi;
