@@ -1,5 +1,4 @@
 import { formatLongDate } from '@/utils/date';
-import { truncate } from '@/utils/string';
 import { Chip, Image } from '@heroui/react';
 import { CheckIcon } from '../icons/check';
 

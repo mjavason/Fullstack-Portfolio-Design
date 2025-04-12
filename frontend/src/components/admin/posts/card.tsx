@@ -1,4 +1,3 @@
-import { truncate } from '@/utils/string';
 import { Chip } from '@heroui/react';
 import { CheckIcon } from '../icons/check';
 

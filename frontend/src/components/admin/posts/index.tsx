@@ -6,8 +6,6 @@ import PostForm from './create-post-form';
 import PageHeaderAdmin from '../page-header-admin';
 import ContainerSection from '@/components/container';
 import { useFetchPostsQuery } from '@/redux/api/posts';
-import { truncate } from '@/utils/string';
-import { Pagination } from '@heroui/react';
 import RotatingLoader from '@/components/rotating-loader';
 import NothingFound from '@/components/nothing-found';
 import PaginationComponent from '@/components/pagination';
