@@ -7,11 +7,10 @@ import Link from 'next/link';
 
 function MobileList() {
   const pathname = usePathname();
-  const [currentPath, setCurrentPath] = useState(pathname);
+  const isActive = (href: string) => pathname === href;
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setCurrentPath(pathname); // Ensure active link updates
     setMenuOpen(false); // Close menu after navigation
   }, [pathname]);
 
@@ -45,11 +44,11 @@ function MobileList() {
             >
               <Link
                 href={item.path}
-                className={`text-white ${
-                  currentPath === item.path
+                className={
+                  isActive(item.path)
                     ? 'text-accent-primary font-semibold'
-                    : 'hover:text-accent-primary'
-                }`}
+                    : 'text-white hover:text-accent-primary'
+                }
                 onClick={() => setMenuOpen(false)} // Close menu on click
               >
                 {item.name}

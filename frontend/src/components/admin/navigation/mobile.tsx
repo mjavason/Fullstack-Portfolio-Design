@@ -11,11 +11,10 @@ interface MobileAdminNavbarProps {
 
 function MobileList({ logout }: MobileAdminNavbarProps) {
   const pathname = usePathname();
-  const [currentPath, setCurrentPath] = useState(pathname);
+  const isActive = (href: string) => pathname === href;
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setCurrentPath(pathname);
     setMenuOpen(false);
   }, [pathname]);
 
@@ -51,21 +50,17 @@ function MobileList({ logout }: MobileAdminNavbarProps) {
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`text-white ${
-                    currentPath === item.path
+                  className={
+                    isActive(item.path)
                       ? 'text-accent-primary font-semibold'
-                      : 'hover:text-accent-primary'
-                  }`}
+                      : 'text-white hover:text-accent-primary'
+                  }
                   onClick={() => setMenuOpen(false)} // Close menu on click
                 >
                   {item.name}
                 </Link>
               ) : (
-                <button
-                  key={index}
-                  onClick={item.action}
-                  className="w-full text-lg text-accent-primary"
-                >
+                <button key={index} onClick={item.action} className="w-full text-lg text-white">
                   {item.name}
                 </button>
               )}
