@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import RootModal from '../../root-modal';
+import RootModal from '@/components/root-modal';
 import PostForm from './create-post-form';
 import PageHeaderAdmin from '../page-header-admin';
 import ContainerSection from '@/components/container';
