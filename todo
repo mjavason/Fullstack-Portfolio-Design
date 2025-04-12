@@ -9,3 +9,7 @@
 //  There should also be a settings page to update the picture and social media links that show on the client side.
 //  Also don't forget to implement search.
 // always cache posts or projects being created incase the token expires and they redirected to the login page.
+
+Fit admin post title and date together. Everything else should be fine
+
+Update the create post/project modal. The title and close button should be well aligned

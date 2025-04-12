@@ -37,11 +37,11 @@ function AdminPostsSection() {
                   key={post.id}
                   className="flex flex-col justify-between w-full p-3 shadow-md min-h-16"
                 >
-                  <h3 className="text-black text-lg mt-3">{truncate(post.title, 15)}</h3>
+                  <h3 className="text-black text-lg mt-3 break-words">{post.title}</h3>
                   <h5 className="text-gray-400 text-sm">
                     {new Date(post.createdAt).toLocaleDateString()}
                   </h5>
-                  <p className="text-black text-sm my-3">{truncate(post.summary, 15)}</p>
+                  <p className="text-black text-sm my-3">{truncate(post.summary, 50)}</p>
                   <span className="text-accent-primary">
                     {Math.floor(Math.random() * 50) + 1}+ Clicks
                   </span>
