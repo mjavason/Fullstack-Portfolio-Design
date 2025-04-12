@@ -12,4 +12,5 @@ export const baseApi = createApi({
   }),
   tagTypes: Object.values(tagTypes),
   endpoints: () => ({}),
+  keepUnusedDataFor: Number.POSITIVE_INFINITY,
 });
