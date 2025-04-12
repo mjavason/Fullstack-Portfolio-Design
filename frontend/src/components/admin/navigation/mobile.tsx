@@ -60,7 +60,11 @@ function MobileList({ logout }: MobileAdminNavbarProps) {
                   {item.name}
                 </Link>
               ) : (
-                <button key={index} onClick={item.action} className="w-full text-lg text-white">
+                <button
+                  key={index}
+                  onClick={item.action}
+                  className="text-white hover:text-accent-primary"
+                >
                   {item.name}
                 </button>
               )}
