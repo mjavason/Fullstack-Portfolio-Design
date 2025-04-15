@@ -62,7 +62,7 @@ export class GenericService<T extends Document> {
       [field]: regex,
     }));
 
-    return this.model.paginate(
+    return await this.model.paginate(
       { $or: orQueries as FilterQuery<T>[] },
       { page: filter.pagination_page, limit: filter.pagination_size },
     );
@@ -79,7 +79,7 @@ export class GenericService<T extends Document> {
       [field]: regex,
     }));
 
-    return this.model.find({ $or: orQueries as FilterQuery<T>[] }).exec();
+    return await this.model.find({ $or: orQueries as FilterQuery<T>[] }).exec();
   }
 
   async getMonthlyGrowth(filter: FilterQuery<T>) {
