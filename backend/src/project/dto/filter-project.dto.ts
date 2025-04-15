@@ -1,6 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, Min } from 'class-validator';
+import { IsArray, IsOptional, IsString, Min } from 'class-validator';
 import { ConvertToInt } from 'src/common/decorators/util.decorator';
+import { projectFieldOptions } from '../project.interface';
 
 export class FilterProjectDto {
   @ApiPropertyOptional({ description: 'Filter by category', type: String, example: 'Technology' })
@@ -21,24 +22,19 @@ export class FilterProjectDto {
   published: boolean;
 }
 
-export class FilterProjectWithOrDto {
-  @ApiPropertyOptional({
-    description: 'Filter by multiple categories',
-    type: [String],
-    example: ['Tech', 'Science'],
-  })
+export class FilterProjectWithMultiFieldDto {
+  @ApiPropertyOptional({ description: 'Search term for multiple fields', example: 'JavaScript' })
   @IsOptional()
-  @IsString({ each: true })
-  category: string[];
+  @IsString()
+  searchTerm: string;
 
   @ApiPropertyOptional({
-    description: 'Filter by multiple titles',
-    type: [String],
-    example: ['AI', 'Blockchain'],
+    description: 'Fields to search in',
+    example: projectFieldOptions,
   })
   @IsOptional()
-  @IsString({ each: true })
-  title: string[];
+  @IsArray()
+  fields: string[];
 }
 
 export class FilterProjectWithPaginationDto extends FilterProjectDto {
@@ -53,8 +49,8 @@ export class FilterProjectWithPaginationDto extends FilterProjectDto {
   pagination_page: number = 1;
 }
 
-export class FilterProjectWithOrAndPaginationDto extends FilterProjectWithOrDto {
-  @ApiPropertyOptional({ description: 'Number of projects per page', type: Number, default: 10 })
+export class FilterProjectWithMultiFieldDtoPaginated extends FilterProjectWithMultiFieldDto {
+  @ApiPropertyOptional({ description: 'Number of objects per page', type: Number, default: 10 })
   @ConvertToInt()
   @Min(1)
   pagination_size: number = 10;

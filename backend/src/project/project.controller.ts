@@ -3,7 +3,7 @@ import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import {
-  FilterProjectWithOrAndPaginationDto,
+  FilterProjectWithMultiFieldDtoPaginated,
   FilterProjectWithPaginationDto,
 } from './dto/filter-project.dto';
 import {
@@ -33,10 +33,10 @@ export class ProjectController {
     return await this.projectService.create(createProjectDto);
   }
 
-  @Post('/advanced-search')
+  @Post('/multi-field-search')
   @ApiOperation({ summary: 'Advanced OR search with pagination' })
-  async findAllWithOr(@Body() filter: FilterProjectWithOrAndPaginationDto) {
-    return await this.projectService.findWithMultipleOrFields(filter);
+  async findWithMultiField(@Body() filter: FilterProjectWithMultiFieldDtoPaginated) {
+    return await this.projectService.multiFieldSearch(filter);
   }
 
   @Get()

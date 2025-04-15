@@ -29,7 +29,6 @@ export class GenericService<T extends Document> {
   }
 
   async findAllNoAutoPopulate(filter: FilterQuery<T>) {
-    // Model.find(query).setOptions({ autopopulate: false });
     return await this.model
       .find(filter)
       .sort({ createdAt: 'desc' })
@@ -44,32 +43,43 @@ export class GenericService<T extends Document> {
     return await this.model.findOne(filter).setOptions({ autopopulate: false });
   }
 
-  async findWithMultipleOrFields(filter: FilterQuery<T>) {
-    const { pagination_page, pagination_size, ...orFilters } = filter;
-    const page = pagination_page ?? 1;
-    const size = pagination_size ?? 10;
+  async multiFieldSearch(filter: {
+    searchTerm: string;
+    fields: string[];
+    pagination_page: number;
+    pagination_size: number;
+  }) {
+    if (!filter.searchTerm || filter.searchTerm.trim() === '') {
+      return this.model.paginate(
+        {},
+        { page: filter.pagination_page, limit: filter.pagination_size },
+      );
+    }
 
-    // Convert filters into an array of OR conditions
-    const orConditions = Object.entries(orFilters).map(([key, value]) => ({
-      [key]: Array.isArray(value) ? { $in: value } : value,
+    const regex = new RegExp(filter.searchTerm, 'i');
+
+    const orQueries = filter.fields.map((field) => ({
+      [field]: regex,
     }));
 
-    const query = orConditions.length ? { $or: orConditions } : {};
-
-    return await this.model.paginate(query as FilterQuery<T>, { limit: size, page });
+    return this.model.paginate(
+      { $or: orQueries as FilterQuery<T>[] },
+      { page: filter.pagination_page, limit: filter.pagination_size },
+    );
   }
 
-  async findWithMultipleOrFieldsNoPagination(filter: FilterQuery<T>) {
-    const { pagination_page, pagination_size, ...orFilters } = filter;
+  async multiFieldSearchNoPagination(searchTerm: string, fields: (keyof T)[]): Promise<T[]> {
+    if (!searchTerm || searchTerm.trim() === '') {
+      return this.model.find().exec();
+    }
 
-    // Convert filters into an array of OR conditions
-    const orConditions = Object.entries(orFilters).map(([key, value]) => ({
-      [key]: Array.isArray(value) ? { $in: value } : value,
+    const regex = new RegExp(searchTerm, 'i');
+
+    const orQueries = fields.map((field) => ({
+      [field]: regex,
     }));
 
-    const query = orConditions.length ? { $or: orConditions } : {};
-
-    return await this.model.find(query as FilterQuery<T>).sort({ createdAt: 'desc' });
+    return this.model.find({ $or: orQueries as FilterQuery<T>[] }).exec();
   }
 
   async getMonthlyGrowth(filter: FilterQuery<T>) {
@@ -77,15 +87,11 @@ export class GenericService<T extends Document> {
     const prevMonth = getUTCMonthStartAndEnd(now.getFullYear(), now.getMonth() - 1);
     const currMonth = getUTCMonthStartAndEnd(now.getFullYear(), now.getMonth());
 
-    // console.log('start of previous month', prevMonth.startDate);
-    // console.log('end of previous month', prevMonth.endDate);
-    // console.log('start of current month', currMonth.startDate);
-
     const result = await this.model.aggregate([
       {
         $match: {
           ...filter,
-          createdAt: { $gte: prevMonth.startDate }, // Items from previous month to the start of the current month
+          createdAt: { $gte: prevMonth.startDate },
         },
       },
       {
@@ -105,9 +111,6 @@ export class GenericService<T extends Document> {
       },
     ]);
 
-    // console.log(result);
-
-    // Extract counts for the previous and current month
     const previousMonthCount =
       result.find(
         (entry) =>
@@ -122,7 +125,6 @@ export class GenericService<T extends Document> {
           entry._id.month === currMonth.startDate.getMonth() + 1,
       )?.itemCount || 0;
 
-    // Calculate the percentage difference
     const percentageDifference =
       previousMonthCount === 0
         ? currentMonthCount > 0
@@ -139,11 +141,11 @@ export class GenericService<T extends Document> {
         $match: filter,
       },
       {
-        $count: 'total', // Count all matching items
+        $count: 'total',
       },
     ]);
 
-    return result[0]?.total || 0; // Return the count or 0 if no items found
+    return result[0]?.total || 0;
   }
 
   async update(id: string, updateDto: Partial<T>) {
@@ -174,24 +176,22 @@ export class GenericService<T extends Document> {
       },
       {
         $group: {
-          _id: { dayOfWeek: { $dayOfWeek: '$createdAt' } }, // Group by day of the week (1=Sunday, 7=Saturday)
-          total: { $sum: 1 }, // Sum the total sales for each day
-          // total: { $sum: '$totalAmount' }, // Sum the total sales for each day
+          _id: { dayOfWeek: { $dayOfWeek: '$createdAt' } },
+          total: { $sum: 1 },
         },
       },
       {
-        $sort: { '_id.dayOfWeek': 1 }, // Sort by day of the week
+        $sort: { '_id.dayOfWeek': 1 },
       },
       {
         $project: {
           dayOfWeek: '$_id.dayOfWeek',
           total: 1,
-          _id: 0, // Remove the _id field for cleaner output
+          _id: 0,
         },
       },
     ]);
 
-    // Initialize all days of the week with zero sales
     const dayNames = [
       '',
       'Sunday',
@@ -202,14 +202,13 @@ export class GenericService<T extends Document> {
       'Friday',
       'Saturday',
     ];
-    const fullWeek = dayNames.slice(1).map((day, index) => ({
+    const fullWeek = dayNames.slice(1).map((day) => ({
       dayOfWeek: day,
       total: 0,
     }));
 
-    // Merge existing sales data with the initialized week
     report.forEach((report) => {
-      const dayIndex = report.dayOfWeek - 1; // Convert MongoDB's 1-indexed dayOfWeek to 0-indexed
+      const dayIndex = report.dayOfWeek - 1;
       fullWeek[dayIndex].total = report.total;
     });
 

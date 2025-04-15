@@ -1,6 +1,6 @@
 
 // TODO: Update happens when you click on a post or project.
-//  As the user types, updates are saved automatically.
+//  As the user types, updates are saved automatically to the device.
 //  There should be a button to preview the work.
 //  The preview is simply redirecting them to client side as usual.
 //  A delete button should be there as well.

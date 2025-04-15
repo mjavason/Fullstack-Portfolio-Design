@@ -3,7 +3,7 @@ import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import {
-  FilterPostWithOrAndPaginationDto,
+  FilterPostWithMultiFieldDtoPaginated,
   FilterPostWithPaginationDto,
 } from './dto/filter-post.dto';
 import {
@@ -33,10 +33,10 @@ export class PostController {
     return await this.postService.create(createPostDto);
   }
 
-  @Post('/advanced-search')
+  @Post('/multi-field-search')
   @ApiOperation({ summary: 'Advanced OR search with pagination' })
-  async findAllWithOr(@Body() filter: FilterPostWithOrAndPaginationDto) {
-    return await this.postService.findWithMultipleOrFields(filter);
+  async findWithMultiField(@Body() filter: FilterPostWithMultiFieldDtoPaginated) {
+    return await this.postService.multiFieldSearch(filter);
   }
 
   @Get()

@@ -1,6 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString, IsArray, Min } from 'class-validator';
 import { ConvertToInt } from 'src/common/decorators/util.decorator';
+import { postFieldOptions } from '../post.interface';
 
 export class FilterPostDto {
   @ApiPropertyOptional({ description: 'Title of the post', example: 'My First Post' })
@@ -22,17 +23,19 @@ export class FilterPostDto {
   published: boolean;
 }
 
-export class FilterPostWithOrDto {
-  @ApiPropertyOptional({ description: 'Titles of posts', example: ['Post 1', 'Post 2'] })
+export class FilterPostWithMultiFieldDto {
+  @ApiPropertyOptional({ description: 'Search term for multiple fields', example: 'JavaScript' })
   @IsOptional()
-  @IsString({ each: true })
-  title: string[];
+  @IsString()
+  searchTerm: string;
 
-  @ApiPropertyOptional({ description: 'Categories of posts', example: ['Tech', 'NestJS'] })
+  @ApiPropertyOptional({
+    description: 'Fields to search in',
+    example: postFieldOptions,
+  })
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  categories: string[];
+  fields: string[];
 }
 
 export class FilterPostWithPaginationDto extends FilterPostDto {
@@ -47,7 +50,7 @@ export class FilterPostWithPaginationDto extends FilterPostDto {
   pagination_page: number = 1;
 }
 
-export class FilterPostWithOrAndPaginationDto extends FilterPostWithOrDto {
+export class FilterPostWithMultiFieldDtoPaginated extends FilterPostWithMultiFieldDto {
   @ApiPropertyOptional({ description: 'Number of objects per page', type: Number, default: 10 })
   @ConvertToInt()
   @Min(1)
