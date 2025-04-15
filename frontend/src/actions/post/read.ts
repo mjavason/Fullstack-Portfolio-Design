@@ -1,29 +1,42 @@
 'use server';
-import { PostType } from '@/config/types/post';
 
-export const fetchPosts = async () => {
-  const posts: PostType[] = [
-    {
-      title: 'Making a design system from scratch',
-      date: '12 Feb 2020',
-      category: ['Design', 'Pattern'],
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-    },
-    {
-      title: 'Creating a pixel perfect icon in Figma',
-      date: '12 Feb 2020',
-      category: ['Figma', 'Icon Design'],
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-    },
-  ];
+import { BASE_URL } from '@/config/constants';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
 
+export async function fetchPosts() {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return posts;
+    const res = await fetch(`${BASE_URL}/posts`, {
+      method: 'GET',
+      next: {
+        tags: [tagTypes.POSTS],
+      },
+    });
+
+    if (!res.ok) return [];
+
+    const response = await res.json();
+    return response.data as IPost[];
   } catch (error) {
     console.error('Error fetching posts:', error);
     throw error;
   }
-};
+}
+
+export async function fetchSinglePost(id: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/posts/${id}`, {
+      method: 'GET',
+      next: {
+        tags: [`${tagTypes.POSTS}-${id}`],
+      },
+    });
+
+    if (!res.ok) return null;
+
+    const response = await res.json();
+    return response.data as IPost;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw error;
+  }
+}
