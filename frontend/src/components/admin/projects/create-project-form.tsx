@@ -12,6 +12,8 @@ import { uploadImage } from '@/utils/upload-image';
 import { getCookieValue } from '@/utils/cookies';
 import { CookieType } from '@/config/enums';
 import { Image } from '@heroui/react';
+import { revalidateTagHelper } from '@/actions/revalidate';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
@@ -57,6 +59,8 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   };
 
   const onSubmit = async (data: ProjectFormData) => {
+    revalidateTagHelper(tagTypes.PROJECTS);
+
     await createProject(data)
       .unwrap()
       .then((res) => {

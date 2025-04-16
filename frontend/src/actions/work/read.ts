@@ -1,42 +1,42 @@
 'use server';
-import { WorkType } from '@/config/types/work';
 
-export const fetchProjects = async () => {
-  const works: WorkType[] = [
-    {
-      title: 'Designing Dashboards',
-      year: 2020,
-      category: 'Dashboard',
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: '/images/featured/30.png',
-      alt: 'dashboard design',
-    },
-    {
-      title: 'Vibrant Portraits of 2020',
-      year: 2018,
-      category: 'Illustration',
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: '/images/featured/32.png',
-      alt: 'dashboard design',
-    },
-    {
-      title: '36 Days of Malayalam Type',
-      year: 2018,
-      category: 'Typography',
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      image: '/images/featured/34.png',
-      alt: 'dashboard design',
-    },
-  ];
+import { BASE_URL } from '@/config/constants';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
 
+export async function fetchProjects() {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return works;
+    const res = await fetch(`${BASE_URL}/project`, {
+      method: 'GET',
+      next: {
+        tags: [tagTypes.PROJECTS],
+      },
+    });
+
+    if (!res.ok) return [];
+
+    const response = await res.json();
+    return response.data as IProject[];
   } catch (error) {
-    console.error('Error fetching work data:', error);
+    console.error('Error fetching projects:', error);
     throw error;
   }
-};
+}
+
+export async function fetchSingleProject(id: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/project/${id}`, {
+      method: 'GET',
+      next: {
+        tags: [`${tagTypes.PROJECTS}-${id}`],
+      },
+    });
+
+    if (!res.ok) return null;
+
+    const response = await res.json();
+    return response.data as IProject;
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    throw error;
+  }
+}
