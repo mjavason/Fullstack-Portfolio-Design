@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -16,6 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
+import { DynamicCacheInterceptor } from 'src/common/interceptors/dynamic-cache-interceptor';
 
 @Controller('project')
 @ApiTags('Project')
@@ -23,6 +34,7 @@ import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
 @ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
 @ApiBadRequestResponse({ description: 'Invalid Parameters' })
 @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+@UseInterceptors(DynamicCacheInterceptor)
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 

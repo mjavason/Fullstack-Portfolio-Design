@@ -10,6 +10,7 @@ import { SetCacheDto } from './common/dto/cache.dto';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -19,6 +20,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { CACHE_EXPIRY } from './common/configs/constants';
+
 @Controller()
 @ApiTags('Default')
 export class AppController {
@@ -101,5 +103,16 @@ export class AppController {
     archive.directory(this.logFolderPath, false);
 
     await archive.finalize();
+  }
+
+  @Delete('reset-cache')
+  @ApiOperation({ summary: 'Clear entire API cache' })
+  @ApiResponse({
+    status: 200,
+    description: 'API cache reset successfully',
+  })
+  async resetCache() {
+    await this.cacheManager.clear();
+    return { success: true, message: 'API cache reset successfully' };
   }
 }
