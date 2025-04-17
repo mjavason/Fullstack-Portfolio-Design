@@ -5,7 +5,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
 import { PostFormData, postSchema } from './schema';
-import { useCreatePostMutation } from '@/redux/api/posts';
+import { useUpdatePostMutation } from '@/redux/api/posts';
 import { toast } from 'react-toastify';
 import { extractFieldValues } from '@/utils/extract-field-values';
 import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
@@ -14,11 +14,12 @@ import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
+  post: IPost | null;
 }
 
-const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
+const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
   const [body, setBody] = useState('');
-  const [createPost, { isLoading }] = useCreatePostMutation();
+  const [updatePost, { isLoading }] = useUpdatePostMutation();
   const {
     register,
     control,
@@ -26,7 +27,13 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
     setValue,
     formState: { errors },
   } = useForm<PostFormData>({
-    defaultValues: { categories: [{ category: '' }] },
+    defaultValues: {
+      categories: post?.categories.map((category) => ({ category })),
+      title: post?.title,
+      summary: post?.summary,
+      body: post?.body,
+      published: post?.published,
+    },
     resolver: zodResolver(postSchema),
   });
   const { fields, append, remove } = useFieldArray({
@@ -40,12 +47,15 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   }, [body, setValue]);
 
   const onSubmit = async (data: PostFormData) => {
-    await createPost({
-      title: data.title,
-      summary: data.summary,
-      categories: extractFieldValues(data.categories, 'category'),
-      body: data.body,
-      published: data.published ? true : false,
+    await updatePost({
+      postId: post!.id,
+      update: {
+        title: data.title,
+        summary: data.summary,
+        categories: extractFieldValues(data.categories, 'category'),
+        body: data.body,
+        published: data.published ? true : false,
+      },
     })
       .unwrap()
       .then((res) => {
@@ -62,7 +72,7 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
 
   return (
     <>
-      <h2 className="text-xl font-bold">Create Post</h2>
+      <h2 className="text-xl font-bold">Update Post</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 mt-4 space-y-3">
         <Input
           label="Title"
@@ -108,7 +118,7 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
         />
 
         <div>
-          <QuillEditorWithImage setValue={setBody}></QuillEditorWithImage>
+          <QuillEditorWithImage setValue={setBody} initialValue={post?.body}></QuillEditorWithImage>
           {/* Hidden Input - Syncs with Quill Editor */}
           <input type="text" {...register('body')} value={body} hidden readOnly />
           {errors.body && <div className="text-red-500 text-sm mt-1">{errors.body.message}</div>}
@@ -127,4 +137,4 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   );
 };
 
-export default CreatePostForm;
+export default UpdatePostForm;

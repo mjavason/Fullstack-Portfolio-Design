@@ -2,15 +2,15 @@ import { Button } from '@heroui/react';
 
 interface PageHeaderProps {
   pageTitle: string;
-  setIsModalOpen(isOpen: boolean): void;
+  setIsCreateModalOpen(isOpen: boolean): void;
 }
 
-function PageHeaderAdmin({ pageTitle, setIsModalOpen }: PageHeaderProps) {
+function PageHeaderAdmin({ pageTitle, setIsCreateModalOpen }: PageHeaderProps) {
   return (
     <div className="flex justify-between align-middle w-full items-center my-5">
       <h2 className="text-5xl font-bold h-fit text-primary">{pageTitle}</h2>
       <Button
-        onPress={() => setIsModalOpen(true)}
+        onPress={() => setIsCreateModalOpen(true)}
         className="rounded-sm text-white bg-accent-primary px-5 py-2"
       >
         Create

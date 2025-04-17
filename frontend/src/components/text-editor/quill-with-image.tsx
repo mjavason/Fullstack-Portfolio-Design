@@ -9,9 +9,10 @@ import { CookieType } from '@/config/enums';
 
 interface QuillEditorProps {
   setValue: (content: string) => void;
+  initialValue?: string;
 }
 
-const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
+const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue, initialValue }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [QuillInstance, setQuillInstance] = useState<any>(null);
   const [isUploading, setIsUploading] = useState(false); // Track upload state
@@ -41,6 +42,11 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue }) => {
           ],
         },
       });
+
+      // Set initial value if provided
+      if (initialValue) {
+        quill.root.innerHTML = initialValue;
+      }
 
       quill.getModule('toolbar').addHandler('image', () => {
         const input = document.createElement('input');

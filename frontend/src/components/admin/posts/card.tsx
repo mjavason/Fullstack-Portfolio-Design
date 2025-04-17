@@ -1,9 +1,10 @@
 import { Chip } from '@heroui/react';
-import { CheckIcon } from '../icons/check';
+import PostCardDropDown from './dropdown';
 
-function PostCard(props: { post: IPost }) {
+function PostCard(props: { post: IPost; onPostUpdate: (post: IPost) => void }) {
   return (
-    <div className="flex flex-col justify-between w-full p-3 shadow-md min-h-16">
+    <div className="flex flex-col justify-between w-full p-3 shadow-md min-h-16 relative">
+      <PostCardDropDown onPostUpdate={props.onPostUpdate} post={props.post}></PostCardDropDown>
       <div className="flex flex-col">
         <h3 className="text-black text-lg mt-3 break-words flex-1 md:line-clamp-2">
           {props.post.title}
@@ -18,11 +19,11 @@ function PostCard(props: { post: IPost }) {
           {Math.floor(Math.random() * 50) + 1}+ Clicks
         </span>
         {props.post.published ? (
-          <Chip variant="bordered" color="success" startContent={<CheckIcon size={18} />}>
+          <Chip variant="bordered" size="sm" color="success">
             Live
           </Chip>
         ) : (
-          <Chip color="warning" variant="bordered">
+          <Chip color="warning" size="sm" variant="bordered">
             Draft
           </Chip>
         )}

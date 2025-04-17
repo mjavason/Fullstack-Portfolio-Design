@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import RootModal from '@/components/root-modal';
-import PostForm from './create-post-form';
+import CreatePostForm from './create-post-form';
+import UpdatePostForm from './update-post-form';
 import PageHeaderAdmin from '../page-header-admin';
 import ContainerSection from '@/components/container';
 import { useFetchPostsQuery } from '@/redux/api/posts';
@@ -12,15 +13,33 @@ import PaginationComponent from '@/components/pagination';
 import PostCard from './card';
 
 function AdminPostsSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: posts, isLoading } = useFetchPostsQuery({ pagination_page: currentPage });
+  const [postToUpdate, setPostToUpdate] = useState<IPost | null>(null);
+
+  function onPostUpdate(post: IPost) {
+    setPostToUpdate(post);
+    setIsUpdateModalOpen(true);
+  }
+
+  function onPostUpdateModalClose() {
+    setIsUpdateModalOpen(false);
+    setPostToUpdate(null);
+  }
 
   return (
     <ContainerSection>
-      <PageHeaderAdmin pageTitle="Posts" setIsModalOpen={setIsModalOpen}></PageHeaderAdmin>
-      <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <PostForm setIsModalOpen={setIsModalOpen}></PostForm>
+      <PageHeaderAdmin
+        pageTitle="Posts"
+        setIsCreateModalOpen={setIsCreateModalOpen}
+      ></PageHeaderAdmin>
+      <RootModal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)}>
+        <CreatePostForm setIsModalOpen={setIsCreateModalOpen}></CreatePostForm>
+      </RootModal>
+      <RootModal isOpen={isUpdateModalOpen} onClose={onPostUpdateModalClose}>
+        <UpdatePostForm setIsModalOpen={setIsUpdateModalOpen} post={postToUpdate}></UpdatePostForm>
       </RootModal>
       {isLoading ? (
         <RotatingLoader></RotatingLoader>
@@ -28,9 +47,11 @@ function AdminPostsSection() {
         <NothingFound text="No posts found"></NothingFound>
       ) : (
         <>
-          <div className="h-[50vh] overflow-auto">
+          <div className="h-[50vh] overflow-auto scrollbar-thin-custom">
             <div className="grid grid-cols-1 items-stretch md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-              {posts?.data?.map((post) => <PostCard key={post.id} post={post}></PostCard>)}
+              {posts?.data?.map((post) => (
+                <PostCard onPostUpdate={onPostUpdate} key={post.id} post={post}></PostCard>
+              ))}
             </div>
           </div>
 

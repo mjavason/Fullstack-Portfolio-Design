@@ -1,17 +1,6 @@
 import { Auth } from 'src/common/decorators/auth.decorator';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
-import { DynamicCacheInterceptor } from 'src/common/interceptors/dynamic-cache-interceptor';
 import { PostService } from './post.service';
 import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -33,7 +22,7 @@ import {
 @ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
 @ApiBadRequestResponse({ description: 'Invalid Parameters' })
 @ApiUnauthorizedResponse({ description: 'Unauthorized' })
-@UseInterceptors(DynamicCacheInterceptor)
+// @UseInterceptors(DynamicCacheInterceptor)
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
@@ -57,7 +46,6 @@ export class PostController {
   }
 
   @Get('/:id')
-  @UseInterceptors(DynamicCacheInterceptor)
   @ApiOperation({ summary: 'Retrieve a post by ID' })
   async findOne(@Param() uniqueIdDTO: UniqueIdDTO) {
     return await this.postService.findOne({ _id: uniqueIdDTO.id });

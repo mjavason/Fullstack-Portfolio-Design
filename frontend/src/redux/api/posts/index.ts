@@ -12,6 +12,17 @@ export const postApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: tagTypes.POSTS }],
     }),
 
+    updatePost: builder.mutation<ISuccessResponse<null>, { postId: string; update: CreatePostDTO }>(
+      {
+        query: (data) => ({
+          url: `/posts/${data.postId}`,
+          method: 'PATCH',
+          data: data.update,
+        }),
+        invalidatesTags: [{ type: tagTypes.POSTS }],
+      },
+    ),
+
     fetchPosts: builder.query<ISuccessResponse<IPost[]>, IPostsQuery>({
       query: (params) => ({
         url: '/posts',
@@ -20,7 +31,20 @@ export const postApi = baseApi.injectEndpoints({
       }),
       providesTags: [{ type: tagTypes.POSTS }],
     }),
+
+    deletePosts: builder.mutation<ISuccessResponse, { postId: string }>({
+      query: (params) => ({
+        url: `/posts/${params.postId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: tagTypes.POSTS }],
+    }),
   }),
 });
 
-export const { useCreatePostMutation, useFetchPostsQuery } = postApi;
+export const {
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useFetchPostsQuery,
+  useDeletePostsMutation,
+} = postApi;
