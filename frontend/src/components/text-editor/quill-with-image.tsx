@@ -85,7 +85,7 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue, initialVal
         setValue(quill.root.innerHTML);
       });
     }
-  }, [QuillInstance, setValue]);
+  }, [QuillInstance, setValue, initialValue]);
 
   return (
     <div className="relative">

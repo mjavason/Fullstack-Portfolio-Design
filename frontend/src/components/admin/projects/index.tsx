@@ -18,7 +18,7 @@ function AdminProjectsSection() {
 
   return (
     <ContainerSection>
-      <PageHeaderAdmin pageTitle="Projects" setIsModalOpen={setIsModalOpen}></PageHeaderAdmin>
+      <PageHeaderAdmin pageTitle="Projects" setIsCreateModalOpen={setIsModalOpen}></PageHeaderAdmin>
       <RootModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ProjectForm setIsModalOpen={setIsModalOpen}></ProjectForm>
       </RootModal>
