@@ -5,6 +5,9 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@heroui/r
 import { useAppDispatch } from '@/redux/hooks';
 import { startLoading, stopLoading } from '@/redux/slices/loading-slice';
 import paths from '@/config/constants/paths';
+import { revalidateTagHelper } from '@/actions/revalidate';
+import { tagTypes } from '@/redux/baseApi/tagTypes';
+import { useDeletePostsMutation } from '@/redux/api/posts';
 
 interface IPostCardDropDownProps {
   post: IPost;
@@ -12,31 +15,27 @@ interface IPostCardDropDownProps {
 }
 
 function PostCardDropDown(props: IPostCardDropDownProps) {
-  // const [deletePost] = useDeletePostsMutation();
+  const [deletePost] = useDeletePostsMutation();
   const dispatch = useAppDispatch();
 
   async function onClickDelete() {
-    // dispatch(startLoading())
-    // await deletePost({
-    //     postId: props.postId
-    // })
-    //     .unwrap()
-    //     .then((res) => {
-    //         revalidateTagHelper(tagTypes.POSTS);
-    //         toast.success(res.message);
-    //         // console.log('Form Submitted:', data);
-    //     })
-    //     .catch((err: { message: string }) => {
-    //         // console.log(err);
-    //         toast.error(err.message);
-    //     }).finally(() => {
-    //         dispatch(stopLoading())
-    //     });
-
     dispatch(startLoading());
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast.success('Post deleted successfully');
-    dispatch(stopLoading());
+    await deletePost({
+      postId: props.post.id,
+    })
+      .unwrap()
+      .then((res) => {
+        revalidateTagHelper(tagTypes.POSTS);
+        toast.success(res.message);
+        // console.log('Form Submitted:', data);
+      })
+      .catch((err: { message: string }) => {
+        // console.log(err);
+        toast.error(err.message);
+      })
+      .finally(() => {
+        dispatch(stopLoading());
+      });
   }
 
   return (
