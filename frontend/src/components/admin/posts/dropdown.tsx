@@ -44,11 +44,11 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
         <i className="fas fa-ellipsis-h text-primary cursor-pointer absolute right-3 top-3" />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
-        <DropdownItem key="preview" href={paths.blogDetails(props.post.id)}>
-          Preview
-        </DropdownItem>
         <DropdownItem key="update" onPress={() => props.onPostUpdate(props.post)}>
           Update
+        </DropdownItem>
+        <DropdownItem key="preview" href={paths.blogDetails(props.post.id)}>
+          Preview
         </DropdownItem>
         <DropdownItem key="delete" color="danger" onPress={onClickDelete}>
           Delete
