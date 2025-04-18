@@ -32,6 +32,15 @@ export const postApi = baseApi.injectEndpoints({
       providesTags: [{ type: tagTypes.POSTS }],
     }),
 
+    fetchPostsAdvanced: builder.query<ISuccessResponse<IPost[]>, IAdvancedPostQuery>({
+      query: (params) => ({
+        url: '/posts/multi-field-search',
+        method: 'POST',
+        data: params,
+      }),
+      providesTags: [{ type: tagTypes.POSTS }],
+    }),
+
     deletePosts: builder.mutation<ISuccessResponse, { postId: string }>({
       query: (params) => ({
         url: `/posts/${params.postId}`,
@@ -47,4 +56,5 @@ export const {
   useUpdatePostMutation,
   useFetchPostsQuery,
   useDeletePostsMutation,
+  useFetchPostsAdvancedQuery,
 } = postApi;

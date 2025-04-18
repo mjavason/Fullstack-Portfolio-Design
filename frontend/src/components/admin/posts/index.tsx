@@ -1,25 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RootModal from '@/components/root-modal';
 import CreatePostForm from './create-post-form';
 import UpdatePostForm from './update-post-form';
 import PageHeaderAdmin from '../page-header-admin';
 import ContainerSection from '@/components/container';
-import { useFetchPostsQuery } from '@/redux/api/posts';
+import { useFetchPostsAdvancedQuery } from '@/redux/api/posts';
 import RotatingLoader from '@/components/rotating-loader';
 import NothingFound from '@/components/nothing-found';
 import PaginationComponent from '@/components/pagination';
 import PostCard from './card';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { closePostUpdate } from '@/redux/slices/post-slice';
+import { postFieldOptions } from '@/config/constants/post';
 
 function AdminPostsSection() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: posts, isLoading } = useFetchPostsQuery({ pagination_page: currentPage });
+  const searchValue = useAppSelector((state) => state.search.value);
+  const { data: posts, isLoading } = useFetchPostsAdvancedQuery({
+    searchTerm: searchValue,
+    fields: postFieldOptions,
+    pagination_page: currentPage,
+  });
   const globalPostState = useAppSelector((state) => state.post.updatePost);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchValue]);
 
   return (
     <ContainerSection>

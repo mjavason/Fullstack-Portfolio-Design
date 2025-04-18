@@ -5,6 +5,9 @@ import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { Input } from '@heroui/react';
 import SearchIcon from '@/components/admin/icons/search-icon';
+import { debounceSetter } from '@/utils/debounce';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setSearchValue } from '@/redux/slices/search-slice';
 
 interface AdminNavbarProps {
   logout: () => void;
@@ -12,6 +15,14 @@ interface AdminNavbarProps {
 
 function AdminNavbar({ logout }: AdminNavbarProps) {
   const pathname = usePathname();
+  const searchValue = useAppSelector((state) => state.search.value);
+  const dispatch = useAppDispatch();
+  const debouncedSetInput = debounceSetter(
+    (input: string) => dispatch(setSearchValue({ value: input })),
+    300,
+  );
+
+  console.log('Debounced:', searchValue);
 
   return (
     <div className="w-full flex justify-between">
@@ -21,7 +32,11 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
         type="text"
         className="max-w-[75%] md:max-w-[35%]"
         variant="bordered"
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          debouncedSetInput(e.target.value);
+        }}
       />
+
       <ul className="hidden sm:flex gap-10 font-bold">
         {[
           { name: 'Overview', path: paths.adminDashboard },
