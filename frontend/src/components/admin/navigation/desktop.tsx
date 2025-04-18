@@ -15,7 +15,6 @@ interface AdminNavbarProps {
 
 function AdminNavbar({ logout }: AdminNavbarProps) {
   const pathname = usePathname();
-  const searchValue = useAppSelector((state) => state.search.value);
   const dispatch = useAppDispatch();
   const debouncedSetInput = debounceSetter(
     (input: string) => dispatch(setSearchValue({ value: input })),
