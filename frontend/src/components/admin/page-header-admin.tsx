@@ -11,7 +11,7 @@ function PageHeaderAdmin(props: PageHeaderProps) {
       <h2 className="text-5xl font-bold h-fit text-primary">{props.pageTitle}</h2>
       <Button
         onPress={() => props.setIsCreateModalOpen(true)}
-        className="rounded-sm text-white bg-accent-primary px-5 py-2"
+        className="rounded-md text-white bg-accent-primary px-5 py-2"
       >
         Create
       </Button>
