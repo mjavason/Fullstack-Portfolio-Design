@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
@@ -11,15 +11,14 @@ import { extractFieldValues } from '@/utils/extract-field-values';
 import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
 import { revalidateTagHelper } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { closePostUpdate } from '@/redux/slices/post-slice';
 
-interface ModalProps {
-  setIsModalOpen: (state: boolean) => void;
-  post: IPost | null;
-}
-
-const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
+const UpdatePostForm = () => {
   const [body, setBody] = useState('');
   const [updatePost, { isLoading }] = useUpdatePostMutation();
+  const dispatch = useAppDispatch();
+  const postToUpdate = useAppSelector((state) => state.post.updatePost.postToUpdate);
   const {
     register,
     control,
@@ -28,11 +27,11 @@ const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
     formState: { errors },
   } = useForm<PostFormData>({
     defaultValues: {
-      categories: post?.categories.map((category) => ({ category })),
-      title: post?.title,
-      summary: post?.summary,
-      body: post?.body,
-      published: post?.published,
+      categories: postToUpdate?.categories.map((category) => ({ category })),
+      title: postToUpdate?.title,
+      summary: postToUpdate?.summary,
+      body: postToUpdate?.body,
+      published: postToUpdate?.published,
     },
     resolver: zodResolver(postSchema),
   });
@@ -48,7 +47,7 @@ const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
 
   const onSubmit = async (data: PostFormData) => {
     await updatePost({
-      postId: post!.id,
+      postId: postToUpdate!.id,
       update: {
         title: data.title,
         summary: data.summary,
@@ -62,7 +61,7 @@ const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
         revalidateTagHelper(tagTypes.POSTS);
         toast.success(res.message);
         // console.log('Form Submitted:', data);
-        setIsModalOpen(false);
+        dispatch(closePostUpdate());
       })
       .catch((err: { message: string }) => {
         // console.log(err);
@@ -118,7 +117,10 @@ const UpdatePostForm: FC<ModalProps> = ({ setIsModalOpen, post }) => {
         />
 
         <div>
-          <QuillEditorWithImage setValue={setBody} initialValue={post?.body}></QuillEditorWithImage>
+          <QuillEditorWithImage
+            setValue={setBody}
+            initialValue={postToUpdate?.body}
+          ></QuillEditorWithImage>
           {/* Hidden Input - Syncs with Quill Editor */}
           <input type="text" {...register('body')} value={body} hidden readOnly />
           {errors.body && <div className="text-red-500 text-sm mt-1">{errors.body.message}</div>}

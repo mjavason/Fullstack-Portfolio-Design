@@ -8,10 +8,10 @@ import paths from '@/config/constants/paths';
 import { revalidateTagHelper } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
 import { useDeletePostsMutation } from '@/redux/api/posts';
+import { initiatePostUpdate } from '@/redux/slices/post-slice';
 
 interface IPostCardDropDownProps {
   post: IPost;
-  onPostUpdate: (post: IPost) => void;
 }
 
 function PostCardDropDown(props: IPostCardDropDownProps) {
@@ -44,7 +44,10 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
         <i className="fas fa-ellipsis-h text-primary cursor-pointer absolute right-3 top-3" />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
-        <DropdownItem key="update" onPress={() => props.onPostUpdate(props.post)}>
+        <DropdownItem
+          key="update"
+          onPress={() => dispatch(initiatePostUpdate({ post: props.post }))}
+        >
           Update
         </DropdownItem>
         <DropdownItem key="preview" href={paths.blogDetails(props.post.id)}>
