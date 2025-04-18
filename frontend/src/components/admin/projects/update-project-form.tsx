@@ -17,7 +17,7 @@ import { tagTypes } from '@/redux/baseApi/tagTypes';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { closeProjectUpdate } from '@/redux/slices/project-slice';
 
-const ProjectForm = () => {
+const UpdateProjectForm = () => {
   const [updateProject, { isLoading }] = useUpdateProjectMutation();
   const dispatch = useAppDispatch();
   const projectToUpdate = useAppSelector((state) => state.project.updateProject.projectToUpdate);
@@ -170,4 +170,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+export default UpdateProjectForm;
