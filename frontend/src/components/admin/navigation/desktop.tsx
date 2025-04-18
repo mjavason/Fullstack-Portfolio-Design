@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { Input } from '@heroui/react';
@@ -14,12 +14,21 @@ interface AdminNavbarProps {
 }
 
 function AdminNavbar({ logout }: AdminNavbarProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
-  const debouncedSetInput = debounceSetter(
-    (input: string) => dispatch(setSearchValue({ value: input })),
-    700,
-  );
+
+  //if a search value exists in the params, use it as search
+  const queryFromURL = searchParams.get('q') || '';
+  dispatch(setSearchValue({ value: queryFromURL }));
+
+  const params = new URLSearchParams(searchParams.toString());
+  const debouncedSetInput = debounceSetter((input: string) => {
+    dispatch(setSearchValue({ value: input }));
+    params.set('q', input);
+    router.push(`?${params.toString()}`, { scroll: false });
+  }, 700);
 
   return (
     <div className="w-full flex justify-between">
