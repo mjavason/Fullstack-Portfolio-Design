@@ -4,7 +4,7 @@ import ProjectCardDropDown from './dropdown';
 
 function ProjectCard(props: { project: IProject }) {
   return (
-    <div className="flex flex-col justify-between w-full p-3 shadow-md relative">
+    <div className="flex flex-col justify-between w-full p-3 border-1 rounded-md relative">
       <ProjectCardDropDown project={props.project}></ProjectCardDropDown>
       <div className="overflow-hidden">
         <Image

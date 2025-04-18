@@ -1,6 +1,6 @@
 function DashboardTopLocations() {
   return (
-    <div className="flex flex-col gap-3 items-center justify-between shadow-md p-3 rounded-md">
+    <div className="flex flex-col gap-3 items-center justify-between border-1 p-3 rounded-md">
       <div className="flex justify-between w-full mb-3">
         <h4 className="font-semibold text-lg text-primary">Top Locations</h4>
         <i className="fas fa-ellipsis-v cursor-pointer p-3"></i>

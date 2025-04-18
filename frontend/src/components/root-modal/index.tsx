@@ -25,7 +25,7 @@ const RootModal: FC<RootModalProps> = ({ isOpen, onClose, children }) => {
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-lg p-6 w-full md:w-[90%] h-[90vh] overflow-auto shadow-lg relative"
+        className="bg-white rounded-lg p-6 w-full md:w-[90%] h-[90vh] overflow-auto border-1 relative"
       >
         <Button
           onPress={onClose}

@@ -17,7 +17,7 @@ Chartjs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 function GeneralResultsChart() {
   return (
-    <div className="flex flex-col justify-between col-span-2 w-full shadow-md  rounded-md">
+    <div className="flex flex-col justify-between col-span-2 w-full border-1 rounded-md">
       <div className="flex justify-between w-full mb-3 p-3">
         <h4 className="font-semibold text-lg text-primary">General Results</h4>
       </div>
