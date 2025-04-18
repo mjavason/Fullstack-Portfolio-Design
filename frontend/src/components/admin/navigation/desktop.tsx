@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { Input } from '@heroui/react';
@@ -8,27 +8,23 @@ import SearchIcon from '@/components/admin/icons/search-icon';
 import { debounceSetter } from '@/utils/debounce';
 import { useAppDispatch } from '@/redux/hooks';
 import { setSearchValue } from '@/redux/slices/search-slice';
+import { useEffect } from 'react';
 
 interface AdminNavbarProps {
   logout: () => void;
 }
 
 function AdminNavbar({ logout }: AdminNavbarProps) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
-  //if a search value exists in the params, use it as search
-  const queryFromURL = searchParams.get('q') || '';
-  dispatch(setSearchValue({ value: queryFromURL }));
-
-  const params = new URLSearchParams(searchParams.toString());
   const debouncedSetInput = debounceSetter((input: string) => {
     dispatch(setSearchValue({ value: input }));
-    params.set('q', input);
-    router.push(`?${params.toString()}`, { scroll: false });
   }, 700);
+
+  useEffect(() => {
+    dispatch(setSearchValue({ value: '' }));
+  }, [pathname]);
 
   return (
     <div className="w-full flex justify-between">
