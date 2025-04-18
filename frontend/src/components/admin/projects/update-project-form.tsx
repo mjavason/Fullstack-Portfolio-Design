@@ -1,11 +1,11 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Textarea } from '@heroui/react';
 import { ProjectFormData, projectSchema } from './schema';
-import { useCreateProjectMutation } from '@/redux/api/projects';
+import { useUpdateProjectMutation } from '@/redux/api/projects';
 import { toast } from 'react-toastify';
 import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
 import { uploadImage } from '@/utils/upload-image';
@@ -14,25 +14,32 @@ import { CookieType } from '@/config/enums';
 import { Image } from '@heroui/react';
 import { revalidateServerTag } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { closeProjectUpdate } from '@/redux/slices/project-slice';
 
-interface ModalProps {
-  setIsModalOpen: (state: boolean) => void;
-}
-
-const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
-  const testing = '';
-  const [body, setBody] = useState(testing);
-  const [createProject, { isLoading }] = useCreateProjectMutation();
+const UpdateProjectForm = () => {
+  const [updateProject, { isLoading }] = useUpdateProjectMutation();
+  const dispatch = useAppDispatch();
+  const projectToUpdate = useAppSelector((state) => state.project.updateProject.projectToUpdate);
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm<ProjectFormData>({
+    defaultValues: {
+      title: projectToUpdate?.title,
+      category: projectToUpdate?.category,
+      coverImage: projectToUpdate?.coverImage,
+      summary: projectToUpdate?.summary,
+      body: projectToUpdate?.body,
+      published: projectToUpdate?.published,
+    },
     resolver: zodResolver(projectSchema),
   });
   const [uploading, setUploading] = useState(false);
-  const [fileUrl, setFileUrl] = useState('');
+  const [body, setBody] = useState(projectToUpdate!.body);
+  const [fileUrl, setFileUrl] = useState(projectToUpdate!.coverImage);
 
   // Sync state variable with the form field
   useEffect(() => {
@@ -59,13 +66,13 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   };
 
   const onSubmit = async (data: ProjectFormData) => {
-    await createProject(data)
+    await updateProject({ projectId: projectToUpdate!.id, update: data })
       .unwrap()
       .then((res) => {
         revalidateServerTag(tagTypes.PROJECTS);
         toast.success(res.message);
         // console.log('Form Submitted:', data);
-        setIsModalOpen(false);
+        dispatch(closeProjectUpdate());
       })
       .catch((err: { message: string }) => {
         // console.log(err);
@@ -81,7 +88,6 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           label="Title"
           variant={'bordered'}
           {...register('title')}
-          defaultValue={testing}
           isInvalid={errors.title ? true : false}
           errorMessage={errors?.title?.message}
         />
@@ -90,7 +96,6 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           label="Category"
           variant={'bordered'}
           {...register('category')}
-          defaultValue={testing}
           isInvalid={errors.title ? true : false}
           errorMessage={errors?.category?.message}
         />
@@ -100,7 +105,6 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
           variant={'bordered'}
           size="sm"
           {...register('summary')}
-          defaultValue={testing}
           isInvalid={errors.summary ? true : false}
           errorMessage={errors?.summary?.message}
         />
@@ -144,7 +148,10 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
         </div>
 
         <div>
-          <QuillEditorWithImage setValue={setBody}></QuillEditorWithImage>
+          <QuillEditorWithImage
+            setValue={setBody}
+            initialValue={projectToUpdate?.body}
+          ></QuillEditorWithImage>
           {/* Hidden Input - Syncs with Quill Editor */}
           <input type="text" {...register('body')} value={body} hidden readOnly />
           {errors.body && <div className="text-red-500 text-sm mt-1">{errors.body.message}</div>}
@@ -163,4 +170,4 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
   );
 };
 
-export default ProjectForm;
+export default UpdateProjectForm;

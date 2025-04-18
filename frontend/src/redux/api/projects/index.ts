@@ -20,7 +20,32 @@ export const projectApi = baseApi.injectEndpoints({
       }),
       providesTags: [{ type: tagTypes.PROJECTS }],
     }),
+
+    updateProject: builder.mutation<
+      ISuccessResponse<null>,
+      { projectId: string; update: CreateProjectDTO }
+    >({
+      query: (data) => ({
+        url: `/project/${data.projectId}`,
+        method: 'PATCH',
+        data: data.update,
+      }),
+      invalidatesTags: [{ type: tagTypes.PROJECTS }],
+    }),
+
+    deleteProjects: builder.mutation<ISuccessResponse, { projectId: string }>({
+      query: (params) => ({
+        url: `/project/${params.projectId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: tagTypes.PROJECTS }],
+    }),
   }),
 });
 
-export const { useCreateProjectMutation, useFetchProjectsQuery } = projectApi;
+export const {
+  useCreateProjectMutation,
+  useFetchProjectsQuery,
+  useUpdateProjectMutation,
+  useDeleteProjectsMutation,
+} = projectApi;

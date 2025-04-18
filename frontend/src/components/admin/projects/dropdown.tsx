@@ -7,25 +7,25 @@ import { startLoading, stopLoading } from '@/redux/slices/loading-slice';
 import paths from '@/config/constants/paths';
 import { revalidateServerTag } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
-import { useDeletePostsMutation } from '@/redux/api/posts';
-import { initiatePostUpdate } from '@/redux/slices/post-slice';
+import { useDeleteProjectsMutation } from '@/redux/api/projects';
+import { initiateProjectUpdate } from '@/redux/slices/project-slice';
 
-interface IPostCardDropDownProps {
-  post: IPost;
+interface IProjectCardDropDownProps {
+  project: IProject;
 }
 
-function PostCardDropDown(props: IPostCardDropDownProps) {
-  const [deletePost] = useDeletePostsMutation();
+function ProjectCardDropDown(props: IProjectCardDropDownProps) {
+  const [deleteProject] = useDeleteProjectsMutation();
   const dispatch = useAppDispatch();
 
   async function onClickDelete() {
     dispatch(startLoading());
-    await deletePost({
-      postId: props.post.id,
+    await deleteProject({
+      projectId: props.project.id,
     })
       .unwrap()
       .then((res) => {
-        revalidateServerTag(tagTypes.POSTS);
+        revalidateServerTag(tagTypes.PROJECTS);
         toast.success(res.message);
         // console.log('Form Submitted:', data);
       })
@@ -41,16 +41,16 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <i className="fas fa-ellipsis-v text-primary cursor-pointer absolute right-3 top-3 p-3" />
+        <i className="fas fa-ellipsis-v text-primary cursor-pointer absolute right-3 top-3 p-3 z-20" />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem
           key="update"
-          onPress={() => dispatch(initiatePostUpdate({ post: props.post }))}
+          onPress={() => dispatch(initiateProjectUpdate({ project: props.project }))}
         >
           Update
         </DropdownItem>
-        <DropdownItem key="preview" href={paths.blogDetails(props.post.id)}>
+        <DropdownItem key="preview" href={paths.workDetails(props.project.id)}>
           Preview
         </DropdownItem>
         <DropdownItem key="delete" color="danger" onPress={onClickDelete}>
@@ -61,4 +61,4 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
   );
 }
 
-export default PostCardDropDown;
+export default ProjectCardDropDown;
