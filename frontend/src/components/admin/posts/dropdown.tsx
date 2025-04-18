@@ -5,7 +5,7 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@heroui/r
 import { useAppDispatch } from '@/redux/hooks';
 import { startLoading, stopLoading } from '@/redux/slices/loading-slice';
 import paths from '@/config/constants/paths';
-import { revalidateTagHelper } from '@/actions/revalidate';
+import { revalidateServerTag } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
 import { useDeletePostsMutation } from '@/redux/api/posts';
 import { initiatePostUpdate } from '@/redux/slices/post-slice';
@@ -25,7 +25,7 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
     })
       .unwrap()
       .then((res) => {
-        revalidateTagHelper(tagTypes.POSTS);
+        revalidateServerTag(tagTypes.POSTS);
         toast.success(res.message);
         // console.log('Form Submitted:', data);
       })

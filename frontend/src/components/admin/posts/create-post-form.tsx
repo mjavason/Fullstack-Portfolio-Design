@@ -9,7 +9,7 @@ import { useCreatePostMutation } from '@/redux/api/posts';
 import { toast } from 'react-toastify';
 import { extractFieldValues } from '@/utils/extract-field-values';
 import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
-import { revalidateTagHelper } from '@/actions/revalidate';
+import { revalidateServerTag } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 interface ModalProps {
@@ -49,7 +49,7 @@ const CreatePostForm: FC<ModalProps> = ({ setIsModalOpen }) => {
     })
       .unwrap()
       .then((res) => {
-        revalidateTagHelper(tagTypes.POSTS);
+        revalidateServerTag(tagTypes.POSTS);
         toast.success(res.message);
         // console.log('Form Submitted:', data);
         setIsModalOpen(false);
