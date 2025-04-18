@@ -19,10 +19,8 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
   const dispatch = useAppDispatch();
   const debouncedSetInput = debounceSetter(
     (input: string) => dispatch(setSearchValue({ value: input })),
-    300,
+    700,
   );
-
-  console.log('Debounced:', searchValue);
 
   return (
     <div className="w-full flex justify-between">
@@ -37,7 +35,7 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
         }}
       />
 
-      <ul className="hidden sm:flex gap-10 font-bold">
+      <ul className="hidden md:flex gap-10 font-bold">
         {[
           { name: 'Overview', path: paths.adminDashboard },
           { name: 'Posts', path: paths.adminPosts },

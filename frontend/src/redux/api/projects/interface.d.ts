@@ -26,3 +26,10 @@ interface IProject {
   updatedAt: string;
   id: string;
 }
+
+interface IAdvancedProjectQuery {
+  searchTerm?: string;
+  fields?: (keyof IProject)[];
+  pagination_size?: number;
+  pagination_page?: number;
+}
