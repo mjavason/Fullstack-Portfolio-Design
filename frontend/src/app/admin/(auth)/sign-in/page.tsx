@@ -61,7 +61,7 @@ function SignInPage() {
     <div className="flex min-h-screen items-center justify-center bg-background-secondary p-4">
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
-        className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 shadow-lg"
+        className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 border-1"
       >
         <h2 className="text-center text-2xl font-semibold text-primary">Sign In</h2>
 

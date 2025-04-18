@@ -12,7 +12,7 @@ function ProfileDescription() {
         consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
       </p>
       <div>
-        <Button className="px-4 py-6 rounded-lg bg-accent-primary text-white w-[70%] lg:w-[40%] text-xl lg:text-2xl">
+        <Button className="px-4 py-6 rounded-lg bg-accent-primary text-white w-[70%] lg:w-[40%] text-lg">
           Download Resume
         </Button>
       </div>

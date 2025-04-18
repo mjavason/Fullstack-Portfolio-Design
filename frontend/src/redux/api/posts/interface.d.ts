@@ -24,3 +24,10 @@ interface IPost {
   createdAt: string;
   updatedAt: string;
 }
+
+interface IAdvancedPostQuery {
+  searchTerm?: string;
+  fields?: (keyof IPost)[];
+  pagination_size?: number;
+  pagination_page?: number;
+}

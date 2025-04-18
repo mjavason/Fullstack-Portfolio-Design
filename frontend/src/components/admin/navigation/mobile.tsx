@@ -31,7 +31,7 @@ function MobileList({ logout }: MobileAdminNavbarProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 h-screen w-screen bg-transparent shadow-lg transition-transform duration-300 ease-in-out flex font-bold sm:hidden z-50 ${
+        className={`fixed top-0 left-0 h-screen w-screen bg-transparent shadow-lg transition-transform duration-300 ease-in-out flex font-bold md:hidden z-50 ${
           menuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

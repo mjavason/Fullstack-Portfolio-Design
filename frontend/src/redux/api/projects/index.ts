@@ -33,6 +33,15 @@ export const projectApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: tagTypes.PROJECTS }],
     }),
 
+    fetchProjectsAdvanced: builder.query<ISuccessResponse<IProject[]>, IAdvancedProjectQuery>({
+      query: (params) => ({
+        url: '/project/multi-field-search',
+        method: 'POST',
+        data: params,
+      }),
+      providesTags: [{ type: tagTypes.PROJECTS }],
+    }),
+
     deleteProjects: builder.mutation<ISuccessResponse, { projectId: string }>({
       query: (params) => ({
         url: `/project/${params.projectId}`,
@@ -48,4 +57,5 @@ export const {
   useFetchProjectsQuery,
   useUpdateProjectMutation,
   useDeleteProjectsMutation,
+  useFetchProjectsAdvancedQuery,
 } = projectApi;

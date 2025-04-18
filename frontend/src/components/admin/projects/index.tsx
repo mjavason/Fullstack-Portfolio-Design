@@ -9,17 +9,27 @@ import ProjectForm from '../projects/create-project-form';
 import RootModal from '@/components/root-modal';
 import RotatingLoader from '@/components/rotating-loader';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { useFetchProjectsQuery } from '@/redux/api/projects';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { closeProjectUpdate } from '@/redux/slices/project-slice';
 import UpdateProjectForm from './update-project-form';
+import { useFetchProjectsAdvancedQuery } from '@/redux/api/projects';
+import { projectFieldOptions } from '@/config/constants/project';
 
 function AdminProjectsSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: projects, isLoading } = useFetchProjectsQuery({ pagination_page: currentPage });
-  const globalProjectState = useAppSelector((state) => state.project.updateProject);
   const dispatch = useAppDispatch();
+  const globalProjectState = useAppSelector((state) => state.project.updateProject);
+  const searchValue = useAppSelector((state) => state.search.value);
+  const { data: projects, isLoading } = useFetchProjectsAdvancedQuery({
+    searchTerm: searchValue,
+    fields: projectFieldOptions,
+    pagination_page: currentPage,
+  });
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchValue]);
 
   return (
     <ContainerSection>

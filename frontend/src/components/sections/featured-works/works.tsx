@@ -8,7 +8,7 @@ async function FeaturedWorks() {
   const renderedWorks = works.map((work) => {
     return (
       <Link key={work.id} href={paths.workDetails(work.id)}>
-        <div className="flex flex-col items-stretch lg:flex-row gap-5 lg:gap-0 lg:hover:shadow-lg border-b-2 pb-3">
+        <div className="flex flex-col items-stretch lg:flex-row gap-5 lg:gap-0 border-b-2 pb-3">
           <div className="overflow-hidden w-full lg:w-2/5 h-auto">
             <Image
               className="w-full h-full object-cover"
