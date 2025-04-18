@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Input } from '@heroui/react';
 import SearchIcon from '@/components/admin/icons/search-icon';
 import { debounceSetter } from '@/utils/debounce';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import { setSearchValue } from '@/redux/slices/search-slice';
 
 interface AdminNavbarProps {
