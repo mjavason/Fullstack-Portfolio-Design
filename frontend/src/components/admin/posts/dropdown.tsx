@@ -41,7 +41,7 @@ function PostCardDropDown(props: IPostCardDropDownProps) {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
-        <i className="fas fa-ellipsis-h text-primary cursor-pointer absolute right-3 top-3" />
+        <i className="fas fa-ellipsis-v text-primary cursor-pointer absolute right-3 top-3 p-3" />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem
