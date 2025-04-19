@@ -8,7 +8,7 @@ function FooterSection() {
         <i className="cursor-pointer fab fa-linkedin"></i>
       </div>
       <p className="text-sm text-center w-[90vw] md:w-[100%]">
-        Copyright © {new Date().getFullYear()} All rights reserved
+        Copyright ©{new Date().getFullYear()} All rights reserved
       </p>
     </footer>
   );
