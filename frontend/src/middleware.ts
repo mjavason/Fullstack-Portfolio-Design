@@ -1,18 +1,13 @@
 import { NextRequest } from 'next/server';
 import { noAuthPaths } from './config/constants/urls';
-import {
-  handleTokenRedirect,
-  isProtectedPath,
-  handleAuthRedirect,
-  redirectIfLoggedIn,
-} from './utils/redirect';
+import { isProtectedPath, handleAuthRedirect, redirectIfLoggedIn } from './utils/redirect';
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.includes('/verify-email') || pathname.includes('/reset-password')) {
-    return handleTokenRedirect(request, pathname);
-  }
+  // if (pathname.includes('/verify-email') || pathname.includes('/reset-password')) {
+  //   return handleTokenRedirect(request, pathname);
+  // }
 
   if (isProtectedPath(pathname)) {
     return handleAuthRedirect(request, pathname);

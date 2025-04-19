@@ -22,6 +22,7 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
     dispatch(setSearchValue({ value: input }));
   }, 700);
 
+  //reset whenever the page is loaded
   useEffect(() => {
     dispatch(setSearchValue({ value: '' }));
   }, [pathname]);
@@ -54,7 +55,7 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
                 className={`text-2xl ${
                   pathname === item.path
                     ? 'text-accent-primary font-semibold'
-                    : 'hover:text-accent-primary'
+                    : 'hover:text-accent-primary font-semibold'
                 }`}
               >
                 {item.name}

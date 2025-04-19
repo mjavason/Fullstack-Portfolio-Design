@@ -47,7 +47,7 @@ function MobileList() {
                 className={
                   isActive(item.path)
                     ? 'text-accent-primary font-semibold'
-                    : 'text-white hover:text-accent-primary'
+                    : 'text-white hover:text-accent-primary font-semibold'
                 }
                 onClick={() => setMenuOpen(false)} // Close menu on click
               >

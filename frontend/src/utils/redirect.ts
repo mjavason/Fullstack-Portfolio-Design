@@ -71,7 +71,7 @@ export const redirectToLogin = (request: NextRequest, currentPath?: string) => {
     const response = NextResponse.redirect(new URL(paths.adminLogin, request.url));
     response.cookies.set(CookieType.CurrentUrl, currentPath, { maxAge: 120 });
     response.cookies.set(CookieType.ExpiryMessage, 'Token Expired Please Login');
-    response?.cookies.delete(CookieType.Token);
+    response.cookies.delete(CookieType.Token);
     return response;
   }
 

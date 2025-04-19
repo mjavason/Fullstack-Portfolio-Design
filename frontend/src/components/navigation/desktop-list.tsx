@@ -21,7 +21,7 @@ function DesktopList() {
             className={`text-2xl ${
               pathname === item.path
                 ? 'text-accent-primary font-semibold'
-                : 'hover:text-accent-primary'
+                : 'hover:text-accent-primary font-semibold'
             }`}
           >
             {item.name}

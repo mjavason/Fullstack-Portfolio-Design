@@ -1,8 +1,8 @@
 import paths from './paths';
 
-export const noAuthPaths: string[] = [paths.adminLogin];
-export const publicPaths: string[] = [paths.home, paths.blog, paths.work];
-export const authPaths: string[] = [
+export const noAuthPaths = [paths.adminLogin];
+export const publicPaths = [paths.home, paths.blog, paths.work];
+export const authPaths = [
   paths.adminDashboard,
   paths.adminCreatePost,
   paths.adminCreateWork,
