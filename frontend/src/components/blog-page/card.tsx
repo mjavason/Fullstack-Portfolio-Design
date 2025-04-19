@@ -8,7 +8,7 @@ function BlogPageCard(props: { post: IPost }) {
   return (
     <Link key={post.id} href={paths.blogDetails(post.id)}>
       <div className="flex flex-col cursor-pointer py-5 border-b-2">
-        <h3 className="text-3xl font-bold my-5 flex-1 line-clamp-2">{post.title}</h3>
+        <h3 className="text-3xl font-bold my-5 flex-1">{post.title}</h3>
         <div className="my-3 text-lg">
           <span>{formatLongDate(post.createdAt, 'short')}</span>
           <span className="mx-5">|</span>

@@ -19,7 +19,7 @@ function ProjectPageCard(props: { project: IProject }) {
         </div>
         <div className="flex-1 flex flex-col gap-5 justify-between cursor-pointer bg-white px-0 lg:px-5">
           <div className="flex flex-col gap-4">
-            <h3 className="text-3xl font-bold break-words line-clamp-1">{project.title}</h3>
+            <h3 className="text-3xl font-bold break-words md:line-clamp-1">{project.title}</h3>
             <div className="my-1 text-lg flex items-center gap-5">
               <span className="rounded-full px-3 p-0 bg-primary font-semibold text-white">
                 {new Date(project.createdAt).getFullYear().toString()}

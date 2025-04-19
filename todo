@@ -10,3 +10,5 @@ Also optimize seo
 Clean up code later. Most pages need components. Start with admin posts
 
 Make admin and client side share the navbar, difference only in content
+
+frontend\src\components\admin\projects\card.tsx:19 truncate should not be there
