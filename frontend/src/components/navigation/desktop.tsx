@@ -8,7 +8,7 @@ function DesktopList() {
   const pathname = usePathname(); // Get the current route
 
   return (
-    <ul className="hidden sm:flex gap-10 font-bold">
+    <ul className="hidden md:flex gap-10 font-bold">
       {[
         { name: 'Home', path: paths.home },
         { name: 'Works', path: paths.work },
