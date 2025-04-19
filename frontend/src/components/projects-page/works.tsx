@@ -5,7 +5,7 @@ async function Projects() {
   const projects = await fetchProjects();
 
   return (
-    <div className="grid items-stretch gap-9">
+    <div className="grid items-stretch gap-10">
       {projects.map((project) => {
         return <ProjectPageCard key={project.id} project={project}></ProjectPageCard>;
       })}
