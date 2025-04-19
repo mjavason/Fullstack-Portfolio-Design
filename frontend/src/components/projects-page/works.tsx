@@ -7,7 +7,7 @@ async function Projects() {
   return (
     <div className="grid items-stretch gap-9">
       {projects.map((project) => {
-        return <ProjectPageCard project={project}></ProjectPageCard>;
+        return <ProjectPageCard key={project.id} project={project}></ProjectPageCard>;
       })}
     </div>
   );
