@@ -1,6 +1,6 @@
-import DesktopList from './desktop-list';
+import DesktopList from './desktop';
 import Toggle from './toggle';
-import MobileList from './mobile-list';
+import MobileList from './mobile';
 
 function NavSection() {
   return (
