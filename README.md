@@ -75,7 +75,12 @@ This is a fullstack practice project built using Next.js for the frontend and Ne
    ```sh
    npm install
    ```
-3. Start the development server:
+3. Configure environment variables:
+   - Copy the `.env.sample` file to a new `.env` file in the root of the `frontend` directory and fill in the required values:
+     ```sh
+     cp .env.sample .env
+     ```
+4. Start the development server:
    ```sh
    npm run dev
    ```
@@ -99,10 +104,6 @@ This is a fullstack practice project built using Next.js for the frontend and Ne
    ```sh
    npm run start:dev
    ```
-
-### Authentication
-
-Authentication is handled via JWT (JSON Web Tokens). The backend provides endpoints for user registration, login, and token generation.
 
 ## Project Features
 
