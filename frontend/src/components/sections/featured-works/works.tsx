@@ -4,7 +4,7 @@ import { Image } from '@heroui/react';
 import Link from 'next/link';
 
 async function FeaturedWorks() {
-  const works = await fetchProjects();
+  const works = await fetchProjects(1, 3);
   const renderedWorks = works.map((work) => {
     return (
       <Link key={work.id} href={paths.workDetails(work.id)}>
