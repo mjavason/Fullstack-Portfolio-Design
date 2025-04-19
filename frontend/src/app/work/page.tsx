@@ -1,18 +1,18 @@
 import ContainerSection from '@/components/container';
 import PageHeader from '@/components/page-header';
-import WorksSkeleton from '@/components/sections/featured-works/suspense/works';
-import FeaturedWorks from '@/components/sections/featured-works/works';
+import Projects from '@/components/projects-page/works';
+import ProjectsSkeleton from '@/components/projects-page/suspense/works';
 import React, { Suspense } from 'react';
 
 const WorkPage = () => {
   return (
     <ContainerSection>
       {/* header */}
-      <PageHeader pageTitle="Work"></PageHeader>
+      <PageHeader pageTitle="Projects"></PageHeader>
 
       {/* works/projects */}
-      <Suspense fallback={<WorksSkeleton />}>
-        <FeaturedWorks></FeaturedWorks>
+      <Suspense fallback={<ProjectsSkeleton />}>
+        <Projects></Projects>
       </Suspense>
     </ContainerSection>
   );
