@@ -40,6 +40,7 @@ This is a fullstack practice project built using Next.js for the frontend and Ne
     │   ├── tsconfig.json
     │   ├── .gitignore
     │   ├── public/
+    │   ├── .env.sample
     │   └── src/
     │       └── app/
     │           ├── globals.css
