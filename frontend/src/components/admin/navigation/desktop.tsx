@@ -25,7 +25,7 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
   //reset whenever the page is loaded
   useEffect(() => {
     dispatch(setSearchValue({ value: '' }));
-  }, [pathname]);
+  }, [pathname, dispatch]);
 
   return (
     <div className="w-full flex justify-between">

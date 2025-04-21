@@ -1,6 +1,6 @@
 import paths from '@/config/constants/paths';
 import { CookieType } from '@/config/enums';
-import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cookies';
+import { getCookieValue, setCookieValue } from '@/utils/cookies';
 import { BaseQueryFn } from '@reduxjs/toolkit/query';
 import axios, {
   AxiosError,
