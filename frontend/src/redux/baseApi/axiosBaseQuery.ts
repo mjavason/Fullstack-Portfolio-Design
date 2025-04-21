@@ -18,40 +18,14 @@ interface ErrorResponse {
   errors: string[];
 }
 
-// Authentication-related error types
-const AUTH_ERRORS = {
-  LOCKED: 'locked',
-  BANNED: 'banned',
-} as const;
-
-/**
- * Checks if an authentication error has occurred and returns an appropriate message.
- * @param {string} errorMessage - The error message received from the server.
- * @returns {Object | null} - Returns an object with the error type and message if matched, otherwise null.
- */
-const handleAuthError = (errorMessage: string = '') => {
-  if (errorMessage.includes(AUTH_ERRORS.LOCKED)) {
-    return { type: 'LOCKED', message: 'User account locked, contact support' };
-  }
-  if (errorMessage.includes(AUTH_ERRORS.BANNED)) {
-    return { type: 'BANNED', message: 'User account banned, contact support' };
-  }
-  return null;
-};
-
 /**
  * Handles authentication failures by redirecting the user and clearing authentication cookies.
  * @param {AxiosError<ErrorResponse>} error - The Axios error object containing the response details.
  */
-const handleAuthenticationFailure = (error: AxiosError<ErrorResponse>) => {
-  const lockedOut = handleAuthError(error.response?.data?.message);
+const handleAuthenticationFailure = () => {
   const currentUrl = window.location.href;
 
-  if (lockedOut) {
-    removeCookieValue(CookieType.Token);
-    setCookieValue(CookieType.ExpiryMessage, lockedOut.message);
-    window.location.href = paths.adminLogin;
-  } else if (!currentUrl.includes(paths.adminLogin)) {
+  if (!currentUrl.includes(paths.adminLogin)) {
     setCookieValue(CookieType.CurrentUrl, currentUrl, 120);
     setCookieValue(CookieType.ExpiryMessage, 'Token Expired Please Login');
     window.location.href = paths.adminLogin;
@@ -88,7 +62,7 @@ axios.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    handleAuthenticationFailure(error);
+    handleAuthenticationFailure();
     return Promise.reject(error);
   },
 );

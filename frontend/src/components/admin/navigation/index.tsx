@@ -1,14 +1,10 @@
-'use client';
-
 import DesktopList from './desktop';
 import Toggle from './toggle';
 import MobileList from './mobile';
 import paths from '@/config/constants/paths';
 import { getCookies, deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 
 function NavSection() {
-  const router = useRouter();
   const logout = async () => {
     const allCookies = getCookies();
     if (allCookies) {
@@ -16,7 +12,7 @@ function NavSection() {
         deleteCookie(key);
       });
     }
-    router.replace(paths.home);
+    window.location.href = paths.home;
   };
 
   return (

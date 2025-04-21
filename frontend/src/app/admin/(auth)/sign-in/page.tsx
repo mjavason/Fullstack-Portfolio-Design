@@ -10,15 +10,11 @@ import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cooki
 import { toast } from 'react-toastify';
 import { Button } from '@heroui/react';
 import paths from '@/config/constants/paths';
-import { useRouter } from 'next/navigation';
 
 function SignInPage() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const toggleShow = () => setShowPassword(!showPassword);
   const [userSignIn, { isLoading }] = useUserSignInMutation();
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [direction, setDirection] = useState<string>(paths.home);
 
   useEffect(() => {
     async function checkExpiryMessage() {
@@ -32,12 +28,6 @@ function SignInPage() {
 
     checkExpiryMessage();
   }, []);
-
-  useEffect(() => {
-    if (isSignedIn) {
-      router.replace(direction);
-    }
-  }, [isSignedIn]);
 
   const {
     register,
@@ -58,9 +48,7 @@ function SignInPage() {
             .then((currentUrl) => {
               setCookieValue(CookieType.Token, res.data.accessToken);
               removeCookieValue(CookieType.CurrentUrl);
-              const direction = currentUrl ?? paths.adminDashboard;
-              setDirection(direction);
-              setIsSignedIn(true);
+              window.location.href = currentUrl ?? paths.adminDashboard;
             });
         }
       })
