@@ -14,7 +14,7 @@ const menuVariants = {
     transition: {
       when: 'beforeChildren',
       staggerChildren: staggerDefault,
-      duration: time.fast,
+      duration: time.fastest,
       ease: 'easeInOut',
     },
   },
@@ -23,7 +23,7 @@ const menuVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, x: -10 },
-  visible: { opacity: 1, x: 0, transition: { duration: time.fast } },
+  visible: { opacity: 1, x: 0, transition: { duration: time.fastest } },
 };
 
 function MobileList() {
