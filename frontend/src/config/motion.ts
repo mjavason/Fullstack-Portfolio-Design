@@ -20,3 +20,12 @@ export const pageContainerVariants: Variants = {
     transition: { ease: 'easeInOut' },
   },
 };
+
+export const staggerDefault = 0.15;
+export const time = {
+  fastest: 0.2,
+  fast: 0.4,
+  base: 0.6,
+  slow: 0.8,
+  slowest: 1.0,
+};

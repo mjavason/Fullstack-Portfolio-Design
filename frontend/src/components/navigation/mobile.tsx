@@ -4,6 +4,27 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { staggerDefault, time } from '@/config/motion';
+
+const menuVariants = {
+  hidden: { x: '-100%' },
+  visible: {
+    x: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: staggerDefault,
+      duration: time.fast,
+      ease: 'easeInOut',
+    },
+  },
+  exit: { x: '-100%', transition: { duration: time.fastest, ease: 'easeInOut' } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { opacity: 1, x: 0, transition: { duration: time.fast } },
+};
 
 function MobileList() {
   const pathname = usePathname();
@@ -11,12 +32,11 @@ function MobileList() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMenuOpen(false); // Close menu after navigation
+    setMenuOpen(false);
   }, [pathname]);
 
   return (
     <>
-      {/* Toggle Button */}
       <input
         type="checkbox"
         id="nav-toggle"
@@ -25,41 +45,49 @@ function MobileList() {
         onChange={() => setMenuOpen((prev) => !prev)}
       />
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 left-0 h-screen w-screen bg-transparent shadow-lg transition-transform duration-300 ease-in-out flex font-bold md:hidden z-50 ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <ul className="h-full w-1/3 bg-gray-600 shadow-lg flex flex-col justify-center items-start p-5 space-y-4">
-          {[
-            { name: 'Home', path: paths.home },
-            { name: 'Work', path: paths.work },
-            { name: 'Blog', path: paths.blog },
-            { name: 'Admin', path: paths.adminDashboard },
-          ].map((item) => (
-            <li
-              key={item.path}
-              className="px-4 py-2 rounded transition-colors duration-300 cursor-pointer"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuVariants}
+            className="fixed top-0 left-0 h-screen w-screen bg-transparent shadow-lg flex font-bold md:hidden z-50"
+          >
+            <motion.ul
+              className="h-full w-1/3 bg-gray-600 shadow-lg flex flex-col justify-center items-start p-5 space-y-4"
+              variants={menuVariants}
             >
-              <Link
-                href={item.path}
-                className={
-                  isActive(item.path)
-                    ? 'text-accent-primary font-semibold'
-                    : 'text-white hover:text-accent-primary font-semibold'
-                }
-                onClick={() => setMenuOpen(false)} // Close menu on click
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+              {[
+                { name: 'Home', path: paths.home },
+                { name: 'Work', path: paths.work },
+                { name: 'Blog', path: paths.blog },
+                { name: 'Admin', path: paths.adminDashboard },
+              ].map((item) => (
+                <motion.li
+                  key={item.path}
+                  variants={itemVariants}
+                  className="px-4 py-2 rounded transition-colors duration-300 cursor-pointer"
+                >
+                  <Link
+                    href={item.path}
+                    className={
+                      isActive(item.path)
+                        ? 'text-accent-primary font-semibold'
+                        : 'text-white hover:text-accent-primary font-semibold'
+                    }
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
 
-        {/* Clicking outside the menu closes it */}
-        <div className="flex-1 h-full bg-transparent" onClick={() => setMenuOpen(false)}></div>
-      </div>
+            <div className="flex-1 h-full bg-transparent" onClick={() => setMenuOpen(false)}></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

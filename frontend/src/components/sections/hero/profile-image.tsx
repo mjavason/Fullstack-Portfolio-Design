@@ -2,13 +2,14 @@
 
 import { motion, Variants } from 'framer-motion';
 import { Image } from '@heroui/react';
+import { time } from '@/config/motion';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: 'easeOut' },
+    transition: { delay: 1.5, duration: time.slowest, ease: 'easeOut' },
   },
 };
 

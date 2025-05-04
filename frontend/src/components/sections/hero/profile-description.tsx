@@ -2,6 +2,7 @@
 
 import { motion, Variants } from 'framer-motion';
 import { Button } from '@heroui/react';
+import { time, staggerDefault } from '@/config/motion';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -9,21 +10,21 @@ const containerVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: time.base,
       when: 'beforeChildren',
-      staggerChildren: 0.15,
+      staggerChildren: staggerDefault,
     },
   },
 };
 
 const childVariants = {
   hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  show: { opacity: 1, y: 0, transition: { duration: time.fast } },
 };
 
 const buttonVariants = {
   hidden: { opacity: 0, x: -20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+  show: { opacity: 1, x: 0, transition: { duration: time.fast } },
 };
 
 function ProfileDescription() {
