@@ -1,6 +1,6 @@
 'use client';
 
-import { delay, motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
