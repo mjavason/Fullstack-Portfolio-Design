@@ -6,8 +6,8 @@ async function FeaturedWorks() {
 
   return (
     <div className="grid items-stretch gap-9">
-      {projects.map((project, index) => {
-        return <ProjectPageCard key={project.id} project={project} index={index}></ProjectPageCard>;
+      {projects.map((project) => {
+        return <ProjectPageCard key={project.id} project={project}></ProjectPageCard>;
       })}
     </div>
   );

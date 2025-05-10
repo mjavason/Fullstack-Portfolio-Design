@@ -12,6 +12,6 @@ export const iconStaggerVariants: Variants = {
     scale: 1,
     opacity: 1,
     rotate: 0,
-    transition: { duration: time.fast, delay: i * time.fastest },
+    transition: { duration: time.fastest, delay: i * time.fastest },
   }),
 };
