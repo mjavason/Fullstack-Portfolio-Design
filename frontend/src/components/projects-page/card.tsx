@@ -4,16 +4,15 @@ import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { Image } from '@heroui/react';
 import { motion } from 'framer-motion';
-import { staggerListItemVariantsWithDelay } from '@/utils/animation/stagger-list';
+import { staggerListItemVariants } from '@/utils/animation/stagger-list';
 
-function ProjectPageCard(props: { project: IProject; index: number }) {
-  const { project, index } = props;
+function ProjectPageCard(props: { project: IProject }) {
+  const { project } = props;
 
   return (
     <Link href={paths.workDetails(project.id)}>
       <motion.div
-        custom={index}
-        variants={staggerListItemVariantsWithDelay}
+        variants={staggerListItemVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

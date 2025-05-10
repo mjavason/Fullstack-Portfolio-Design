@@ -6,8 +6,8 @@ async function BlogPagePosts() {
 
   return (
     <div className="grid grid-cols-1 items-stretch gap-5">
-      {posts.map((post, index) => {
-        return <BlogPageCard key={post.id} post={post} index={index}></BlogPageCard>;
+      {posts.map((post) => {
+        return <BlogPageCard key={post.id} post={post}></BlogPageCard>;
       })}
     </div>
   );

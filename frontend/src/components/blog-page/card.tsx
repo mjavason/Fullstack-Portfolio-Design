@@ -1,19 +1,18 @@
 'use client';
 
 import paths from '@/config/constants/paths';
-import { staggerListItemVariantsWithDelay } from '@/utils/animation/stagger-list';
+import { staggerListItemVariants } from '@/utils/animation/stagger-list';
 import { formatLongDate } from '@/utils/date';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-function BlogPageCard(props: { post: IPost; index: number }) {
-  const { post, index } = props;
+function BlogPageCard(props: { post: IPost }) {
+  const { post } = props;
 
   return (
     <Link key={post.id} href={paths.blogDetails(post.id)}>
       <motion.div
-        custom={index}
-        variants={staggerListItemVariantsWithDelay}
+        variants={staggerListItemVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

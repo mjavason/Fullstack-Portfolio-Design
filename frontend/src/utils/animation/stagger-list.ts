@@ -9,3 +9,12 @@ export const staggerListItemVariantsWithDelay: Variants = {
     transition: { duration: time.fast, delay: i * time.fastest },
   }),
 };
+
+export const staggerListItemVariants: Variants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: time.fast },
+  },
+};
