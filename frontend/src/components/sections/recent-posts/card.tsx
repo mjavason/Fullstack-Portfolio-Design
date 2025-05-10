@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import paths from '@/config/constants/paths';
 import { formatLongDate } from '@/utils/date';
 import Link from 'next/link';
-import { time } from '@/config/motion';
+import { scaleInOpacityStaggerVariants } from '@/utils/animation/expand-card';
 
 function RecentPostCard(props: { post: IPost; index: number }) {
   const { post, index } = props;
@@ -12,10 +12,11 @@ function RecentPostCard(props: { post: IPost; index: number }) {
   return (
     <Link href={paths.blogDetails(post.id)}>
       <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
+        custom={index}
+        variants={scaleInOpacityStaggerVariants}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        transition={{ duration: time.fast, ease: 'easeOut', delay: index * time.fastest }}
         className="flex flex-col cursor-pointer bg-white p-5 hover:border-1 md:h-full"
       >
         <h3 className="text-3xl font-bold my-5 flex-1 md:first-letter:line-clamp-2 h-full pb-3">

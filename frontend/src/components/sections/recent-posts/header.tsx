@@ -3,15 +3,15 @@
 import { motion } from 'framer-motion';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
-import { time } from '@/config/motion';
+import { fadeInUpVariants } from '@/utils/animation/fade-in-up-text';
 
 function RecentPostsSectionHeader() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={fadeInUpVariants}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true }}
-      transition={{ duration: time.base }}
       className="flex justify-center md:justify-between my-5 text-primary"
     >
       <span className="text-2xl">Recent Posts</span>

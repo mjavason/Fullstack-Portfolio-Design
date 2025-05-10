@@ -1,13 +1,24 @@
+'use client';
+
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { Image } from '@heroui/react';
+import { motion } from 'framer-motion';
+import { staggerListItemVariantsWithDelay } from '@/utils/animation/stagger-list';
 
-function ProjectPageCard(props: { project: IProject }) {
-  const { project } = props;
+function ProjectPageCard(props: { project: IProject; index: number }) {
+  const { project, index } = props;
 
   return (
     <Link href={paths.workDetails(project.id)}>
-      <div className="flex flex-col items-stretch lg:flex-row gap-5 lg:gap-0 border-b-2 pb-3">
+      <motion.div
+        custom={index}
+        variants={staggerListItemVariantsWithDelay}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-col items-stretch lg:flex-row gap-5 lg:gap-0 border-b-2 pb-3"
+      >
         <div className="overflow-hidden lg:w-[246px] lg:h-[180px] w-full h-[230px] rounded-md">
           <Image
             className="lg:w-[246px] lg:h-[180px] w-full h-[230px] object-cover"
@@ -31,7 +42,7 @@ function ProjectPageCard(props: { project: IProject }) {
             {project.summary}
           </p>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 }
