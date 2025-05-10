@@ -11,6 +11,6 @@ export const scaleInOpacityStaggerVariants: Variants = {
   visible: (i: number) => ({
     scale: 1,
     opacity: 1,
-    transition: { duration: time.fast, ease: 'easeOut', delay: i * time.fastest },
+    transition: { duration: time.fastest, ease: 'easeOut', delay: i * time.fastest },
   }),
 };
