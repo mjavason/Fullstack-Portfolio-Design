@@ -5,26 +5,7 @@ import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { staggerDefault, time } from '@/config/motion';
-
-const menuVariants = {
-  hidden: { x: '-100%' },
-  visible: {
-    x: 0,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: staggerDefault,
-      duration: time.fastest,
-      ease: 'easeInOut',
-    },
-  },
-  exit: { x: '-100%', transition: { duration: time.fastest, ease: 'easeInOut' } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -10 },
-  visible: { opacity: 1, x: 0, transition: { duration: time.fastest } },
-};
+import { menuVariants, itemVariants } from '@/utils/animation/navigation/mobile';
 
 function MobileList() {
   const pathname = usePathname();

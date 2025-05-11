@@ -1,28 +1,10 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
-import { staggerDefault, time } from '@/config/motion';
-
-const listVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: staggerDefault,
-      delay: time.base,
-      duration: time.fast,
-      when: 'beforeChildren',
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: -10 },
-  show: { opacity: 1, y: 0, transition: { duration: time.fastest } },
-};
+import { listVariants, itemVariants } from '@/utils/animation/navigation/desktop';
 
 function DesktopList() {
   const pathname = usePathname();

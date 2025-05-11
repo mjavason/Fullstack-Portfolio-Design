@@ -9,6 +9,8 @@ import { debounceSetter } from '@/utils/debounce';
 import { useAppDispatch } from '@/redux/hooks';
 import { setSearchValue } from '@/redux/slices/search-slice';
 import { useEffect } from 'react';
+import { itemVariants, menuVariants } from '@/utils/animation/navigation/mobile';
+import { motion } from 'framer-motion';
 
 interface AdminNavbarProps {
   logout: () => void;
@@ -28,7 +30,12 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
   }, [pathname, dispatch]);
 
   return (
-    <div className="w-full flex justify-between">
+    <motion.div
+      variants={menuVariants}
+      initial="hidden"
+      animate="visible"
+      className="w-full flex justify-between"
+    >
       <Input
         placeholder="Enter keyword to search"
         startContent={<SearchIcon className="text-primary pointer-events-none" />}
@@ -40,14 +47,18 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
         }}
       />
 
-      <ul className="hidden md:flex gap-10 font-bold">
+      <motion.ul variants={menuVariants} className="hidden md:flex gap-10 font-bold">
         {[
           { name: 'Overview', path: paths.adminDashboard },
           { name: 'Posts', path: paths.adminPosts },
           { name: 'Projects', path: paths.adminWorks },
           { name: 'Logout', action: logout },
         ].map((item, index) => (
-          <li key={index} className="transition-colors duration-300 cursor-pointer">
+          <motion.li
+            variants={itemVariants}
+            key={index}
+            className="transition-colors duration-300 cursor-pointer"
+          >
             {item.path ? (
               <Link
                 key={item.path}
@@ -65,10 +76,10 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
                 {item.name}
               </button>
             )}
-          </li>
+          </motion.li>
         ))}
-      </ul>
-    </div>
+      </motion.ul>
+    </motion.div>
   );
 }
 
