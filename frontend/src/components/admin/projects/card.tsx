@@ -1,10 +1,17 @@
 import { formatLongDate } from '@/utils/date';
 import { Chip, Image } from '@heroui/react';
 import ProjectCardDropDown from './dropdown';
+import { motion } from 'framer-motion';
+import { staggerListItemVariants } from '@/utils/animation/stagger-list';
 
 function ProjectCard(props: { project: IProject }) {
   return (
-    <div className="flex flex-col justify-between w-full p-3 border-1 rounded-md relative">
+    <motion.div
+      variants={staggerListItemVariants}
+      initial="hidden"
+      whileInView="visible"
+      className="flex flex-col justify-between w-full p-3 border-1 rounded-md relative"
+    >
       <ProjectCardDropDown project={props.project}></ProjectCardDropDown>
       <div className="overflow-hidden">
         <Image
@@ -38,7 +45,7 @@ function ProjectCard(props: { project: IProject }) {
           </Chip>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

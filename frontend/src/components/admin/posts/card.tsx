@@ -1,9 +1,16 @@
 import { Chip } from '@heroui/react';
 import PostCardDropDown from './dropdown';
+import { staggerListItemVariants } from '@/utils/animation/stagger-list';
+import { motion } from 'framer-motion';
 
 function PostCard(props: { post: IPost }) {
   return (
-    <div className="flex flex-col justify-between w-full p-3 border-1 rounded-md min-h-16 relative">
+    <motion.div
+      variants={staggerListItemVariants}
+      initial="hidden"
+      whileInView="visible"
+      className="flex flex-col justify-between w-full p-3 border-1 rounded-md min-h-16 relative"
+    >
       <PostCardDropDown post={props.post}></PostCardDropDown>
       <div className="flex flex-col">
         <h3 className="text-black text-lg mt-3 break-words flex-1 md:line-clamp-2">
@@ -28,7 +35,7 @@ function PostCard(props: { post: IPost }) {
           </Chip>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

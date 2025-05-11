@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import paths from '@/config/constants/paths';
 import { formatLongDate } from '@/utils/date';
 import Link from 'next/link';
-import { scaleInOpacityStaggerVariants } from '@/utils/animation/expand-card';
+import { expandCardStaggerVariants } from '@/utils/animation/expand-card';
 
 function RecentPostCard(props: { post: IPost; index: number }) {
   const { post, index } = props;
@@ -13,7 +13,7 @@ function RecentPostCard(props: { post: IPost; index: number }) {
     <Link href={paths.blogDetails(post.id)}>
       <motion.div
         custom={index}
-        variants={scaleInOpacityStaggerVariants}
+        variants={expandCardStaggerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
