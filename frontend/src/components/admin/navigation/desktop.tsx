@@ -36,16 +36,20 @@ function AdminNavbar({ logout }: AdminNavbarProps) {
       animate="visible"
       className="w-full flex justify-between"
     >
-      <Input
-        placeholder="Enter keyword to search"
-        startContent={<SearchIcon className="text-primary pointer-events-none" />}
-        type="text"
-        className="max-w-[75%] md:max-w-[35%]"
-        variant="bordered"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          debouncedSetInput(e.target.value);
-        }}
-      />
+      {pathname !== paths.adminDashboard ? (
+        <Input
+          placeholder="Enter keyword to search"
+          startContent={<SearchIcon className="text-primary pointer-events-none" />}
+          type="text"
+          className="max-w-[75%] md:max-w-[35%]"
+          variant="bordered"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            debouncedSetInput(e.target.value);
+          }}
+        />
+      ) : (
+        <div></div>
+      )}
 
       <motion.ul variants={menuVariants} className="hidden md:flex gap-10 font-bold">
         {[

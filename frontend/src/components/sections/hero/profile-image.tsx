@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { Image } from '@heroui/react';
+import Image from 'next/image';
 import { time } from '@/config/motion';
 
 const containerVariants: Variants = {
@@ -26,8 +26,11 @@ function ProfileImage() {
           className="object-contain rounded-full"
           src="/images/Ellipse 1.png"
           alt="Picture of John"
-          isZoomed
-          removeWrapper
+          width={240}
+          height={240}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.png"
         />
       </div>
     </motion.div>

@@ -1,7 +1,10 @@
-import type { NextConfig } from 'next';
+import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  reactStrictMode: false, // Disable strict mode for debugging
+  reactStrictMode: false,
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 export default nextConfig;

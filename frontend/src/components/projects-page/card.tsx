@@ -2,7 +2,7 @@
 
 import paths from '@/config/constants/paths';
 import Link from 'next/link';
-import { Image } from '@heroui/react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { staggerListItemVariants } from '@/utils/animation/stagger-list';
 
@@ -23,8 +23,11 @@ function ProjectPageCard(props: { project: IProject }) {
             className="lg:w-[246px] lg:h-[180px] w-full h-[230px] object-cover"
             src={project.coverImage}
             alt={project.title}
-            isZoomed
-            removeWrapper
+            width={246}
+            height={180}
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="/images/placeholder.png"
           />
         </div>
         <div className="flex-1 flex flex-col gap-5 justify-between cursor-pointer bg-white px-0 lg:px-5">
