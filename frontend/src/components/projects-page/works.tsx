@@ -1,5 +1,4 @@
 import { fetchProjects } from '@/actions/work/read';
-import ProjectPageCard from './card';
 import ProjectsClient from './projects';
 
 async function Projects() {
