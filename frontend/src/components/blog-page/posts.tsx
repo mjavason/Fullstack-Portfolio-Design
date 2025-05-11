@@ -1,16 +1,10 @@
 import { fetchPosts } from '@/actions/post/read';
-import BlogPageCard from './card';
+import BlogPagePostsClient from './posts-client';
 
 async function BlogPagePosts() {
   const posts = await fetchPosts();
 
-  return (
-    <div className="grid grid-cols-1 items-stretch gap-5">
-      {posts.map((post) => {
-        return <BlogPageCard key={post.id} post={post}></BlogPageCard>;
-      })}
-    </div>
-  );
+  return <BlogPagePostsClient posts={posts} fetchPosts={fetchPosts}></BlogPagePostsClient>;
 }
 
 export default BlogPagePosts;

@@ -1,5 +1,5 @@
 import { fetchProjects } from '@/actions/work/read';
-import ProjectsClient from './projects';
+import ProjectsClient from './works-client';
 
 async function Projects() {
   const projects = await fetchProjects();

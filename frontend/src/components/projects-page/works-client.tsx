@@ -51,8 +51,8 @@ export default function ProjectsClient({ projects, fetchProjects }: ProjectsClie
 
   return (
     <div className="grid items-stretch gap-10">
-      {currentProjects.map((project) => (
-        <ProjectPageCard key={project.id} project={project} />
+      {currentProjects.map((project, index) => (
+        <ProjectPageCard key={index} project={project} />
       ))}
       {loading && <p>Loading more projects...</p>}
       {end && <p>No more projects to load</p>}
