@@ -18,11 +18,14 @@ function SignInPage() {
 
   useEffect(() => {
     async function checkExpiryMessage() {
-      const expiryMessage = await getCookieValue(CookieType.ExpiryMessage);
-
-      if (expiryMessage) {
-        toast.error(expiryMessage);
-        removeCookieValue(CookieType.ExpiryMessage);
+      try {
+        const expiryMessage = await getCookieValue(CookieType.ExpiryMessage);
+        if (expiryMessage) {
+          toast.error(expiryMessage);
+          removeCookieValue(CookieType.ExpiryMessage);
+        }
+      } catch (err) {
+        console.error('Error handling expiry message cookie:', err);
       }
     }
 
@@ -36,39 +39,41 @@ function SignInPage() {
   } = useForm({
     resolver: zodResolver(signInSchema),
   });
+
   const onSubmitHandler = async (data: Omit<UserSignInDTO, 'userRole'>) => {
-    await userSignIn({
-      ...data,
-    })
-      .unwrap()
-      .then((res) => {
-        if (res.data && res.data.accessToken) {
-          getCookieValue(CookieType.CurrentUrl)
-            .then((currentUrl) => currentUrl ?? null)
-            .then((currentUrl) => {
-              setCookieValue(CookieType.Token, res.data.accessToken);
-              removeCookieValue(CookieType.CurrentUrl);
-              window.location.href = currentUrl ?? paths.adminDashboard;
-            });
+    try {
+      const res = await userSignIn({ ...data }).unwrap();
+      if (res.data.accessToken) {
+        try {
+          const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
+          setCookieValue(CookieType.Token, res.data.accessToken);
+          removeCookieValue(CookieType.CurrentUrl);
+          window.location.href = currentUrl ?? paths.adminDashboard;
+        } catch (cookieErr) {
+          console.error('Cookie handling failed:', cookieErr);
+          toast.error('Authentication succeeded but session setup failed.');
         }
-      })
-      .catch((err: any) => {
-        toast.error(err.message);
-      });
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+    }
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-secondary p-4">
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
-        className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 border-1"
+        className="w-full max-w-md space-y-6 rounded-lg bg-white p-6 border"
       >
         <h2 className="text-center text-2xl font-semibold text-primary">Sign In</h2>
 
         {/* Email Field */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium text-primary">Email</label>
+          <label htmlFor="email" className="text-sm font-medium text-primary">
+            Email
+          </label>
           <input
+            id="email"
             type="email"
             {...register('email', { required: 'Email is required' })}
             className="mt-1 rounded-lg border border-secondary bg-background-secondary px-3 py-2 text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary"
@@ -78,9 +83,12 @@ function SignInPage() {
 
         {/* Password Field */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium text-primary">Password</label>
+          <label htmlFor="password" className="text-sm font-medium text-primary">
+            Password
+          </label>
           <div className="relative">
             <input
+              id="password"
               type={showPassword ? 'text' : 'password'}
               {...register('password', { required: 'Password is required' })}
               className="mt-1 w-full rounded-lg border border-secondary bg-background-secondary px-3 py-2 text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary"
@@ -88,6 +96,7 @@ function SignInPage() {
             <button
               type="button"
               onClick={toggleShow}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-link-primary hover:underline"
             >
               {showPassword ? 'Hide' : 'Show'}
