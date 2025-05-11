@@ -1,4 +1,4 @@
-import { Image } from '@heroui/react';
+import Image from 'next/image';
 import PostTitleMetaData from './title-metadata/post';
 import WorkTitleMetaData from './title-metadata/work';
 
@@ -31,11 +31,14 @@ function FullDetailsHeader({
       {!isPost && (
         <div className="overflow-hidden rounded-lg">
           <Image
-            removeWrapper
-            isZoomed
             className="object-contain w-[100%] rounded-lg"
             src={image}
             alt={title}
+            width={1000}
+            height={500}
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="/images/placeholder.png"
           />
         </div>
       )}

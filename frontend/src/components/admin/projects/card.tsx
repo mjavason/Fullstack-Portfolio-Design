@@ -1,5 +1,6 @@
 import { formatLongDate } from '@/utils/date';
-import { Chip, Image } from '@heroui/react';
+import { Chip } from '@heroui/react';
+import Image from 'next/image';
 import ProjectCardDropDown from './dropdown';
 import { motion } from 'framer-motion';
 import { staggerListItemVariants } from '@/utils/animation/stagger-list';
@@ -18,8 +19,11 @@ function ProjectCard(props: { project: IProject }) {
           className="w-full object-cover h-[256px] md:h-[128px] rounded-md"
           src={props.project.coverImage}
           alt={props.project.title}
-          removeWrapper
-          isZoomed
+          width={256}
+          height={128}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.png"
         />
       </div>
       <div className="flex flex-col">

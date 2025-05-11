@@ -11,7 +11,7 @@ import QuillEditorWithImage from '@/components/text-editor/quill-with-image';
 import { uploadImage } from '@/utils/upload-image';
 import { getCookieValue } from '@/utils/cookies';
 import { CookieType } from '@/config/enums';
-import { Image } from '@heroui/react';
+import Image from 'next/image';
 import { revalidateServerTag } from '@/actions/revalidate';
 import { tagTypes } from '@/redux/baseApi/tagTypes';
 
@@ -127,6 +127,11 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
                   src={fileUrl}
                   alt="Uploaded file preview"
                   className="mt-2 max-w-[96px] h-auto rounded-lg"
+                  width={96}
+                  height={96}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="/images/placeholder.png"
                 />
               </a>
             </div>
