@@ -1,16 +1,11 @@
 import { fetchProjects } from '@/actions/work/read';
 import ProjectPageCard from './card';
+import ProjectsClient from './projects';
 
 async function Projects() {
   const projects = await fetchProjects();
 
-  return (
-    <div className="grid items-stretch gap-10">
-      {projects.map((project) => {
-        return <ProjectPageCard key={project.id} project={project}></ProjectPageCard>;
-      })}
-    </div>
-  );
+  return <ProjectsClient projects={projects} fetchProjects={fetchProjects}></ProjectsClient>;
 }
 
 export default Projects;
