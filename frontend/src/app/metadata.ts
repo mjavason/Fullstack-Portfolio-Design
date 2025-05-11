@@ -1,10 +1,10 @@
+import { APP_DESCRIPTION, APP_NAME, APP_PREVIEW_IMAGE, FRONTEND_URL } from '@/config/constants';
 import { Metadata } from 'next';
 
 export function getHomeMetadata(): Metadata {
   return {
-    title: 'Fullstack Portfolio Design',
-    description:
-      'A fullstack portfolio project using Next.js and Nest.js with a responsive UI and dynamic backend integration.',
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
     keywords: [
       'Fullstack',
       'Next.js',
@@ -21,27 +21,24 @@ export function getHomeMetadata(): Metadata {
     ],
     authors: [{ name: 'mjavason' }],
     creator: 'mjavason',
-    applicationName: 'Fullstack Portfolio Design',
+    applicationName: APP_NAME,
     generator: 'Next.js',
     referrer: 'origin-when-cross-origin',
     openGraph: {
-      title: 'Fullstack Portfolio Design',
-      description:
-        'A fullstack practice portfolio project with Next.js frontend and Nest.js backend.',
-      url: 'https://fullstack-portfolio-design.vercel.app',
-      siteName: 'Fullstack Portfolio',
+      title: APP_NAME,
+      description: APP_DESCRIPTION,
+      url: FRONTEND_URL,
+      siteName: APP_NAME,
       images: [
         {
-          url: 'https://res.cloudinary.com/tech-aku/image/upload/v1743443222/startup/66cb07776cde8fba5b240bfe/keloc4mylznclkudtzhv.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'Fullstack Portfolio Preview',
+          url: APP_PREVIEW_IMAGE,
+          alt: APP_NAME,
         },
       ],
       locale: 'en_US',
       type: 'website',
     },
-    metadataBase: new URL('https://fullstack-portfolio-design.vercel.app'),
+    metadataBase: new URL(FRONTEND_URL),
     alternates: {
       canonical: '/',
       languages: {
