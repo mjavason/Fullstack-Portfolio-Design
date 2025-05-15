@@ -4,14 +4,14 @@ import { StoreProvider } from '@/redux';
 import { ToastContainer } from 'react-toastify';
 import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { getHomeMetadata } from './metadata';
+import { getBaseMetadata } from '@/config/constants/metadata';
 
 const heebo = Heebo({
   variable: '--font-heebo',
   subsets: ['latin'],
 });
 
-export const metadata = getHomeMetadata();
+export const metadata = getBaseMetadata();
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

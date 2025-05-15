@@ -1,7 +1,7 @@
-import { APP_DESCRIPTION, APP_NAME, APP_PREVIEW_IMAGE, FRONTEND_URL } from '@/config/constants';
+import { APP_DESCRIPTION, APP_NAME, APP_PREVIEW_IMAGE, FRONTEND_URL } from './index';
 import { Metadata } from 'next';
 
-export function getHomeMetadata(): Metadata {
+export function getBaseMetadata(): Metadata {
   return {
     title: APP_NAME,
     description: APP_DESCRIPTION,
@@ -44,6 +44,18 @@ export function getHomeMetadata(): Metadata {
       languages: {
         'en-US': '/en-US',
       },
+    },
+    icons: {
+      icon: [
+        { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicons/favicon.ico', sizes: 'any' },
+      ],
+      apple: [{ url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+      other: [
+        { url: '/favicons/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+        { url: '/favicons/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      ],
     },
   };
 }
