@@ -1,16 +1,16 @@
-import { deleteCookie, getCookie, hasCookie, setCookie } from 'cookies-next';
+import { deleteCookie, getCookie, hasCookie, setCookie } from 'cookies-next/client';
 
 /**
  * Retrieves the value of a cookie by its name.
  * @param name - The name of the cookie to retrieve.
  * @returns The cookie value as a string or undefined if not found.
  */
-export const getCookieValue = async (name: string) => {
-  return await getCookie(name);
+export const getCookieValue = (name: string) => {
+  return getCookie(name);
 };
 
-export const hasCookieKey = async (name: string) => {
-  return await hasCookie(name);
+export const hasCookieKey = (name: string) => {
+  return hasCookie(name);
 };
 
 /**

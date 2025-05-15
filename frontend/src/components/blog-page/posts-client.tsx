@@ -49,7 +49,7 @@ export default function BlogPagePostsClient({ posts, fetchPosts }: BlogPagePosts
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [fetchMorePosts, loading, end]);
+  }, [fetchMorePosts, loading, end, currentPosts, page]);
 
   return (
     <div className="grid grid-cols-1 items-stretch gap-5">

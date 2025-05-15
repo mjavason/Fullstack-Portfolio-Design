@@ -64,7 +64,7 @@ const QuillEditorWithImage: React.FC<QuillEditorProps> = ({ setValue, initialVal
           setIsUploading(true); // Disable editor
           quill.enable(false); // Prevent interaction
 
-          const token = (await getCookieValue(CookieType.Token)) ?? '';
+          const token = getCookieValue(CookieType.Token) ?? '';
           const imageUrl = await uploadImage(file, token);
 
           if (!imageUrl.success) {

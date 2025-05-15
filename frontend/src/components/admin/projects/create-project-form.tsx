@@ -46,7 +46,7 @@ const ProjectForm: FC<ModalProps> = ({ setIsModalOpen }) => {
 
     setUploading(true);
 
-    const token = (await getCookieValue(CookieType.Token)) ?? '';
+    const token = getCookieValue(CookieType.Token) ?? '';
     const imageUrl = await uploadImage(file, token);
     if (!imageUrl.success) {
       setUploading(false);

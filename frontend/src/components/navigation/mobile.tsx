@@ -43,7 +43,7 @@ function MobileList() {
                 { name: 'Home', path: paths.home },
                 { name: 'Work', path: paths.work },
                 { name: 'Blog', path: paths.blog },
-                { name: 'Admin', path: paths.adminDashboard },
+                { name: 'Admin', path: paths.adminLogin },
               ].map((item) => (
                 <motion.li
                   key={item.path}

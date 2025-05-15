@@ -36,8 +36,8 @@ const handleAuthenticationFailure = () => {
  * Axios request interceptor to automatically add authentication headers to outgoing requests.
  */
 axios.interceptors.request.use(
-  async (config) => {
-    const token = await getCookieValue(CookieType.Token);
+  (config) => {
+    const token = getCookieValue(CookieType.Token);
     config.headers = {
       ...config.headers,
       Authorization: token ? `Bearer ${token}` : '',

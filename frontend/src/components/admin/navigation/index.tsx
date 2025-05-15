@@ -3,16 +3,19 @@ import Toggle from './toggle';
 import MobileList from './mobile';
 import paths from '@/config/constants/paths';
 import { getCookies, deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 
 function NavSection() {
-  const logout = async () => {
+  const router = useRouter();
+
+  const logout = () => {
     const allCookies = getCookies();
     if (allCookies) {
       Object.keys(allCookies).forEach((key) => {
         deleteCookie(key);
       });
     }
-    window.location.href = paths.home;
+    router.replace(paths.home);
   };
 
   return (

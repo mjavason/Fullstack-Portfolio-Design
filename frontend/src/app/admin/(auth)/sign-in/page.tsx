@@ -10,27 +10,21 @@ import { getCookieValue, removeCookieValue, setCookieValue } from '@/utils/cooki
 import { toast } from 'react-toastify';
 import { Button } from '@heroui/react';
 import paths from '@/config/constants/paths';
+import { useRouter } from 'next/navigation';
 
 function SignInPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const toggleShow = () => setShowPassword(!showPassword);
   const [userSignIn, { isLoading }] = useUserSignInMutation();
+  const expiryMessage = getCookieValue(CookieType.ExpiryMessage);
 
   useEffect(() => {
-    async function checkExpiryMessage() {
-      try {
-        const expiryMessage = await getCookieValue(CookieType.ExpiryMessage);
-        if (expiryMessage) {
-          toast.error(expiryMessage);
-          removeCookieValue(CookieType.ExpiryMessage);
-        }
-      } catch (err) {
-        console.error('Error handling expiry message cookie:', err);
-      }
+    if (expiryMessage) {
+      toast.error(expiryMessage);
+      removeCookieValue(CookieType.ExpiryMessage);
     }
-
-    checkExpiryMessage();
-  }, []);
+  }, [expiryMessage]);
 
   const {
     register,
@@ -45,10 +39,10 @@ function SignInPage() {
       const res = await userSignIn({ ...data }).unwrap();
       if (res.data.accessToken) {
         try {
-          const currentUrl = (await getCookieValue(CookieType.CurrentUrl)) ?? null;
+          const currentUrl = getCookieValue(CookieType.CurrentUrl) ?? null;
           setCookieValue(CookieType.Token, res.data.accessToken);
           removeCookieValue(CookieType.CurrentUrl);
-          window.location.href = currentUrl ?? paths.adminDashboard;
+          router.replace(currentUrl ?? paths.adminDashboard);
         } catch (cookieErr) {
           console.error('Cookie handling failed:', cookieErr);
           toast.error('Authentication succeeded but session setup failed.');
