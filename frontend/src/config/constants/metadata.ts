@@ -1,24 +1,26 @@
 import { APP_DESCRIPTION, APP_NAME, APP_PREVIEW_IMAGE, FRONTEND_URL } from './index';
 import { Metadata } from 'next';
 
+export const defaultMetadataKeywords = [
+  'Fullstack',
+  'Next.js',
+  'Nest.js',
+  'Portfolio',
+  'React',
+  'MongoDB',
+  'JWT',
+  'Tailwind CSS',
+  'REST API',
+  'TypeScript',
+  'Figma',
+  'Practice Project',
+];
+
 export function getBaseMetadata(): Metadata {
   return {
     title: APP_NAME,
     description: APP_DESCRIPTION,
-    keywords: [
-      'Fullstack',
-      'Next.js',
-      'Nest.js',
-      'Portfolio',
-      'React',
-      'MongoDB',
-      'JWT',
-      'Tailwind CSS',
-      'REST API',
-      'TypeScript',
-      'Figma',
-      'Practice Project',
-    ],
+    keywords: defaultMetadataKeywords,
     authors: [{ name: 'mjavason' }],
     creator: 'mjavason',
     applicationName: APP_NAME,

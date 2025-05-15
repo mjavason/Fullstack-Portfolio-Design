@@ -4,11 +4,22 @@ import React from 'react';
 import { fetchSinglePost } from '@/actions/post/read';
 import { notFound } from 'next/navigation';
 import { formatLongDate } from '@/utils/date';
+import { getMetadataNoOg } from '@/utils/metadata';
+import { Metadata } from 'next';
 
 interface BlogDetailProps {
   params: Promise<{
     postId: string;
   }>;
+}
+
+export async function generateMetadata({ params }: BlogDetailProps): Promise<Metadata> {
+  const { postId } = await params;
+
+  const post = await fetchSinglePost(postId);
+  if (!post) return { title: 'Project Not Found' };
+
+  return getMetadataNoOg(post.title, post.summary, ['blog', 'post', ...post.categories]);
 }
 
 const BlogPostPage = async ({ params }: BlogDetailProps) => {

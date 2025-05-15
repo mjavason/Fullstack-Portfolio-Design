@@ -3,11 +3,27 @@ import FullDetails from '@/components/details-page/full-details';
 import FullDetailsHeader from '@/components/details-page/header';
 import { notFound } from 'next/navigation';
 import React from 'react';
+import { Metadata } from 'next';
+import { getMetadata } from '@/utils/metadata';
 
 interface ProjectDetailProps {
   params: Promise<{
     workId: string;
   }>;
+}
+
+export async function generateMetadata({ params }: ProjectDetailProps): Promise<Metadata> {
+  const { workId } = await params;
+
+  const work = await fetchSingleProject(workId);
+  if (!work) return { title: 'Project Not Found' };
+
+  return getMetadata(
+    work.title,
+    work.summary,
+    ['project', 'work', work.category.toLowerCase()],
+    work.coverImage,
+  );
 }
 
 const WorkPage = async ({ params }: ProjectDetailProps) => {
@@ -17,7 +33,6 @@ const WorkPage = async ({ params }: ProjectDetailProps) => {
 
   return (
     <section className="px-5 md:px-36 text-primary min-h-[90vh] flex flex-col justify-start gap-10">
-      {/* detail header */}
       <FullDetailsHeader
         title={work.title}
         date={new Date(work.createdAt).getFullYear().toString()}
@@ -25,10 +40,8 @@ const WorkPage = async ({ params }: ProjectDetailProps) => {
         description={work.summary}
         image={work.coverImage}
         isPost={false}
-      ></FullDetailsHeader>
-
-      {/* full detail */}
-      <FullDetails content={work.body}></FullDetails>
+      />
+      <FullDetails content={work.body} />
     </section>
   );
 };

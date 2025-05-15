@@ -1,4 +1,5 @@
 import { APP_NAME, BASE_URL } from '@/config/constants';
+import { defaultMetadataKeywords } from '@/config/constants/metadata';
 import { Metadata } from 'next';
 
 export function getMetadata(
@@ -10,7 +11,7 @@ export function getMetadata(
   return {
     title,
     description,
-    keywords,
+    keywords: [...keywords, ...defaultMetadataKeywords],
     openGraph: {
       title,
       description,
@@ -30,6 +31,6 @@ export function getMetadataNoOg(title: string, description: string, keywords: st
   return {
     title,
     description,
-    keywords,
+    keywords: [...keywords, ...defaultMetadataKeywords],
   };
 }
