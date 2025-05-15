@@ -11,6 +11,7 @@ function ProjectCard(props: { project: IProject }) {
       variants={staggerListItemVariants}
       initial="hidden"
       whileInView="visible"
+      viewport={{ once: true }}
       className="flex flex-col justify-between w-full p-3 border-1 rounded-md relative"
     >
       <ProjectCardDropDown project={props.project}></ProjectCardDropDown>

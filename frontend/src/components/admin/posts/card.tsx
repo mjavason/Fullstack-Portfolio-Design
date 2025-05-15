@@ -9,6 +9,7 @@ function PostCard(props: { post: IPost }) {
       variants={staggerListItemVariants}
       initial="hidden"
       whileInView="visible"
+      viewport={{ once: true }}
       className="flex flex-col justify-between w-full p-3 border-1 rounded-md min-h-16 relative"
     >
       <PostCardDropDown post={props.post}></PostCardDropDown>
