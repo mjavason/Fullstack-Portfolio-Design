@@ -1,4 +1,3 @@
-import { accentPrimary, accentSecondary } from '@/config/constants';
 import { ChartOptions } from 'chart.js';
 
 export const options: ChartOptions<'doughnut'> = {
@@ -13,22 +12,6 @@ export const options: ChartOptions<'doughnut'> = {
       position: 'bottom',
       align: 'start',
       fullSize: true,
-      labels: {
-        generateLabels: function (this) {
-          return [
-            {
-              text: 'Projects',
-              fillStyle: accentPrimary,
-              strokeStyle: accentPrimary,
-            },
-            {
-              text: 'Posts',
-              fillStyle: accentSecondary,
-              strokeStyle: accentSecondary,
-            },
-          ];
-        },
-      },
     },
   },
 };
