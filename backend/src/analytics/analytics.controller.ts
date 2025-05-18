@@ -99,4 +99,22 @@ export class AnalyticsController {
     const data = await this.analyticsService.getProjectVsPostClicks();
     return { data };
   }
+
+  @Get('/dashboard/summary')
+  @ApiOperation({ summary: 'Get all analytics dashboard data' })
+  async getDashboardSummary() {
+    const [uniqueVisitors, topLocations, contentClicks, projectVsPostClicks] = await Promise.all([
+      this.analyticsService.getUniqueVisitorsPerMonth(),
+      this.analyticsService.getTopLocations(),
+      this.analyticsService.getContentClicks(),
+      this.analyticsService.getProjectVsPostClicks(),
+    ]);
+
+    return {
+      uniqueVisitors,
+      topLocations,
+      contentClicks,
+      projectVsPostClicks,
+    };
+  }
 }
