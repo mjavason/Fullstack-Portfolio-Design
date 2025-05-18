@@ -17,12 +17,12 @@ export const options: ChartOptions<'doughnut'> = {
         generateLabels: function (this) {
           return [
             {
-              text: 'Male',
+              text: 'Projects',
               fillStyle: accentPrimary,
               strokeStyle: accentPrimary,
             },
             {
-              text: 'Female',
+              text: 'Posts',
               fillStyle: accentSecondary,
               strokeStyle: accentSecondary,
             },

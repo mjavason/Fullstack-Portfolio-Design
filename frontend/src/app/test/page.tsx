@@ -1,20 +1,28 @@
 'use client';
 
-import React from 'react';
-// import QuillEditor from '@/components/custom-editor';
-import QuillEditor from './quill';
+import { useState, useEffect } from 'react';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { toast } from 'react-toastify';
 
-const EditorPage: React.FC = () => {
-  function setValue(content: string) {
-    console.log(content);
-  }
+function TestPage() {
+  const [visitorId, setVisitorId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadFingerprint = async () => {
+      const fp = await FingerprintJS.load();
+      const result = await fp.get();
+      setVisitorId(result.visitorId);
+    };
+    loadFingerprint();
+    if (visitorId) toast.success(visitorId);
+  }, [visitorId]);
 
   return (
     <div>
-      <h1>Quill Editor with Image Upload</h1>
-      <QuillEditor setValue={setValue} />
+      {}
+      <h1>Testing FingerPrintJs</h1>
     </div>
   );
-};
+}
 
-export default EditorPage;
+export default TestPage;
