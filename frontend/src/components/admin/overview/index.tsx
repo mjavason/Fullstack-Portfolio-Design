@@ -10,7 +10,7 @@ import RotatingLoader from '@/components/rotating-loader';
 import { useFetchDashboardSummaryQuery } from '@/redux/api/dashboard';
 
 function DashboardOverviewSection() {
-  const { data: dashboardSummary, isLoading } = useFetchDashboardSummaryQuery({});
+  const { data: dashboardSummary, isLoading } = useFetchDashboardSummaryQuery(null);
 
   return (
     <ContainerSection>

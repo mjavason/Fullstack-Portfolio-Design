@@ -3,7 +3,7 @@ import { tagTypes } from '@/redux/baseApi/tagTypes';
 
 export const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchDashboardSummary: builder.query<ISuccessResponse<IDashboardSummary>, {}>({
+    fetchDashboardSummary: builder.query<ISuccessResponse<IDashboardSummary>, null>({
       query: () => ({
         url: '/analytics/dashboard/summary',
         method: 'GET',
