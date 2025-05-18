@@ -75,6 +75,21 @@ export const CONTACT_EMAIL = 'fullstack-portfolio@gmail.com';
 
 export const CACHE_EXPIRY = 1000 * 1 * 60 * 60 * 12; //12 hours (milliseconds)
 
+export const MONTH_NAMES_SHORT = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
 export const MONTH_NAMES = [
   'January',
   'February',
@@ -91,7 +106,6 @@ export const MONTH_NAMES = [
 ];
 
 export const DAY_NAMES = [
-  '',
   'Sunday',
   'Monday',
   'Tuesday',
