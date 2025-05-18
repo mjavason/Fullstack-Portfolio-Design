@@ -24,6 +24,7 @@ import {
 } from './common/configs/constants';
 import { PostModule } from './post/post.module';
 import { ProjectModule } from './project/project.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -75,6 +76,7 @@ import { ProjectModule } from './project/project.module';
     ContactModule,
     PostModule,
     ProjectModule,
+    AnalyticsModule,
     // ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
