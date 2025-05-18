@@ -16,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
+import { generateDummyData } from './analytics.seed';
 
 @Controller('analytics')
 @ApiTags('Analytics')
@@ -26,9 +27,15 @@ import { UniqueIdDTO } from 'src/common/dto/unique_id.dto';
 export class AnalyticsController {
   constructor(private readonly analyticsService: AnalyticsService) {}
 
+  // @Post('/seed')
+  // @ApiOperation({ summary: 'Create dummy analytics entry' })
+  // async seed() {
+  //   const seedData = await generateDummyData(500);
+  //   return await this.analyticsService.createMultiple(seedData);
+  // }
+
   @Post()
-  @ApiOperation({ summary: 'Create a new analytics event' })
-  @Auth()
+  @ApiOperation({ summary: 'Create analytics entry' })
   async create(@Body() createAnalyticsDto: CreateAnalyticsDto) {
     return await this.analyticsService.create(createAnalyticsDto);
   }
@@ -46,22 +53,50 @@ export class AnalyticsController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: 'Retrieve an analytics event by ID' })
+  @ApiOperation({ summary: 'Retrieve analytics by ID' })
   async findOne(@Param() uniqueIdDTO: UniqueIdDTO) {
     return await this.analyticsService.findOne({ _id: uniqueIdDTO.id });
   }
 
   @Patch('/:id')
-  @ApiOperation({ summary: 'Update an existing analytics event' })
+  @ApiOperation({ summary: 'Update analytics entry' })
   @Auth()
   async update(@Param() uniqueIdDTO: UniqueIdDTO, @Body() updateAnalyticsDto: UpdateAnalyticsDto) {
     return await this.analyticsService.update(uniqueIdDTO.id, updateAnalyticsDto);
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: 'Delete an analytics event' })
+  @ApiOperation({ summary: 'Delete analytics entry' })
   @Auth()
   async remove(@Param() uniqueIdDTO: UniqueIdDTO) {
     return await this.analyticsService.remove(uniqueIdDTO.id);
+  }
+
+  @Get('/dashboard/unique-visitors')
+  @ApiOperation({ summary: 'Get unique visitors per month' })
+  async getUniqueVisitors() {
+    const data = await this.analyticsService.getUniqueVisitorsPerMonth();
+    return { data };
+  }
+
+  @Get('/dashboard/top-locations')
+  @ApiOperation({ summary: 'Get top visitor locations' })
+  async getTopLocations() {
+    const data = await this.analyticsService.getTopLocations();
+    return { data };
+  }
+
+  @Get('/dashboard/content-clicks')
+  @ApiOperation({ summary: 'Get content clicks per month' })
+  async getContentClicks() {
+    const data = await this.analyticsService.getContentClicks();
+    return { data };
+  }
+
+  @Get('/dashboard/project-vs-post')
+  @ApiOperation({ summary: 'Get clicks comparison: projects vs posts' })
+  async getProjectVsPostClicks() {
+    const data = await this.analyticsService.getProjectVsPostClicks();
+    return { data };
   }
 }
