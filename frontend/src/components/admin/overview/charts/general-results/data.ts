@@ -1,22 +1,26 @@
 import { accentPrimary, accentSecondary } from '@/config/constants';
 import { ChartData, ChartDataset } from 'chart.js';
 
-const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const dataValues = [65, 49, 39, 51, 20, 55, 40, 16, 51, 60, 70, 50];
+export function contentClicksChartDataBuilder(data_: {
+  labels: string[];
+  dataValues: number[];
+}): ChartData<'bar'> {
+  const datasets: ChartDataset<'bar'>[] = [
+    {
+      label: 'Content Clicks',
+      data: data_.dataValues,
+      backgroundColor: data_?.dataValues?.map((value) =>
+        value > 50 ? accentPrimary : accentSecondary,
+      ),
+      borderWidth: 1,
+      barThickness: 10, // Makes bars slimmer
+      categoryPercentage: 0.6, // Adjusts bar width
+      barPercentage: 0.8, // Adjusts bar width
+    },
+  ];
 
-const datasets: ChartDataset<'bar'>[] = [
-  {
-    label: 'Dataset',
-    data: dataValues,
-    backgroundColor: dataValues.map((value) => (value > 50 ? accentPrimary : accentSecondary)),
-    borderWidth: 1,
-    barThickness: 10, // Makes bars slimmer
-    categoryPercentage: 0.6, // Adjusts bar width
-    barPercentage: 0.8, // Adjusts bar width
-  },
-];
-
-export const data: ChartData<'bar'> = {
-  labels,
-  datasets,
-};
+  return {
+    labels: data_.labels,
+    datasets,
+  };
+}

@@ -10,6 +10,10 @@ export class GenericService<T extends Document> {
     this.model = _model;
   }
 
+  async createMultiple(multiCreateDto: Partial<T>[]) {
+    return await this.model.create(multiCreateDto);
+  }
+
   async create(createDto: Partial<T>) {
     return await this.model.create(createDto);
   }

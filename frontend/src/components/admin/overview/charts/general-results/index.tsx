@@ -10,18 +10,20 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { data } from './data';
+import { contentClicksChartDataBuilder } from './data';
 import { options } from './options';
 
 Chartjs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function GeneralResultsChart() {
+function GeneralResultsChart(props: { summary: IDashboardSummary }) {
+  const { summary } = props;
+
   return (
     <div className="flex flex-col justify-between col-span-2 w-full border-1 rounded-md">
       <div className="flex justify-between w-full mb-3 p-3">
         <h4 className="font-semibold text-lg text-primary">Content Clicks</h4>
       </div>
-      <Bar data={data} options={options}></Bar>
+      <Bar data={contentClicksChartDataBuilder(summary.contentClicks)} options={options}></Bar>
     </div>
   );
 }
