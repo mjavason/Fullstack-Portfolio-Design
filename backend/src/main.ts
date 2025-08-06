@@ -7,7 +7,7 @@ import { NestFactory } from '@nestjs/core';
 import { setupSwagger } from './common/configs/swagger.config';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { ValidationPipe } from '@nestjs/common';
-import './common/utils/ping.util';
+// import './common/utils/ping.util';
 // import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
